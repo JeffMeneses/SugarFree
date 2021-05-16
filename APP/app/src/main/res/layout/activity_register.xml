@@ -20,7 +20,7 @@
         android:onClick="onClickReturn"/>
 
     <ImageView
-        android:id="@+id/lblTitleStreetAnalyzer"
+        android:id="@+id/lblTitleSugarFree"
         android:layout_width="117dp"
         android:layout_height="23dp"
         android:layout_marginTop="16dp"
@@ -38,7 +38,7 @@
         android:onClick="onClickAddPicture"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblTitleStreetAnalyzer"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitleSugarFree"
         android:src="@drawable/ic_profile_picture" />
 
     <ImageView
