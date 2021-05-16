@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">SugarFree</string>
+
+    <!-- Welcome Activity -->
+    <string name="sugarFree">SugarFree</string>
+    <string name="welcomeText">Join our community and be aware of delicious food recipes for people with Diabetes and create your own menus.</string>
+    <string name="login">LOGIN</string>
+    <string name="register">REGISTER</string>
+
+    <!-- Login Activity -->
+    <string name="signIn">Sign In</string>
+    <string name="loginTitle">Login to \nyour account</string>
+    <string name="createAccount">Don\'t have an account yet? Sign Up</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="rememberMe">Remember me</string>
+
+    <!-- Create Account Activity -->
+    <string name="createAccountTitle">Create \nYour account</string>
+    <string name="email">E-mail</string>
+    <string name="name">Name</string>
+    <string name="confirmPassword">Confirm Password</string>
+    <string name="confirm">CONFIRM</string>
 </resources>
