@@ -16,7 +16,7 @@
     <string name="rememberMe">Remember me</string>
 
     <!-- Create Account Activity -->
-    <string name="createAccountTitle">Create \nYour account</string>
+    <string name="registerTitle">Create \nYour account</string>
     <string name="email">E-mail</string>
     <string name="name">Name</string>
     <string name="confirmPassword">Confirm Password</string>
