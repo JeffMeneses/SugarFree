@@ -9,4 +9,6 @@ public class Constants {
 
     public static final int MIN_NAME_LENGTH = 3;
     public static final int MIN_PASSWORD_LENGTH = 3;
+
+    public static final int IMAGE_GALLERY_REQUEST = 20;
 }
