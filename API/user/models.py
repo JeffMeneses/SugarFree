@@ -1,8 +1,15 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, session
 from app import db
 import uuid
 
 class User:
+
+    def startSession(self, user):
+        del user['password']
+        session['loggedIn'] = True
+        session['user'] = user
+        return jsonify(user), 200
+
 
     def signup(self):
 
@@ -17,6 +24,20 @@ class User:
             return jsonify({"error": "O email já está em uso."}), 400
 
         if db.users.insert_one(user):
-            return jsonify(user), 200
+            return self.startSession(user)
 
         return jsonify({"error": "O cadastro falhou."}), 400
+    
+    def signout(self):
+        session.clear()
+
+    def login(self):
+
+        user = db.users.find_one(
+            {"email": request.json.get('email')}
+        )
+
+        if user and user['password']==request.json['password']:
+            return self.startSession(user)
+
+        return jsonify({"error": "Credenciais de login inválidas."}), 401

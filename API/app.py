@@ -2,6 +2,7 @@ from flask import Flask
 import pymongo
 
 app = Flask(__name__)
+app.secret_key = b'U\x16~\xa9h@\x8e\xb3\xe7\xd8\xf54\xce\xed\x1c\r'
 
 # Database
 client = pymongo.MongoClient('localhost', 27017)
@@ -13,6 +14,3 @@ from user import routes
 @app.route('/')
 def home():
     return "Home"
-
-#if __name__=="__main__":
-#    app.run(debug=True)
