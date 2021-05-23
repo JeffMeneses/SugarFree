@@ -15,6 +15,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sugarfree.utils.Constants;
 import com.example.sugarfree.APIcommunication.APIrequests;
@@ -99,11 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         if(!validInput)
         {
-            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-            dlgAlert.setTitle(Constants.ALERT_INVALID_INPUT);
-            dlgAlert.setMessage(errorMessage);
-            dlgAlert.setCancelable(true);
-            dlgAlert.create().show();
+            Toast.makeText(mContext, errorMessage,Toast.LENGTH_LONG).show();
         }
 
         return validInput;
