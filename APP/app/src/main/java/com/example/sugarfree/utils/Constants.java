@@ -11,4 +11,8 @@ public class Constants {
     public static final int MIN_PASSWORD_LENGTH = 3;
 
     public static final int IMAGE_GALLERY_REQUEST = 20;
+
+    // URL REQUESTS
+    public static final String POST_REGISTER = "http://192.168.1.148:5000/user/signup";
+    public static final String POST_LOGIN = "http://192.168.1.148:5000/user/login";
 }

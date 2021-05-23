@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.sugarfree.utils.Constants;
+import com.example.sugarfree.APIcommunication.APIrequests;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -47,6 +48,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onClickConfirm(View v)
     {
+        APIrequests apiRequests = new APIrequests();
+
         String email = mEmail.getText().toString();
         String name = mName.getText().toString();
         String password = mPassword.getText().toString();
@@ -56,15 +59,16 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
-        //TODO: fazer requisição de cadastro
-        if(true)
-        {
-            AlertDialog.Builder dlgAlert = new AlertDialog.Builder(this);
-            dlgAlert.setTitle("Aviso");
-            dlgAlert.setMessage("Conta criada com sucesso!");
-            dlgAlert.setCancelable(true);
-            dlgAlert.create().show();
-        }
+        //TODO: criar classe parseJson
+        String user = "{"+
+                "\"name\":" + "\"" + name + "\","+
+                "\"email\":" + "\"" + email + "\","+
+                "\"password\":" + "\"" + password + "\""+
+                "}";
+
+        apiRequests.postRegister(mContext, user, Constants.POST_REGISTER);
+
+        //TODO: tratar mensagens de erro
     }
 
     public boolean checkInputs(String email, String name, String password, String confirmPassword)
