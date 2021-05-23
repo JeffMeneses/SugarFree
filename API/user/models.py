@@ -24,12 +24,14 @@ class User:
             return jsonify({"error": "O email já está em uso."}), 400
 
         if db.users.insert_one(user):
-            return self.startSession(user)
+            self.startSession(user)
+            return jsonify({"success": "Cadastro concluído com sucesso."}), 200
 
         return jsonify({"error": "O cadastro falhou."}), 400
     
     def signout(self):
         session.clear()
+        return jsonify({"success": "Sessão finalizada."}), 200
 
     def login(self):
 
@@ -38,6 +40,7 @@ class User:
         )
 
         if user and user['password']==request.json['password']:
-            return self.startSession(user)
+            self.startSession(user)
+            return jsonify({"success": "Login concluído com sucesso."}), 200
 
         return jsonify({"error": "Credenciais de login inválidas."}), 401

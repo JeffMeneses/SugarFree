@@ -30,7 +30,8 @@ public class APIrequests {
             public void onResponse(String response) {
                 try {
                     JSONObject objres=new JSONObject(response);
-                    Toast.makeText(context,objres.toString(),Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context,objres.toString(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, objres.getString("success"),Toast.LENGTH_LONG).show();
 
                 } catch (JSONException e) {
                     Toast.makeText(context,"Server Error",Toast.LENGTH_LONG).show();
@@ -39,7 +40,26 @@ public class APIrequests {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, error.toString(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
+
+                if (error == null || error.networkResponse == null) {
+                    return;
+                }
+
+                String body;
+                JSONObject objres;
+                //get status code here
+                final String statusCode = String.valueOf(error.networkResponse.statusCode);
+                //get response body and parse with appropriate encoding
+                try {
+                    body = new String(error.networkResponse.data,"UTF-8");
+                    objres = new JSONObject(body);
+                    Toast.makeText(context, objres.getString("error"), Toast.LENGTH_SHORT).show();
+                } catch (UnsupportedEncodingException | JSONException e) {
+                    Toast.makeText(context,"Server Error",Toast.LENGTH_LONG).show();
+                }
+
             }
         }) {
             @Override
