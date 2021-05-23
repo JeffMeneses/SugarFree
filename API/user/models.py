@@ -21,13 +21,13 @@ class User:
         }
 
         if db.users.find_one({"email": user['email']}):
-            return jsonify({"error": "O email já está em uso."}), 400
+            return jsonify({"error": "O email já está em uso.", "statusCode": 400}), 400
 
         if db.users.insert_one(user):
             self.startSession(user)
-            return jsonify({"success": "Cadastro concluído com sucesso."}), 200
+            return jsonify({"success": "Cadastro concluído com sucesso.", "statusCode": 200}), 200
 
-        return jsonify({"error": "O cadastro falhou."}), 400
+        return jsonify({"error": "O cadastro falhou.", "statusCode": 400}), 400
     
     def signout(self):
         session.clear()

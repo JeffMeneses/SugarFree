@@ -3,9 +3,11 @@ package com.example.sugarfree;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sugarfree.utils.Constants;
 import com.example.sugarfree.APIcommunication.APIrequests;
@@ -39,7 +41,18 @@ public class LoginActivity extends AppCompatActivity {
                 "\"password\":" + "\"" + password + "\""+
                 "}";
 
-        apiRequests.postMethod(mContext, user, Constants.POST_LOGIN);
+        apiRequests.postMethod(mContext, user, Constants.POST_LOGIN, new APIrequests.VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(String message) {
+                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+                //startActivity(new Intent(mContext, MainActivity.class));
+            }
+        });
     }
 
     public void onClickReturn(View v){

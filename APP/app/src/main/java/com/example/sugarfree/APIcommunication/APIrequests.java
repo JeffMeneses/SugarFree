@@ -19,7 +19,13 @@ import java.io.UnsupportedEncodingException;
 public class APIrequests {
     private RequestQueue requestQueue;
 
-    public boolean postMethod(Context context, String data, String action)
+    public interface VolleyResponseListener {
+        void onError(String message);
+
+        void onResponse(String message);
+    }
+
+    public void postMethod(Context context, String data, String action, VolleyResponseListener volleyResponseListener)
     {
         final String saveData = data;
         String URL= action;
@@ -30,18 +36,15 @@ public class APIrequests {
             public void onResponse(String response) {
                 try {
                     JSONObject objres=new JSONObject(response);
-                    //Toast.makeText(context,objres.toString(),Toast.LENGTH_LONG).show();
-                    Toast.makeText(context, objres.getString("success"),Toast.LENGTH_LONG).show();
+                    volleyResponseListener.onResponse(objres.getString("success"));
 
                 } catch (JSONException e) {
-                    Toast.makeText(context,"Server Error",Toast.LENGTH_LONG).show();
+                    volleyResponseListener.onError("Server Error");
                 }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //Toast.makeText(context, error.toString(),Toast.LENGTH_LONG).show();
-                //Toast.makeText(context, error.getMessage(), Toast.LENGTH_SHORT).show();
 
                 if (error == null || error.networkResponse == null) {
                     return;
@@ -55,9 +58,10 @@ public class APIrequests {
                 try {
                     body = new String(error.networkResponse.data,"UTF-8");
                     objres = new JSONObject(body);
-                    Toast.makeText(context, objres.getString("error"), Toast.LENGTH_SHORT).show();
+                    volleyResponseListener.onError(objres.getString("error"));
                 } catch (UnsupportedEncodingException | JSONException e) {
                     Toast.makeText(context,"Server Error",Toast.LENGTH_LONG).show();
+                    volleyResponseListener.onError("Server Error");
                 }
 
             }
@@ -78,6 +82,5 @@ public class APIrequests {
 
         };
         requestQueue.add(stringRequest);
-        return true;
     }
 }

@@ -67,9 +67,18 @@ public class RegisterActivity extends AppCompatActivity {
                 "\"password\":" + "\"" + password + "\""+
                 "}";
 
-        apiRequests.postMethod(mContext, user, Constants.POST_REGISTER);
+        apiRequests.postMethod(mContext, user, Constants.POST_REGISTER, new APIrequests.VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+            }
 
-        //TODO: tratar mensagens de erro
+            @Override
+            public void onResponse(String message) {
+                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+                startActivity(new Intent(mContext, LoginActivity.class));
+            }
+        });
     }
 
     public boolean checkInputs(String email, String name, String password, String confirmPassword)
