@@ -66,7 +66,7 @@ public class RegisterActivity extends AppCompatActivity {
                 "\"password\":" + "\"" + password + "\""+
                 "}";
 
-        apiRequests.postRegister(mContext, user, Constants.POST_REGISTER);
+        apiRequests.postMethod(mContext, user, Constants.POST_REGISTER);
 
         //TODO: tratar mensagens de erro
     }

@@ -19,10 +19,10 @@ import java.io.UnsupportedEncodingException;
 public class APIrequests {
     private RequestQueue requestQueue;
 
-    public boolean postRegister(Context context, String data, String action)
+    public boolean postMethod(Context context, String data, String action)
     {
         final String saveData = data;
-        String URL="http://192.168.1.148:5000/user/signup";
+        String URL= action;
 
         requestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
