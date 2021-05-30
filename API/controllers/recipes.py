@@ -1,5 +1,7 @@
 from flask import Flask, jsonify, request
 from app import app, db
+import json
+from bson import json_util
 import uuid
 
 # PLACE HOLDER
@@ -16,7 +18,14 @@ def recipes():
         output = []
 
         for item in recipes.find():
-            output.append({'title': item['title'], 'instructions': item['instructions']})
+            output.append({
+                'title': item['title'],
+                'instructions': item['instructions'],
+                'image': item['image'],
+                'likes': item['likes'],
+                'category': item['category'],
+                'tags': item['tags']
+            })
 
         return jsonify(output), 200
     
@@ -24,10 +33,19 @@ def recipes():
         recipe = {
             "_id": uuid.uuid4().hex,
             "title": request.json.get('title'),
-            "instructions": request.json.get('instructions')
+            "instructions": request.json.get('instructions'),
+            "image": request.json.get('image'),
+            "likes": request.json.get('likes'),
+            "category": request.json.get('category'),
+            "tags": request.json.get('tags')
         }
 
         if db.recipes.insert_one(recipe):
             return jsonify({"success": "Receita inserida com sucesso.", "statusCode": 200}), 200
 
         return jsonify({"error": "A inserção de receita falhou.", "statusCode": 400}), 400
+
+@app.route('/recipesCategory/<string:category>', methods=['GET'])
+def recipesCategory(category):
+    recipes_list  = list(db.recipes.find({"category": category}))
+    return json.dumps(recipes_list, default=json_util.default)

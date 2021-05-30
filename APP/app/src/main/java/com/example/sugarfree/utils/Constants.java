@@ -15,5 +15,6 @@ public class Constants {
     // URL REQUESTS
     public static final String POST_REGISTER = "http://192.168.1.148:5000/user/signup";
     public static final String POST_LOGIN = "http://192.168.1.148:5000/user/login";
-    public static final String GET_RECIPES = "http://192.168.1.148:5000/user/login";
+    public static final String GET_RECIPES = "http://192.168.1.148:5000/recipes";
+    public static final String GET_RECIPES_CATEGORY = "http://192.168.1.148:5000/recipesCategory";
 }

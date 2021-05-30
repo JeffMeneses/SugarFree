@@ -89,7 +89,7 @@
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"
                     android:fontFamily="@font/cloud"
-                    android:text="Almoço / Jantar"
+                    android:text="Almoço e Jantar"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
 

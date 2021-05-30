@@ -2,19 +2,19 @@ package com.example.sugarfree.utils;
 
 public class RecipeItem {
     private int mImageResource;
-    private String mText1;
-    private String mText2;
+    private String mTitle;
+    private String mLikes;
 
-    public RecipeItem(int imageResource, String text1, String text2)
+    public RecipeItem(int imageResource, String title, String likes)
     {
         mImageResource = imageResource;
-        mText1 = text1;
-        mText2 = text2;
+        mTitle = title;
+        mLikes = likes;
     }
 
     public void changeText1(String text)
     {
-        mText1 = text;
+        mTitle = text;
     }
 
     public int getImageResource()
@@ -22,13 +22,13 @@ public class RecipeItem {
         return mImageResource;
     }
 
-    public String getText1()
+    public String getTitle()
     {
-        return mText1;
+        return mTitle;
     }
 
-    public String getText2()
+    public String getLikes()
     {
-        return mText2;
+        return mLikes;
     }
 }

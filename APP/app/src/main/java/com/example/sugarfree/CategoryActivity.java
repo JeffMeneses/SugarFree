@@ -9,8 +9,13 @@ import android.content.Context;
 import android.os.Bundle;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
+import com.example.sugarfree.utils.Constants;
 import com.example.sugarfree.utils.RecipeAdapter;
 import com.example.sugarfree.utils.RecipeItem;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -31,15 +36,52 @@ public class CategoryActivity extends AppCompatActivity {
         getIncomingIntent();
 
         //TODO: método GET para pegar receitas
-        testIntent();
-
         buildRecyclerView();
+        initiateRecyclerView();
     }
 
     public void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(this, 2);
+    }
+
+    public void getIncomingIntent()
+    {
+        if(getIntent().hasExtra("categoryName"))
+        {
+            mCategoryName = getIntent().getStringExtra("categoryName");
+        }
+    }
+
+    public void initiateRecyclerView()
+    {
+        APIrequests apiRequests = new APIrequests();
+        apiRequests.getMethod(mContext, Constants.GET_RECIPES_CATEGORY+"/"+mCategoryName, "recipes", new APIrequests.VolleyGETResponseListener() {
+            @Override
+            public void onError(String message)  {
+
+            }
+
+            @Override
+            public void onResponse(JSONArray jsonArray) throws JSONException {
+                for (int i = 0; i < jsonArray.length(); i++)
+                {
+                    JSONObject name = jsonArray.getJSONObject(i);
+
+                    String title = name.getString("title");
+                    String likes = name.getString("likes");
+                    String image = name.getString("image");
+
+                    mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
+                }
+                initiateAdapter();
+            }
+        });
+    }
+
+    public void initiateAdapter()
+    {
         mAdapter = new RecipeAdapter(mRecipeList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
@@ -52,48 +94,5 @@ public class CategoryActivity extends AppCompatActivity {
                 mAdapter.notifyItemChanged(position);
             }
         });
-    }
-
-    public void getIncomingIntent()
-    {
-        if(getIntent().hasExtra("categoryName"))
-        {
-            mCategoryName = getIntent().getStringExtra("categoryName");
-        }
-    }
-
-    public void testIntent()
-    {
-        if(mCategoryName.equals("Café da Manhã"))
-        {
-            APIrequests apiRequests = new APIrequests();
-
-            apiRequests.getMethod(mContext, );
-
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Café", "5 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Lentilha", "6 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Feijão", "7 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Cenoura", "5 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Lentilha", "6 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Feijão", "7 Likes"));
-        }
-        else if(mCategoryName.equals("Almoço / Jantar"))
-        {
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Almoço", "5 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Lentilha", "6 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Feijão", "7 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Cenoura", "5 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Lentilha", "6 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Feijão", "7 Likes"));
-        }
-        else if(mCategoryName.equals("Petiscos"))
-        {
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Petiscos", "5 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Lentilha", "6 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Feijão", "7 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Cenoura", "5 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Lentilha", "6 Likes"));
-            mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Feijão", "7 Likes"));
-        }
     }
 }

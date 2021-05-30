@@ -68,9 +68,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     public void onBindViewHolder(RecipeAdapter.RecipeViewHolder holder, int position) {
         RecipeItem currentItem = mRecipeList.get(position);
 
+        String title = currentItem.getTitle();
+        String likes = currentItem.getLikes();
+
         holder.mImageView.setImageResource(currentItem.getImageResource());
-        holder.mTextView1.setText(currentItem.getText1());
-        holder.mTextView2.setText(currentItem.getText2());
+        holder.mTextView1.setText(title);
+        holder.mTextView2.setText("Likes: "+likes);
     }
 
     @Override
