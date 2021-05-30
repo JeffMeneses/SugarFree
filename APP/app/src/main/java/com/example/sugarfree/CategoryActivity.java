@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
@@ -29,6 +32,8 @@ public class CategoryActivity extends AppCompatActivity {
 
     private String mCategoryName;
     private Context mContext;
+    private TextView mTitle;
+    private ImageView mReturnArrow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,10 @@ public class CategoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_category);
         mContext = getApplicationContext();
         getIncomingIntent();
+
+        mTitle = findViewById(R.id.txtToolbarTitle);
+        mReturnArrow = findViewById(R.id.imgToolbarArrow);
+        updateToolbar();
 
         //TODO: método GET para pegar receitas
         buildRecyclerView();
@@ -99,5 +108,13 @@ public class CategoryActivity extends AppCompatActivity {
                 mAdapter.notifyItemChanged(position);
             }
         });
+    }
+
+    public void updateToolbar()
+    {
+        mTitle.setText(mCategoryName);
+
+        mReturnArrow.setVisibility(View.VISIBLE);
+        mTitle.setVisibility(View.VISIBLE);
     }
 }
