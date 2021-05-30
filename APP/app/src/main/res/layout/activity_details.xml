@@ -60,12 +60,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="35dp"
-                android:background="@drawable/ic_like_icon" />
+                android:background="@drawable/ic_like_icon"
+                android:visibility="invisible"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/ic_favorite_icon" />
+                android:background="@drawable/ic_favorite_icon"
+                android:visibility="invisible"/>
         </LinearLayout>
 
         <TextView
@@ -101,7 +103,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/cloud"
-            android:text="Ingredientes"
+            android:text="Modo de Preparo"
             android:textColor="@color/lightBlue"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
