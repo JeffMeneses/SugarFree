@@ -71,7 +71,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         String title = currentItem.getTitle();
         String likes = currentItem.getLikes();
 
-        holder.mImageView.setImageResource(currentItem.getImageResource());
+        holder.mImageView.setImageBitmap(currentItem.getImageResource());
         holder.mTextView1.setText(title);
         holder.mTextView2.setText("Likes: "+likes);
     }

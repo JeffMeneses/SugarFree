@@ -6,10 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
+import com.example.sugarfree.utils.ImageHandler;
 import com.example.sugarfree.utils.RecipeAdapter;
 import com.example.sugarfree.utils.RecipeItem;
 
@@ -73,7 +75,10 @@ public class CategoryActivity extends AppCompatActivity {
                     String likes = name.getString("likes");
                     String image = name.getString("image");
 
-                    mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
+                    Bitmap imageBitmap = ImageHandler.convert(image);
+
+                    //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
+                    mRecipeList.add(new RecipeItem(imageBitmap, title, likes));
                 }
                 initiateAdapter();
             }

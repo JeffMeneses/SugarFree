@@ -1,11 +1,13 @@
 package com.example.sugarfree.utils;
 
+import android.graphics.Bitmap;
+
 public class RecipeItem {
-    private int mImageResource;
+    private Bitmap mImageResource;
     private String mTitle;
     private String mLikes;
 
-    public RecipeItem(int imageResource, String title, String likes)
+    public RecipeItem(Bitmap imageResource, String title, String likes)
     {
         mImageResource = imageResource;
         mTitle = title;
@@ -17,7 +19,7 @@ public class RecipeItem {
         mTitle = text;
     }
 
-    public int getImageResource()
+    public Bitmap getImageResource()
     {
         return mImageResource;
     }
