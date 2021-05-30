@@ -14,17 +14,41 @@ import java.util.ArrayList;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder> {
     private ArrayList<RecipeItem> mRecipeList;
+    private OnItemClickListener mListener;
+
+    public interface OnItemClickListener
+    {
+        void onItemClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener)
+    {
+        mListener = listener;
+    }
 
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;
         public TextView mTextView1;
         public TextView mTextView2;
 
-        public RecipeViewHolder(View itemView) {
+        public RecipeViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.imgRecipe);
             mTextView1 = itemView.findViewById(R.id.txtTitle);
             mTextView2 = itemView.findViewById(R.id.txtLike);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null) {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION)
+                        {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -36,7 +60,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
     @Override
     public RecipeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.category_item, parent, false);
-        RecipeViewHolder evh = new RecipeViewHolder(v);
+        RecipeViewHolder evh = new RecipeViewHolder(v, mListener);
         return evh;
     }
 

@@ -13,8 +13,9 @@ import com.example.sugarfree.utils.RecipeItem;
 import java.util.ArrayList;
 
 public class CategoryActivity extends AppCompatActivity {
-    private RecyclerView mReciclerView;
-    private RecyclerView.Adapter mAdapter;
+    private ArrayList<RecipeItem> mRecipeList = new ArrayList<>();
+    private RecyclerView mRecyclerView;
+    private RecipeAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
@@ -22,23 +23,34 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
-        ArrayList<RecipeItem> recipeList = new ArrayList<>();
         //TODO: método GET para pegar receitas
 
         //PLACE HOLDER
-        recipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Cenoura", "5 Likes"));
-        recipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Lentilha", "6 Likes"));
-        recipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Feijão", "7 Likes"));
-        recipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Cenoura", "5 Likes"));
-        recipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Lentilha", "6 Likes"));
-        recipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Feijão", "7 Likes"));
+        mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Cenoura", "5 Likes"));
+        mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Lentilha", "6 Likes"));
+        mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Feijão", "7 Likes"));
+        mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Cenoura", "5 Likes"));
+        mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Lentilha", "6 Likes"));
+        mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Feijão", "7 Likes"));
 
-        mReciclerView = findViewById(R.id.reciclerView);
-        mReciclerView.setHasFixedSize(true);
+        buildRecyclerView();
+    }
+
+    public void buildRecyclerView() {
+        mRecyclerView = findViewById(R.id.recyclerView);
+        mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(this, 2);
-        mAdapter = new RecipeAdapter(recipeList);
+        mAdapter = new RecipeAdapter(mRecipeList);
 
-        mReciclerView.setLayoutManager(mLayoutManager);
-        mReciclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                mRecipeList.get(position).changeText1("Clicked");
+                mAdapter.notifyItemChanged(position);
+            }
+        });
     }
 }
