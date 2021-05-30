@@ -8,16 +8,18 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
 public class APIrequests {
-    private RequestQueue requestQueue;
+    private RequestQueue mRequestQueue;
 
     public interface VolleyResponseListener {
         void onError(String message);
@@ -30,7 +32,7 @@ public class APIrequests {
         final String saveData = data;
         String URL= action;
 
-        requestQueue = Volley.newRequestQueue(context);
+        mRequestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -81,6 +83,44 @@ public class APIrequests {
             }
 
         };
-        requestQueue.add(stringRequest);
+        mRequestQueue.add(stringRequest);
     }
+
+    public void getMethod(Context context, String action, String name)
+    {
+        String URL= action;
+
+        mRequestQueue = Volley.newRequestQueue(context);
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, action, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray jsonArray = response.getJSONArray(name);
+
+                            for (int i = 0; i < jsonArray.length(); i++)
+                            {
+                                JSONObject name = jsonArray.getJSONObject(i);
+
+                                String title = name.getString("title");
+                                String instructions = name.getString("instructions");
+                                String image = name.getString("image");
+
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        mRequestQueue.add(request);
+    }
+
+
 }

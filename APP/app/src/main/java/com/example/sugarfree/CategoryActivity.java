@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.RecipeAdapter;
 import com.example.sugarfree.utils.RecipeItem;
 
@@ -19,12 +21,15 @@ public class CategoryActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager mLayoutManager;
 
     private String mCategoryName;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+        mContext = getApplicationContext();
         getIncomingIntent();
+
         //TODO: método GET para pegar receitas
         testIntent();
 
@@ -61,6 +66,10 @@ public class CategoryActivity extends AppCompatActivity {
     {
         if(mCategoryName.equals("Café da Manhã"))
         {
+            APIrequests apiRequests = new APIrequests();
+
+            apiRequests.getMethod(mContext, );
+
             mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Café", "5 Likes"));
             mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Lentilha", "6 Likes"));
             mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, "Sopa de Feijão", "7 Likes"));
