@@ -3,20 +3,22 @@ package com.example.sugarfree.utils;
 import android.graphics.Bitmap;
 
 public class RecipeItem {
+    private String mId;
     private Bitmap mImageResource;
     private String mTitle;
     private String mLikes;
 
-    public RecipeItem(Bitmap imageResource, String title, String likes)
+    public RecipeItem(String id, Bitmap imageResource, String title, String likes)
     {
+        mId = id;
         mImageResource = imageResource;
         mTitle = title;
         mLikes = likes;
     }
 
-    public void changeText1(String text)
+    public String getId()
     {
-        mTitle = text;
+        return mId;
     }
 
     public Bitmap getImageResource()

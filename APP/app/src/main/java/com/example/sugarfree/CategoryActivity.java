@@ -6,8 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
 import com.example.sugarfree.utils.ImageHandler;
+import com.example.sugarfree.utils.Recipe;
 import com.example.sugarfree.utils.RecipeAdapter;
 import com.example.sugarfree.utils.RecipeItem;
 
@@ -80,6 +83,7 @@ public class CategoryActivity extends AppCompatActivity {
                 {
                     JSONObject name = jsonArray.getJSONObject(i);
 
+                    String id = name.getString("_id");
                     String title = name.getString("title");
                     String likes = name.getString("likes");
                     String image = name.getString("image");
@@ -87,7 +91,7 @@ public class CategoryActivity extends AppCompatActivity {
                     Bitmap imageBitmap = ImageHandler.convert(image);
 
                     //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
-                    mRecipeList.add(new RecipeItem(imageBitmap, title, likes));
+                    mRecipeList.add(new RecipeItem(id, imageBitmap, title, likes));
                 }
                 initiateAdapter();
             }
@@ -104,8 +108,41 @@ public class CategoryActivity extends AppCompatActivity {
         mAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                mRecipeList.get(position).changeText1("Clicked");
-                mAdapter.notifyItemChanged(position);
+                Intent intent = new Intent(mContext, DetailsActivity.class);
+                RecipeItem clickedItem = mRecipeList.get(position);
+
+                APIrequests apiRequests = new APIrequests();
+                apiRequests.getMethod(mContext, Constants.GET_RECIPE_BY_ID+"/"+clickedItem.getId(), "recipes", new APIrequests.VolleyGETResponseListener() {
+                    @Override
+                    public void onError(String message)  {
+
+                    }
+
+                    @Override
+                    public void onResponse(JSONArray jsonArray) throws JSONException {
+                        JSONObject recipeJson = jsonArray.getJSONObject(0);
+
+                        String title = recipeJson.getString("title");
+                        String ingredients = recipeJson.getString("ingredients");
+                        String category = recipeJson.getString("category");
+                        String instructions = recipeJson.getString("instructions");
+                        String tags = recipeJson.getString("tags");
+                        String likes = recipeJson.getString("likes");
+                        String image = recipeJson.getString("image");
+
+                        //Bitmap imageBitmap = ImageHandler.convert(image);
+
+                        intent.putExtra(Constants.EXTRA_TITLE, title);
+                        intent.putExtra(Constants.EXTRA_INGREDIENTS, ingredients);
+                        intent.putExtra(Constants.EXTRA_CATEGORY, category);
+                        intent.putExtra(Constants.EXTRA_INSTRUCTIONS, instructions);
+                        intent.putExtra(Constants.EXTRA_TAGS, tags);
+                        intent.putExtra(Constants.EXTRA_LIKES, likes);
+                        intent.putExtra(Constants.EXTRA_IMAGE, image);
+
+                        startActivity(intent);
+                    }
+                });
             }
         });
     }

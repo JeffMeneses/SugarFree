@@ -49,3 +49,8 @@ def recipes():
 def recipesCategory(category):
     recipes_list  = list(db.recipes.find({"category": category}))
     return json.dumps(recipes_list, default=json_util.default)
+
+@app.route('/recipeId/<string:id>', methods=['GET'])
+def recipeId(id):
+    recipes_list  = list(db.recipes.find({"_id": id}))
+    return json.dumps(recipes_list, default=json_util.default)

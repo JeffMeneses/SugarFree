@@ -17,4 +17,15 @@ public class Constants {
     public static final String POST_LOGIN = "http://192.168.1.148:5000/user/login";
     public static final String GET_RECIPES = "http://192.168.1.148:5000/recipes";
     public static final String GET_RECIPES_CATEGORY = "http://192.168.1.148:5000/recipesCategory";
+    public static final String GET_RECIPE_BY_ID = "http://192.168.1.148:5000/recipeId";
+
+
+    // EXTRA INPUTS
+    public static final String EXTRA_TITLE = "title";
+    public static final String EXTRA_INGREDIENTS = "ingredients";
+    public static final String EXTRA_INSTRUCTIONS = "instructions";
+    public static final String EXTRA_TAGS = "tags";
+    public static final String EXTRA_LIKES = "likes";
+    public static final String EXTRA_IMAGE = "image";
+    public static final String EXTRA_CATEGORY = "category";
 }

@@ -50,7 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(String message) {
                 Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
-                //startActivity(new Intent(mContext, MainActivity.class));
+                startActivity(new Intent(mContext, MainActivity.class));
             }
         });
     }
