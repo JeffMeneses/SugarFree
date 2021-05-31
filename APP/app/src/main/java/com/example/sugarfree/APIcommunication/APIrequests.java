@@ -8,16 +8,19 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 
 public class APIrequests {
-    private RequestQueue requestQueue;
+    private RequestQueue mRequestQueue;
 
     public interface VolleyResponseListener {
         void onError(String message);
@@ -25,12 +28,18 @@ public class APIrequests {
         void onResponse(String message);
     }
 
+    public interface VolleyGETResponseListener {
+        void onError(String message);
+
+        void onResponse(JSONArray jsonArray) throws JSONException;
+    }
+
     public void postMethod(Context context, String data, String action, VolleyResponseListener volleyResponseListener)
     {
         final String saveData = data;
         String URL= action;
 
-        requestQueue = Volley.newRequestQueue(context);
+        mRequestQueue = Volley.newRequestQueue(context);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -81,6 +90,33 @@ public class APIrequests {
             }
 
         };
-        requestQueue.add(stringRequest);
+        mRequestQueue.add(stringRequest);
     }
+
+    public void getMethod(Context context, String action, String name, VolleyGETResponseListener volleyGETResponseListener)
+    {
+        String URL= action;
+
+        mRequestQueue = Volley.newRequestQueue(context);
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, action, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            volleyGETResponseListener.onResponse(response);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        mRequestQueue.add(request);
+    }
+
+
 }

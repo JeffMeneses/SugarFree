@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/search"
+        android:title="Search"
+        app:showAsAction="ifRoom|collapseActionView"
+        android:iconTint="@color/darkBlue"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        android:icon="@drawable/ic_searchglass"/>
+
+    <item
+        android:id="@+id/mainMenu"
+        android:title="mainMenu"
+        app:showAsAction="ifRoom"
+        android:iconTint="@color/darkBlue"
+        android:icon="@drawable/ic_menubutton"/>
+</menu>

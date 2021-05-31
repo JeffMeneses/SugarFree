@@ -21,4 +21,12 @@
     <string name="name">Name</string>
     <string name="confirmPassword">Confirm Password</string>
     <string name="confirm">CONFIRM</string>
+
+
+    <!-- Details Activity -->
+    <string name="ingredients">3 cenouras\n1 litro de água\n1 xícara de cenoura\n1/2 de cenouta\ncenoura à gosto</string>
+    <string name="instructions">Lorem ipsum phasellus accumsan justo condimentum conubia vel dapibus aliquet commodo.
+    \nFusce consequat accumsan tempus risus tortor leo netus habitant, litora lobortis enim pulvinar sociosqu et torquent neque vestibulum. erat mauris placerat rutrum etiam nisi duis imperdiet urna, etiam litora aliquet enim mauris.
+        \nIpsum adipiscing, purus erat vehicula elit lacus hac urna.</string>
+    <string name="tags">#PreparoRapido    #Almoço    #Jantar    #Sopa\n#PreparoRapido    #Almoço    #Jantar    #Sopa</string>
 </resources>
