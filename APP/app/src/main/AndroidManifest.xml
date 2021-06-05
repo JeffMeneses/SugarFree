@@ -14,7 +14,8 @@
         android:theme="@style/Theme.SugarFree">
         <activity android:name=".DetailsActivity"></activity>
         <activity android:name=".CategoryActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity"
+            android:theme="@style/Theme.SugarFree.NoActionBar"/>
         <activity android:name=".RegisterActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".WelcomeActivity" />

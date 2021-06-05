@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">SugarFree</string>
 
+    <string name="navigation_drawer_open">Open navigation bar</string>
+    <string name="navigation_drawer_close">Close navigation bar</string>
+
     <!-- Welcome Activity -->
     <string name="sugarFree">SugarFree</string>
     <string name="welcomeText">Join our community and be aware of delicious food recipes for people with Diabetes and create your own menus.</string>

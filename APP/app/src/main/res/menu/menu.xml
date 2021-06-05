@@ -8,11 +8,4 @@
         android:iconTint="@color/darkBlue"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         android:icon="@drawable/ic_searchglass"/>
-
-    <item
-        android:id="@+id/mainMenu"
-        android:title="mainMenu"
-        app:showAsAction="ifRoom"
-        android:iconTint="@color/darkBlue"
-        android:icon="@drawable/ic_menubutton"/>
 </menu>
