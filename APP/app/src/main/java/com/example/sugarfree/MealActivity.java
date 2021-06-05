@@ -40,13 +40,13 @@ public class MealActivity extends AppCompatActivity {
         updateToolbar();
 
         mFoodList.add(new FoodItem("1", "Brócolis", "50", "grama(s)"));
-        mFoodList.add(new FoodItem("1", "Cenoura", "10", "quilo(s)"));
-        mFoodList.add(new FoodItem("1", "Leite", "1", "litro(s)"));
-        mFoodList.add(new FoodItem("1", "Água", "500", "ml"));
-        mFoodList.add(new FoodItem("1", "Brócolis", "50", "grama(s)"));
-        mFoodList.add(new FoodItem("1", "Cenoura", "10", "quilo(s)"));
-        mFoodList.add(new FoodItem("1", "Leite", "1", "litro(s)"));
-        mFoodList.add(new FoodItem("1", "Água", "500", "ml"));
+        mFoodList.add(new FoodItem("2", "Cenoura", "10", "quilo(s)"));
+        mFoodList.add(new FoodItem("3", "Leite", "1", "litro(s)"));
+        mFoodList.add(new FoodItem("4", "Água", "500", "ml"));
+        mFoodList.add(new FoodItem("5", "Brócolis", "50", "grama(s)"));
+        mFoodList.add(new FoodItem("6", "Cenoura", "10", "quilo(s)"));
+        mFoodList.add(new FoodItem("7", "Leite", "1", "litro(s)"));
+        mFoodList.add(new FoodItem("8", "Água", "500", "ml"));
 
         mRecyclerView = findViewById(R.id.recyclerViewFood);
         mRecyclerView.setHasFixedSize(true);
@@ -55,6 +55,19 @@ public class MealActivity extends AppCompatActivity {
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new FoodAdapter.OnItemClickListener() {
+            @Override
+            public void onRemoveClick(int position) {
+                removeItem(position);
+            }
+        });
+    }
+
+    public void removeItem(int position)
+    {
+        mFoodList.remove(position);
+        mAdapter.notifyItemRemoved(position);
     }
 
     public void updateToolbar()
