@@ -32,4 +32,15 @@
     \nFusce consequat accumsan tempus risus tortor leo netus habitant, litora lobortis enim pulvinar sociosqu et torquent neque vestibulum. erat mauris placerat rutrum etiam nisi duis imperdiet urna, etiam litora aliquet enim mauris.
         \nIpsum adipiscing, purus erat vehicula elit lacus hac urna.</string>
     <string name="tags">#PreparoRapido    #Almoço    #Jantar    #Sopa\n#PreparoRapido    #Almoço    #Jantar    #Sopa</string>
+
+
+    <!-- AddFood Activity -->
+    <string-array name="units">
+        <item>Grama(s)</item>
+        <item>Mililitos(s)</item>
+        <item>Unidade(s)</item>
+        <item>Xícara(s)</item>
+        <item>Colher(es)</item>
+        <item>Copo(s)</item>
+    </string-array>
 </resources>

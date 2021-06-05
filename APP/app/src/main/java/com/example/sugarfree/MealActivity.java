@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,6 +34,7 @@ public class MealActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meal);
 
+        mContext = getApplicationContext();
         mTitle = findViewById(R.id.txtToolbarTitle);
         mReturnArrow = findViewById(R.id.imgToolbarArrow);
 
@@ -84,5 +86,12 @@ public class MealActivity extends AppCompatActivity {
         {
             mMealName = getIntent().getStringExtra("mealName");
         }
+    }
+
+    public void onClickAddFood(View v)
+    {
+        Intent intent = new Intent(mContext, AddFoodActivity.class);
+        intent.putExtra("mealName", mTitle.getText().toString());
+        startActivity(intent);
     }
 }
