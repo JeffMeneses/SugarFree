@@ -9,8 +9,8 @@
             android:title="Home"
             />
         <item
-            android:id="@+id/nav_cardapios"
-            android:title="Cardápios"
+            android:id="@+id/nav_refeicoes"
+            android:title="Refeições"
             />
         <item
             android:id="@+id/nav_logoff"
