@@ -18,4 +18,16 @@
             />
     </group>
 
+    <item android:title="Adicionar receita por">
+        <menu>
+            <item
+                android:id="@+id/nav_addRecipeWritten"
+                android:title="Digitação"/>
+
+            <item
+                android:id="@+id/nav_addRecipeScreenshot"
+                android:title="Captura de tela"/>
+        </menu>
+    </item>
+
 </menu>
