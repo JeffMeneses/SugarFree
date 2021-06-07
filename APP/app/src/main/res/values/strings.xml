@@ -6,24 +6,24 @@
 
     <!-- Welcome Activity -->
     <string name="sugarFree">SugarFree</string>
-    <string name="welcomeText">Join our community and be aware of delicious food recipes for people with Diabetes and create your own menus.</string>
-    <string name="login">LOGIN</string>
-    <string name="register">REGISTER</string>
+    <string name="welcomeText">Junte-se à nossa comunidade e fique por dentro das deliciosas receitas de comidas para pessoas com Diabetes e crie seus próprios cardápios.</string>
+    <string name="login">ENTRAR</string>
+    <string name="register">CADASTRAR</string>
 
     <!-- Login Activity -->
     <string name="signIn">Sign In</string>
-    <string name="loginTitle">Login to \nyour account</string>
+    <string name="loginTitle">Entre na\n sua conta</string>
     <string name="createAccount">Don\'t have an account yet? Sign Up</string>
-    <string name="password">Password</string>
-    <string name="username">Username</string>
+    <string name="password">Senha</string>
+    <string name="username">Usuário</string>
     <string name="rememberMe">Remember me</string>
 
     <!-- Create Account Activity -->
-    <string name="registerTitle">Create \nYour account</string>
+    <string name="registerTitle">Crie \nsua conta</string>
     <string name="email">E-mail</string>
-    <string name="name">Name</string>
-    <string name="confirmPassword">Confirm Password</string>
-    <string name="confirm">CONFIRM</string>
+    <string name="name">Nome</string>
+    <string name="confirmPassword">Confirmar senha</string>
+    <string name="confirm">Confirmar</string>
 
 
     <!-- Details Activity -->
