@@ -54,6 +54,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="35dp"
+                android:onClick="onClickShare"
                 android:background="@drawable/ic_share_icon" />
 
             <ImageView

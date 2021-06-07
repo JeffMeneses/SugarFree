@@ -167,7 +167,12 @@ def removeFood(idUser, category, idFood):
     mealUpdate = db.meals.update_one(
         {"idUser": idUser},
         { 
-            "$pull": {category: {"idFood": idFood}}
+            "$pull": {
+                category: 
+                {
+                    "idFood": idFood
+                }
+            }
         })
 
     if mealUpdate.modified_count:

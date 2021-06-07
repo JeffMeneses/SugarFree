@@ -59,4 +59,24 @@ public class DetailsActivity extends AppCompatActivity {
         mReturnArrow.setVisibility(View.VISIBLE);
         mTitle.setVisibility(View.VISIBLE);
     }
+
+    public String getRecipeText()
+    {
+        String recipeText = mTxtTitleDetails.getText().toString()+"\n"+
+                "_________________________________________\n" +
+                mTxtIngredients.getText().toString()+"\n" +
+                "_________________________________________\n" +
+                mTxtInstructions.getText().toString();
+
+        return recipeText;
+    }
+
+    public void onClickShare(View v)
+    {
+
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, getRecipeText());
+        startActivity(Intent.createChooser(shareIntent, "Selecione um aplicativo"));
+    }
 }
