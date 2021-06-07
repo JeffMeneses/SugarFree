@@ -112,11 +112,6 @@ meals_db = [
     }
 ]
 
-#@app.route('/mealCategory/<string:mealName>/<string:idUser>', methods=['GET'])
-#def mealCategory(mealName, idUser):
-#    meals_list  = list(db.meals.find({"idUser": idUser}))
-#    return json.dumps(meals_list, default=json_util.default)
-
 @app.route('/meals', methods=['POST'])
 def meals():
     if request.method == 'POST':
@@ -140,17 +135,20 @@ def meals():
 def food():
 
     mealUpdate = db.meals.update_one(
-    {"idUser": request.json.get('idUser')}, 
+    {"idUser": int(request.json.get('idUser'))}, 
     {
         "$push": {
             request.json.get('mealName'): 
             {
+                "idFood": uuid.uuid4().hex,
                 "foodName": request.json.get('foodName'),
                 "quantity": request.json.get('quantity'),
                 "unit": request.json.get('unit')
             }
         }
     })
+
+    print(request.json.get('idUser'), request.json.get('mealName'), request.json.get('foodName'), request.json.get('quantity'), request.json.get('unit'))
 
     if mealUpdate.modified_count:
         return jsonify({"success": "Alimento inserido com sucesso.", "statusCode": 200}), 200
@@ -163,3 +161,16 @@ def mealCategory(idUser, category):
     categoryResponse = json.loads(json.dumps(meals_list, default=json_util.default))
 
     return jsonify(categoryResponse[0][category])
+
+@app.route('/removeFood/<int:idUser>/<string:category>/<string:idFood>', methods=['GET'])
+def removeFood(idUser, category, idFood):
+    mealUpdate = db.meals.update_one(
+        {"idUser": idUser},
+        { 
+            "$pull": {category: {"idFood": idFood}}
+        })
+
+    if mealUpdate.modified_count:
+        return jsonify({"success": "Alimento removido com sucesso.", "statusCode": 200}), 200
+
+    return jsonify({"error": "A remoção de alimento falhou.", "statusCode": 400}), 400

@@ -18,7 +18,9 @@ public class Constants {
     public static final String GET_RECIPES = "http://192.168.1.148:5000/recipes";
     public static final String GET_RECIPES_CATEGORY = "http://192.168.1.148:5000/recipesCategory";
     public static final String GET_RECIPE_BY_ID = "http://192.168.1.148:5000/recipeId";
-
+    public static final String GET_MEAL_BY_ID = "http://192.168.1.148:5000/mealCategory";
+    public static final String POST_FOOD = "http://192.168.1.148:5000/food";
+    public static final String GET_REMOVE_FOOD = "http://192.168.1.148:5000/removeFood";
 
     // EXTRA INPUTS
     public static final String EXTRA_TITLE = "title";
