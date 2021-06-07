@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
+import com.example.sugarfree.utils.ImageHandler;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -40,8 +41,8 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
         mTags = findViewById(R.id.txtTags);
 
         mPicture = (ImageView)findViewById(R.id.imgRecipe);
-        Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ic_profile_picture);
-        mPicture.setImageBitmap(image);
+        //Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ic_profile_picture);
+        //mPicture.setImageBitmap(image);
     }
 
     public void onClickReturn(View v){
@@ -88,12 +89,17 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
         String category = mCategory.getText().toString();
         String tags = mTags.getText().toString();
 
+        mPicture.setDrawingCacheEnabled(true);
+        String image = ImageHandler.convert(mPicture.getDrawingCache());
+        image = image.replaceAll("\n", "");
+
         String recipe = "{"+
                 "\"title\":" + "\"" + title + "\","+
                 "\"ingredients\":" + "\"" + ingredients + "\","+
                 "\"instructions\":" + "\"" + instructions + "\","+
                 "\"category\":" + "\"" + category + "\","+
-                "\"tags\":" + "\"" + tags + "\""+
+                "\"tags\":" + "\"" + tags + "\","+
+                "\"image\":" + "\"" + image + "\""+
                 "}";
 
         apiRequests.postMethod(mContext, recipe, Constants.POST_RECIPES, new APIrequests.VolleyResponseListener() {

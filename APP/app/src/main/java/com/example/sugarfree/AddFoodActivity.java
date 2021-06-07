@@ -106,6 +106,7 @@ public class AddFoodActivity extends AppCompatActivity {
                 Intent intent = new Intent(mContext, MealActivity.class);
                 intent.putExtra("mealName", mMealName);
                 startActivity(intent);
+                finish();
             }
         });
     }
