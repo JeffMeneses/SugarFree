@@ -33,11 +33,12 @@ def recipes():
         recipe = {
             "_id": uuid.uuid4().hex,
             "title": request.json.get('title'),
+            "ingredients": request.json.get('ingredients'),
             "instructions": request.json.get('instructions'),
-            "image": request.json.get('image'),
-            "likes": request.json.get('likes'),
             "category": request.json.get('category'),
-            "tags": request.json.get('tags')
+            "tags": request.json.get('tags'),
+            "image": request.json.get('image'),
+            "likes": 0
         }
 
         if db.recipes.insert_one(recipe):

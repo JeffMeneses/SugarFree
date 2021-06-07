@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Café da Manhã"
+        android:text="Novo Alimento"
         android:fontFamily="@font/cloud"
         android:textColor="@color/white"
         android:textSize="25sp"
@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nome do alimento"
+        android:text="Nome"
         android:fontFamily="@font/cloud"
         android:textColor="@color/lightBlue"
         android:textSize="16sp"

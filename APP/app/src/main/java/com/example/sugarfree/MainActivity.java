@@ -114,6 +114,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_logoff:
                 Toast.makeText(mContext, "Sessão encerrada", Toast.LENGTH_LONG).show();
                 break;
+            case R.id.nav_addRecipeWritten:
+                startActivity(new Intent(mContext, AddRecipeWrittenActivity.class));
+                break;
+            case R.id.nav_addRecipeScreenshot:
+                Toast.makeText(mContext, "Não disponível", Toast.LENGTH_LONG).show();
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);

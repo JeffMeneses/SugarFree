@@ -16,6 +16,7 @@ public class Constants {
     public static final String POST_REGISTER = "http://192.168.1.148:5000/user/signup";
     public static final String POST_LOGIN = "http://192.168.1.148:5000/user/login";
     public static final String GET_RECIPES = "http://192.168.1.148:5000/recipes";
+    public static final String POST_RECIPES = "http://192.168.1.148:5000/recipes";
     public static final String GET_RECIPES_CATEGORY = "http://192.168.1.148:5000/recipesCategory";
     public static final String GET_RECIPE_BY_ID = "http://192.168.1.148:5000/recipeId";
     public static final String GET_MEAL_BY_ID = "http://192.168.1.148:5000/mealCategory";
