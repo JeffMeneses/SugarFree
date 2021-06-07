@@ -10,7 +10,7 @@ db = client.user_login_system
 
 # Routes
 from user import routes
-from controllers import recipes
+from controllers import recipes, meals
 
 @app.route('/')
 def home():
