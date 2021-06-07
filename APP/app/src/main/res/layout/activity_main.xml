@@ -14,7 +14,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="20dp"
+        android:clipToPadding="false">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -43,17 +45,42 @@
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/txtReceitas"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/cloud"
+                android:text="Receitas"
+                android:textColor="@color/lightBlue"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cima" />
+
+            <TextView
+                android:id="@+id/txtReceitasDesc"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cloud"
+                android:text="Saboreie as melhores receitas sem compremeter sua saúde."
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtReceitas" />
+
             <androidx.cardview.widget.CardView
                 android:id="@+id/card1"
-                android:layout_width="350dp"
+                android:layout_width="300dp"
                 android:layout_height="115dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 app:cardBackgroundColor="@color/lightPink"
-                app:cardCornerRadius="15dp"
+                android:elevation="3dp"
                 android:onClick="onClickBreakfast"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cima">
+                app:layout_constraintTop_toBottomOf="@+id/txtReceitasDesc">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -64,7 +91,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="10dp"
                         android:fontFamily="@font/cloud"
                         android:text="Café da Manhã"
                         android:textColor="@color/white"
@@ -81,11 +108,10 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card2"
-                android:layout_width="350dp"
+                android:layout_width="300dp"
                 android:layout_height="115dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="25dp"
                 app:cardBackgroundColor="@color/lightPink"
-                app:cardCornerRadius="15dp"
                 android:onClick="onClickLunchDinner"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -100,9 +126,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="40dp"
                         android:fontFamily="@font/cloud"
-                        android:text="Almoço e Jantar"
+                        android:text="Almoço\ne Jantar"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
 
@@ -117,11 +143,10 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card3"
-                android:layout_width="350dp"
+                android:layout_width="300dp"
                 android:layout_height="115dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="25dp"
                 app:cardBackgroundColor="@color/lightPink"
-                app:cardCornerRadius="15dp"
                 android:onClick="onClickSnacks"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -136,7 +161,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="35dp"
                         android:fontFamily="@font/cloud"
                         android:text="Petiscos"
                         android:textColor="@color/white"
@@ -152,26 +177,78 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/txtRecommended"
-                android:layout_width="wrap_content"
+                android:id="@+id/txtCardapios"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="52dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/cloud"
+                android:text="Cardápios"
+                android:textColor="@color/lightBlue"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/card3" />
+
+            <TextView
+                android:id="@+id/txtCardapiosDesc"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cloud"
+                android:text="Se organize criando seus próprios cardápios personalizados para todos os momentos do dia."
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCardapios" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardCardapio"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                app:cardBackgroundColor="@color/lightPink"
+                android:onClick="onClickRecipeMenu"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCardapiosDesc">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="35dp"
+                        android:fontFamily="@font/cloud"
+                        android:text="Exibir"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/txtRecommended"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/cloud"
                 android:text="Receitas que talvez você goste"
                 android:textColor="@color/lightBlue"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.226"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card3" />
+                app:layout_constraintTop_toBottomOf="@+id/cardCardapio" />
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card4"
-                android:layout_width="350dp"
+                android:layout_width="300dp"
                 android:layout_height="115dp"
                 android:layout_marginTop="10dp"
                 app:cardBackgroundColor="@color/lightPurple"
-                app:cardCornerRadius="15dp"
                 android:onClick="onClickRecommended"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -187,7 +264,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="10dp"
                         android:fontFamily="@font/cloud"
                         android:text="Recomendados"
                         android:textColor="@color/white"
