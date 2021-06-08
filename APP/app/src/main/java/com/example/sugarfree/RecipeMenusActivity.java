@@ -75,10 +75,8 @@ public class RecipeMenusActivity extends AppCompatActivity {
 
         alertDialog.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
-                String YouEditTextValue = input.getText().toString();
-
-                //mRecipeMenuList.add(new RecipeMenuItem("1", "Cardápio 2", "1", "Terça-feira"));
-                Toast.makeText(mContext, YouEditTextValue+" criado com sucesso", Toast.LENGTH_SHORT).show();
+                String name = input.getText().toString();
+                addNewRecipeMenu(name);
             }
         });
 
@@ -182,5 +180,34 @@ public class RecipeMenusActivity extends AppCompatActivity {
                 });
             }
         });*/
+    }
+
+    public void addNewRecipeMenu(String recipeMenuName)
+    {
+        APIrequests apiRequests = new APIrequests();
+
+        //String idUser = mFoodName.getText().toString();
+
+        String recipeMenu = "{"+
+                "\"idUser\":" + "\"" + 1 + "\","+
+                "\"name\":" + "\"" + recipeMenuName + "\""+
+                "}";
+
+        apiRequests.postMethod(mContext, recipeMenu, Constants.POST_RECIPE_MENU, new APIrequests.VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(String message) {
+                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+
+                //Intent intent = new Intent(mContext, MealActivity.class);
+                //intent.putExtra("mealName", mMealName);
+                //startActivity(intent);
+                //finish();
+            }
+        });
     }
 }
