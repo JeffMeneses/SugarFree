@@ -17,4 +17,15 @@
         android:scrollbars="vertical"
         android:background="@color/darkBlue"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_add_food_item"
+        android:onClick="onClickAddRecipe"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
 </RelativeLayout>

@@ -154,4 +154,9 @@ public class CategoryActivity extends AppCompatActivity {
         mReturnArrow.setVisibility(View.VISIBLE);
         mTitle.setVisibility(View.VISIBLE);
     }
+
+    public void onClickAddRecipe(View v)
+    {
+        startActivity(new Intent(mContext, AddRecipeWrittenActivity.class));
+    }
 }
