@@ -25,8 +25,9 @@ import java.io.InputStream;
 public class AddRecipeWrittenActivity extends AppCompatActivity {
     private Context mContext;
 
-    private TextView mTitle, mIngredients, mInstructions, mCategory, mTags;
-    private ImageView mPicture;
+    private TextView mTitle, mIngredients, mInstructions, mTags, mTitleToolBar;
+    private ImageView mPicture, mReturnArrow;
+    private String mCategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +35,17 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_recipe_written);
         mContext = getApplicationContext();
 
+        Intent intent = getIntent();
+        mCategory = intent.getStringExtra("category");
+
         mTitle = findViewById(R.id.txtTitle);
         mIngredients = findViewById(R.id.txtIngredients);
         mInstructions = findViewById(R.id.txtInstructions);
-        mCategory = findViewById(R.id.txtCategory);
         mTags = findViewById(R.id.txtTags);
+
+        mTitleToolBar = findViewById(R.id.txtToolbarTitle);
+        mReturnArrow = findViewById(R.id.imgToolbarArrow);
+        updateToolbar();
 
         mPicture = (ImageView)findViewById(R.id.imgRecipe);
         //Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ic_profile_picture);
@@ -86,7 +93,7 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
         String title = mTitle.getText().toString();
         String ingredients = mIngredients.getText().toString();
         String instructions = mInstructions.getText().toString();
-        String category = mCategory.getText().toString();
+        String category = mCategory;
         String tags = mTags.getText().toString();
 
         mPicture.setDrawingCacheEnabled(true);
@@ -111,8 +118,20 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
             @Override
             public void onResponse(String message) {
                 Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
-                startActivity(new Intent(mContext, MainActivity.class));
+
+                Intent intent = new Intent(mContext, CategoryActivity.class);
+                intent.putExtra("categoryName", mCategory);
+                startActivity(intent);
+                finish();
             }
         });
+    }
+
+    public void updateToolbar()
+    {
+        mTitleToolBar.setText("Adicionar");
+
+        mReturnArrow.setVisibility(View.VISIBLE);
+        mTitleToolBar.setVisibility(View.VISIBLE);
     }
 }

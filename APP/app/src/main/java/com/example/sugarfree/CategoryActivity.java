@@ -65,6 +65,7 @@ public class CategoryActivity extends AppCompatActivity {
         if(getIntent().hasExtra("categoryName"))
         {
             mCategoryName = getIntent().getStringExtra("categoryName");
+            mCategoryName = mCategoryName.replaceAll("\n", "");
         }
     }
 
@@ -157,6 +158,9 @@ public class CategoryActivity extends AppCompatActivity {
 
     public void onClickAddRecipe(View v)
     {
-        startActivity(new Intent(mContext, AddRecipeWrittenActivity.class));
+        Intent intent = new Intent(mContext, AddRecipeWrittenActivity.class);
+        intent.putExtra("category", mCategoryName);
+        startActivity(intent);
+        finish();
     }
 }

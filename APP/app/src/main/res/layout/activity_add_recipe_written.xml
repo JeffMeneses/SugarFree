@@ -15,39 +15,18 @@
         android:background="@color/darkBlue"
         tools:context=".AddRecipeWrittenActivity">
 
-        <ImageView
-            android:id="@+id/btnGoBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.124"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_return_arrow"
-            android:onClick="onClickReturn"/>
-
-        <ImageView
-            android:id="@+id/lblTitleSugarFree"
-            android:layout_width="117dp"
-            android:layout_height="23dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/ic_sugarfree_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.868"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <include layout="@layout/toolbar"
+            android:id="@+id/toolbar"/>
 
         <ImageView
             android:id="@+id/imgRecipe"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:layout_marginTop="34dp"
-            android:src="@drawable/ic_default_image"
             android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblTitleSugarFree" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            android:scaleType="centerCrop"/>
 
         <ImageView
             android:id="@+id/imageView4"
@@ -95,12 +74,13 @@
         <EditText
             android:id="@+id/txtIngredients"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:background="@drawable/input_field"
             android:ems="14"
             android:fontFamily="@font/cloud_light"
             android:hint="Ingredientes"
+            android:lines="8"
             android:inputType="textMultiLine"
             android:textColor="@color/darkGray"
             android:textColorHint="@color/darkGray"
@@ -109,36 +89,46 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtTitle" />
 
+        <TextView
+            android:id="@+id/txtObsIngredients"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/cloud"
+            android:text="Obs: coloque cada ingrediente uma nova linha."
+            android:textColor="@color/lightBlue"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtIngredients" />
+
         <EditText
             android:id="@+id/txtInstructions"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:background="@drawable/input_field"
             android:ems="14"
             android:fontFamily="@font/cloud_light"
             android:hint="Instruções"
+            android:lines="8"
             android:inputType="textMultiLine"
             android:textColor="@color/darkGray"
             android:textColorHint="@color/darkGray"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtIngredients" />
+            app:layout_constraintTop_toBottomOf="@+id/txtObsIngredients" />
 
-        <EditText
-            android:id="@+id/txtCategory"
-            android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_marginTop="14dp"
-            android:background="@drawable/input_field"
-            android:ems="14"
-            android:fontFamily="@font/cloud_light"
-            android:hint="Categoria"
-            android:inputType="text"
-            android:textColor="@color/darkGray"
-            android:textColorHint="@color/darkGray"
-            android:textSize="16sp"
+        <TextView
+            android:id="@+id/txtObsInstructions"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/cloud"
+            android:text="Obs: coloque cada passo uma nova linha."
+            android:textColor="@color/lightBlue"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtInstructions" />
@@ -146,19 +136,33 @@
         <EditText
             android:id="@+id/txtTags"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             android:background="@drawable/input_field"
             android:ems="14"
             android:fontFamily="@font/cloud_light"
             android:hint="Tags"
-            android:inputType="text"
+            android:lines="3"
+            android:inputType="textMultiLine"
             android:textColor="@color/darkGray"
             android:textColorHint="@color/darkGray"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCategory" />
+            app:layout_constraintTop_toBottomOf="@+id/txtObsInstructions" />
+
+        <TextView
+            android:id="@+id/txtObsTags"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/cloud"
+            android:text="Obs: separe cada tag com vígula(,)."
+            android:textColor="@color/lightBlue"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTags" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnConfirm"

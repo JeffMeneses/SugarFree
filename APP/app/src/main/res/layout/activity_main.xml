@@ -128,7 +128,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="40dp"
                         android:fontFamily="@font/cloud"
-                        android:text="Almoço\ne Jantar"
+                        android:text="Almoço \ne Jantar"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
 
