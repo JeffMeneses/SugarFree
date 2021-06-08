@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:onClick="onClickAddPicture"
             app:layout_constraintBottom_toBottomOf="@+id/imgRecipe"
             app:layout_constraintEnd_toEndOf="parent"
@@ -39,7 +39,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/imgRecipe"
             app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/ic_btn_add_picture" />
+            app:srcCompat="@drawable/ic_add_food_item" />
 
         <TextView
             android:id="@+id/lblNewRecipe"
@@ -177,14 +177,12 @@
         <EditText
             android:id="@+id/txtTags"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
             android:layout_marginTop="14dp"
             android:background="@drawable/input_field"
             android:ems="14"
             android:fontFamily="@font/cloud_light"
             android:hint="Tags (Opcional)"
-            android:lines="3"
-            android:inputType="textMultiLine"
             android:textColor="@color/darkGray"
             android:textColorHint="@color/darkGray"
             android:textSize="16sp"

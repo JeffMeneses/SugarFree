@@ -120,6 +120,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void onClickRecipeMenu(View v)
     {
-        startActivity(new Intent(mContext, FoodMenuActivity.class));
+        startActivity(new Intent(mContext, RecipeMenusActivity.class));
     }
 }

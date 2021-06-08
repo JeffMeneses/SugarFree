@@ -33,6 +33,7 @@
         \nIpsum adipiscing, purus erat vehicula elit lacus hac urna.</string>
     <string name="tags">#PreparoRapido    #Almoço    #Jantar    #Sopa\n#PreparoRapido    #Almoço    #Jantar    #Sopa</string>
 
+    <string name="recipeMenuDesc">Chega de comer sempre a mesma coisa! Aqui você pode criar cardápios variados, personalizade como desejar.\n\nClique em + para adicionar um cardápio.</string>
 
     <!-- AddFood Activity -->
     <string-array name="units">
