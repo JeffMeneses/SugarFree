@@ -43,23 +43,64 @@
 
         <TextView
             android:id="@+id/lblNewRecipe"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="42dp"
+            android:layout_marginTop="40dp"
             android:fontFamily="@font/cloud_light"
             android:text="Nova Receita"
             android:textColor="@color/white"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.163"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgRecipe" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardSendScreenshot"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            app:cardBackgroundColor="@color/lightPink"
+            android:onClick="onClickSendScreenshot"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lblNewRecipe">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="35dp"
+                    android:fontFamily="@font/cloud"
+                    android:text="Enviar captura de tela"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/txtObsSendScreenshot"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/cloud"
+            android:text="Obs: envie uma captura de tela de uma receita para preencher os campos necessários automaticamente."
+            android:textColor="@color/lightBlue"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardSendScreenshot" />
 
         <EditText
             android:id="@+id/txtTitle"
             android:layout_width="wrap_content"
             android:layout_height="44dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/input_field"
             android:ems="14"
             android:fontFamily="@font/cloud_light"
@@ -69,7 +110,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lblNewRecipe" />
+            app:layout_constraintTop_toBottomOf="@+id/txtObsSendScreenshot" />
 
         <EditText
             android:id="@+id/txtIngredients"
@@ -95,7 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/cloud"
-            android:text="Obs: coloque cada ingrediente uma nova linha."
+            android:text="Obs: coloque cada ingrediente em uma nova linha."
             android:textColor="@color/lightBlue"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -126,7 +167,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/cloud"
-            android:text="Obs: coloque cada passo uma nova linha."
+            android:text="Obs: coloque cada passo em uma nova linha."
             android:textColor="@color/lightBlue"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -141,7 +182,7 @@
             android:background="@drawable/input_field"
             android:ems="14"
             android:fontFamily="@font/cloud_light"
-            android:hint="Tags"
+            android:hint="Tags (Opcional)"
             android:lines="3"
             android:inputType="textMultiLine"
             android:textColor="@color/darkGray"
@@ -157,7 +198,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/cloud"
-            android:text="Obs: separe cada tag com vígula(,)."
+            android:text="Obs: separe cada tag com vígula (,)."
             android:textColor="@color/lightBlue"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"

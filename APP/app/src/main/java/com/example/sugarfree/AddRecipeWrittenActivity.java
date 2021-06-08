@@ -134,4 +134,9 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
         mReturnArrow.setVisibility(View.VISIBLE);
         mTitleToolBar.setVisibility(View.VISIBLE);
     }
+
+    public void onClickSendScreenshot (View v)
+    {
+        Toast.makeText(mContext, "Essa função ainda não é suportada.", Toast.LENGTH_SHORT).show();
+    }
 }
