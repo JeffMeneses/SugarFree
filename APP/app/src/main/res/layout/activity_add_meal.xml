@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkBlue"
+    android:fillViewport="true">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+    <TextView
+        android:id="@+id/lblNewMeal"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:fontFamily="@font/cloud_light"
+        android:text="Nova Refeição"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+    <EditText
+        android:id="@+id/txtName"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/input_field"
+        android:ems="14"
+        android:fontFamily="@font/cloud_light"
+        android:hint="Nome"
+        android:textColor="@color/darkGray"
+        android:textColorHint="@color/darkGray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblNewMeal" />
+
+    <Spinner
+        android:id="@+id/spinMealType"
+        android:layout_width="300dp"
+        android:layout_height="44dp"
+        android:background="@drawable/input_field"
+        android:ems="14"
+        android:fontFamily="@font/cloud_light"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/darkGray"
+        android:textColorHint="@color/darkGray"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtName"/>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnConfirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="52dp"
+        android:background="@drawable/ic_btn_filled"
+        android:fontFamily="@font/cloud_light"
+        android:onClick="onClickConfirm"
+        android:text="@string/confirm"
+        android:textColor="@color/darkBlue"
+        android:textSize="20sp"
+        app:backgroundTint="@color/lightBlue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

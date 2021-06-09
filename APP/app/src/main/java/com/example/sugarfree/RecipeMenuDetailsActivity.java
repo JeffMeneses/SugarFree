@@ -1,29 +1,21 @@
 package com.example.sugarfree;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
-import com.example.sugarfree.utils.ImageHandler;
-import com.example.sugarfree.utils.RecipeAdapter;
-import com.example.sugarfree.utils.RecipeItem;
+import com.example.sugarfree.utils.MealAdapter;
+import com.example.sugarfree.utils.MealItem;
 import com.example.sugarfree.utils.RecipeMenuAdapter;
 import com.example.sugarfree.utils.RecipeMenuItem;
 
@@ -33,68 +25,34 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class RecipeMenusActivity extends AppCompatActivity {
+public class RecipeMenuDetailsActivity extends AppCompatActivity {
     private Context mContext;
 
-    private ArrayList<RecipeMenuItem> mRecipeMenuList = new ArrayList<>();
+    private ArrayList<MealItem> mMealList = new ArrayList<>();
     private RecyclerView mRecyclerView;
-    private RecipeMenuAdapter mAdapter;
+    private MealAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
     private TextView mTitle;
     private ImageView mReturnArrow;
 
+    String mRecipeMenuName;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe_menus);
+        setContentView(R.layout.activity_recipe_menu_details);
 
         mContext = getApplicationContext();
 
         mTitle = findViewById(R.id.txtToolbarTitle);
         mReturnArrow = findViewById(R.id.imgToolbarArrow);
+        mRecipeMenuName = getIntent().getStringExtra("recipeMenuName");
         updateToolbar();
 
         buildRecyclerView();
         initiateRecyclerView();
-    }
-
-    public void onClickAddRecipeMenu(View v)
-    {
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(RecipeMenusActivity.this);
-        alertDialog.setTitle("Criar Novo Cardápio");
-        alertDialog.setMessage("Se organize com seus próprios cardápios personalizados");
-
-        final EditText input = new EditText(RecipeMenusActivity.this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        input.setLayoutParams(lp);
-        input.setHint("Nome do Cardápio");
-        alertDialog.setView(input);
-
-        alertDialog.setPositiveButton("Salvar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                String name = input.getText().toString();
-                addNewRecipeMenu(name);
-            }
-        });
-
-        alertDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-
-            }
-        });
-
-        alertDialog.show();
-    }
-
-    public void updateToolbar()
-    {
-        mTitle.setText("Cardápios");
-
-        mReturnArrow.setVisibility(View.VISIBLE);
-        mTitle.setVisibility(View.VISIBLE);
     }
 
     public void buildRecyclerView() {
@@ -106,7 +64,7 @@ public class RecipeMenusActivity extends AppCompatActivity {
     public void initiateRecyclerView()
     {
         APIrequests apiRequests = new APIrequests();
-        apiRequests.getMethod(mContext, Constants.GET_RECIPE_MENU_BY_ID+"/"+1, "recipeMenu", new APIrequests.VolleyGETResponseListener() {
+        apiRequests.getMethod(mContext, Constants.GET_MEAL_BY_ID+"/"+"fd292e5e9ad24c69ace29106e3a52588"+"/"+"breakfast", "meal", new APIrequests.VolleyGETResponseListener() {
             @Override
             public void onError(String message)  {
 
@@ -116,26 +74,26 @@ public class RecipeMenusActivity extends AppCompatActivity {
             public void onResponse(JSONArray jsonArray) throws JSONException {
                 for (int i = 0; i < jsonArray.length(); i++)
                 {
-                    JSONObject recipeMenu = jsonArray.getJSONObject(i);
+                    JSONObject meal = jsonArray.getJSONObject(i);
 
-                    String id = recipeMenu.getString("_id");
-                    String name = recipeMenu.getString("name");
-                    String idUser = recipeMenu.getString("idUser");
-                    String weekDays = recipeMenu.getString("weekDays");
+                    String id = meal.getString("idMeal");
+                    String name = meal.getString("mealName");
+                    String type = meal.getString("type");
 
-                    mRecipeMenuList.add(new RecipeMenuItem(id, name, idUser, weekDays));
+                    mMealList.add(new MealItem(id, name, type, "breakfast"));
                 }
                 initiateAdapter();
             }
         });
-        //mRecipeMenuList.add(new RecipeMenuItem("1", "Cardápio 1", "1", "Terça-feira"));
-        //mRecipeMenuList.add(new RecipeMenuItem("1", "Cardápio 2", "1", "Terça-feira"));
+        //mMealList.add(new MealItem("1", "Refeição 1", "Entrada", "Café da Manhã"));
+        //mMealList.add(new MealItem("1", "Refeição 1", "Prato Principal", "Café da Manhã"));
+        //mMealList.add(new MealItem("1", "Refeição 1", "Sobremesa", "Café da Manhã"));
         //initiateAdapter();
     }
 
     public void initiateAdapter()
     {
-        mAdapter = new RecipeMenuAdapter(mRecipeMenuList);
+        mAdapter = new MealAdapter(mMealList);
 
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -182,32 +140,20 @@ public class RecipeMenusActivity extends AppCompatActivity {
         });*/
     }
 
-    public void addNewRecipeMenu(String recipeMenuName)
+    public void updateToolbar()
     {
-        APIrequests apiRequests = new APIrequests();
+        mTitle.setText(mRecipeMenuName);
 
-        //String idUser = mFoodName.getText().toString();
+        mReturnArrow.setVisibility(View.VISIBLE);
+        mTitle.setVisibility(View.VISIBLE);
+    }
 
-        String recipeMenu = "{"+
-                "\"idUser\":" + "\"" + 1 + "\","+
-                "\"name\":" + "\"" + recipeMenuName + "\""+
-                "}";
-
-        apiRequests.postMethod(mContext, recipeMenu, Constants.POST_RECIPE_MENU, new APIrequests.VolleyResponseListener() {
-            @Override
-            public void onError(String message) {
-                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onResponse(String message) {
-                Toast.makeText(mContext, message,Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent(mContext, RecipeMenuDetailsActivity.class);
-                intent.putExtra("RecipeMenuName", recipeMenuName);
-                startActivity(intent);
-                finish();
-            }
-        });
+    public void onClickAddMeal(View v)
+    {
+        Intent intent = new Intent(mContext, AddMealActivity.class);
+        //intent.putExtra("idRecipeMenu", mIdRecipeMenu);
+        //intent.putExtra("category", mCategory);
+        startActivity(intent);
+        finish();
     }
 }

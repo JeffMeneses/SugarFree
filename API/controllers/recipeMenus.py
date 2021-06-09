@@ -8,9 +8,10 @@ import uuid
 def recipeMenu():
     if request.method == 'POST':
         recipeMenu = {
+        "idRecipeMenu": uuid.uuid4().hex,
         "idUser": int(request.json.get('idUser')),
         "name": request.json.get('name'),
-        "weekDays": [],
+        "weekDays": "",
         "breakfast": [],
         "lunch": [],
         "dinner": []
@@ -33,7 +34,7 @@ def meal():
     {"idUser": int(request.json.get('idUser'))}, 
     {
         "$push": {
-            request.json.get('mealName'): 
+            request.json.get('category'): 
             {
                 "idMeal": uuid.uuid4().hex,
                 "mealName": request.json.get('mealName'),
@@ -46,6 +47,13 @@ def meal():
         return jsonify({"success": "Refeição inserida com sucesso.", "statusCode": 200}), 200
 
     return jsonify({"error": "A inserção de refeição falhou.", "statusCode": 400}), 400
+
+@app.route('/mealCategory/<string:idRecipeMenu>/<string:category>', methods=['GET'])
+def mealCategory(idRecipeMenu, category):
+    meals_list  = list(db.recipeMenus.find({"idRecipeMenu": idRecipeMenu}))
+    categoryResponse = json.loads(json.dumps(meals_list, default=json_util.default))
+
+    return jsonify(categoryResponse[0][category])
 
 @app.route('/removeRecipeMenu/<int:idUser>/<string:idRecipeMenu>', methods=['GET'])
 def removeRecipeMenu(idUser, idRecipeMenu):

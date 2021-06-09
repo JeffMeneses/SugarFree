@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkBlue"
+    tools:context=".RecipeMenuDetailsActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkBlue"
+            android:background="@drawable/ic_circle">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="D"
+                android:textSize="16sp"
+                android:fontFamily="@font/cloud_bold"
+                android:textColor="@color/lightPurple"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="@color/darkBlue"
+            android:background="@drawable/ic_circle">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="S"
+                android:textSize="16sp"
+                android:fontFamily="@font/cloud_bold"
+                android:textColor="@color/lightPurple"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="@color/darkBlue"
+            android:background="@drawable/ic_circle">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="T"
+                android:textSize="16sp"
+                android:fontFamily="@font/cloud_bold"
+                android:textColor="@color/lightPurple"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="@color/darkBlue"
+            android:background="@drawable/ic_circle">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q"
+                android:textSize="16sp"
+                android:fontFamily="@font/cloud_bold"
+                android:textColor="@color/lightPurple"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="@color/darkBlue"
+            android:background="@drawable/ic_circle">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Q"
+                android:textSize="16sp"
+                android:fontFamily="@font/cloud_bold"
+                android:textColor="@color/lightPurple"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="@color/darkBlue"
+            android:background="@drawable/ic_circle">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="S"
+                android:textSize="16sp"
+                android:fontFamily="@font/cloud_bold"
+                android:textColor="@color/lightPurple"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:backgroundTint="@color/darkBlue"
+            android:background="@drawable/ic_circle">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_circle"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="S"
+                android:textSize="16sp"
+                android:fontFamily="@font/cloud_bold"
+                android:textColor="@color/lightPurple"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:layout_centerHorizontal="true">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkBlue"
+            android:background="@drawable/ic_circle">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_circle"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_breakfast"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkBlue"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/ic_circle">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_circle"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_lunch"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkBlue"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/ic_circle">
+
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_circle"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_dinner"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtMealTitle"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cloud"
+        android:textSize="16dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/lightBlue"
+        android:text="Refeições"
+        android:layout_marginTop="270dp"/>
+
+    <TextView
+        android:id="@+id/txtMealTip"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cloud"
+        android:textSize="12dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/lightBlue"
+        android:text="@string/recipeMenuAddTip"
+        android:layout_below="@+id/txtMealTitle"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/txtMealTip"
+        android:scrollbars="vertical"
+        android:paddingBottom="60dp"
+        android:clipToPadding="false"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_add_food_item"
+        android:onClick="onClickAddMeal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>

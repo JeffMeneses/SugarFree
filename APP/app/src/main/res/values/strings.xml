@@ -34,6 +34,7 @@
     <string name="tags">#PreparoRapido    #Almoço    #Jantar    #Sopa\n#PreparoRapido    #Almoço    #Jantar    #Sopa</string>
 
     <string name="recipeMenuDesc">Chega de comer sempre a mesma coisa! Aqui você pode criar cardápios variados, personalizade como desejar.\n\nClique em + para adicionar um cardápio.</string>
+    <string name="recipeMenuAddTip">Clique em + para adicionar uma refeição.</string>
 
     <!-- AddFood Activity -->
     <string-array name="units">
@@ -43,5 +44,11 @@
         <item>Xícara(s)</item>
         <item>Colher(es)</item>
         <item>Copo(s)</item>
+    </string-array>
+
+    <string-array name="mealType">
+        <item>Entrada</item>
+        <item>Prato Principal</item>
+        <item>Sobremesa</item>
     </string-array>
 </resources>
