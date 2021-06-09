@@ -31,7 +31,7 @@ def recipeMenuByIdUser(idUser):
 def meal():
 
     RecipeMenuUpdate = db.recipeMenus.update_one(
-    {"idUser": int(request.json.get('idUser'))}, 
+    {"idRecipeMenu": request.json.get('idRecipeMenu')}, 
     {
         "$push": {
             request.json.get('category'): 
@@ -55,15 +55,32 @@ def mealCategory(idRecipeMenu, category):
 
     return jsonify(categoryResponse[0][category])
 
-@app.route('/removeRecipeMenu/<int:idUser>/<string:idRecipeMenu>', methods=['GET'])
-def removeRecipeMenu(idUser, idRecipeMenu):
+@app.route('/removeRecipeMenu/<string:idRecipeMenu>', methods=['GET'])
+def removeRecipeMenu(idRecipeMenu):
+    recipeMenuUpdate = db.recipeMenus.delete_one(
+        {"idRecipeMenu": idRecipeMenu})
+
+    print(recipeMenuUpdate.deleted_count)
+
+    if recipeMenuUpdate.deleted_count:
+        return jsonify({"success": "Refeição removida com sucesso.", "statusCode": 200}), 200
+
+    return jsonify({"error": "A remoção de refeição falhou.", "statusCode": 400}), 400
+
+@app.route('/removeMeal/<string:idRecipeMenu>/<string:idMeal>/<string:category>', methods=['GET'])
+def removeMeal(idRecipeMenu, idMeal, category):
     recipeMenuUpdate = db.recipeMenus.update_one(
-        {"idUser": idUser},
+        {"idRecipeMenu": idRecipeMenu},
         { 
             "$pull": {
-                "_id": idRecipeMenu
+                category: 
+                {
+                    "idMeal": idMeal
+                }
             }
         })
+
+    print(recipeMenuUpdate.modified_count)
 
     if recipeMenuUpdate.modified_count:
         return jsonify({"success": "Refeição removida com sucesso.", "statusCode": 200}), 200

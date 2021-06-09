@@ -18,6 +18,7 @@ public class RecipeMenuAdapter extends RecyclerView.Adapter<RecipeMenuAdapter.Re
 
     public interface OnItemClickListener
     {
+        void onItemClick(int position);
         void onRemoveClick(int position);
     }
 
@@ -37,6 +38,19 @@ public class RecipeMenuAdapter extends RecyclerView.Adapter<RecipeMenuAdapter.Re
             mTextView1 = itemView.findViewById(R.id.txtRecipeMenuName);
             mTextView2 = itemView.findViewById(R.id.txtWeekDays);
             mImgRemove = itemView.findViewById(R.id.imgRemove);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null) {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION)
+                        {
+                            listener.onItemClick(position);
+                        }
+                    }
+                }
+            });
 
             mImgRemove.setOnClickListener(new View.OnClickListener() {
                 @Override

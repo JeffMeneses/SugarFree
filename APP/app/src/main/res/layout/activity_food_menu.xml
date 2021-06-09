@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     app:srcCompat="@drawable/ic_snack"
-                    app:tint="@color/green"
+                    app:tint="@color/blue"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"/>
 
@@ -219,7 +219,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     app:srcCompat="@drawable/ic_snack"
-                    app:tint="@color/orange"
+                    app:tint="@color/blue"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="20dp"/>
 

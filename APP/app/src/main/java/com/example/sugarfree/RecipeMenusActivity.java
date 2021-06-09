@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
+import com.example.sugarfree.utils.FoodItem;
 import com.example.sugarfree.utils.ImageHandler;
 import com.example.sugarfree.utils.RecipeAdapter;
 import com.example.sugarfree.utils.RecipeItem;
@@ -118,7 +119,7 @@ public class RecipeMenusActivity extends AppCompatActivity {
                 {
                     JSONObject recipeMenu = jsonArray.getJSONObject(i);
 
-                    String id = recipeMenu.getString("_id");
+                    String id = recipeMenu.getString("idRecipeMenu");
                     String name = recipeMenu.getString("name");
                     String idUser = recipeMenu.getString("idUser");
                     String weekDays = recipeMenu.getString("weekDays");
@@ -128,9 +129,6 @@ public class RecipeMenusActivity extends AppCompatActivity {
                 initiateAdapter();
             }
         });
-        //mRecipeMenuList.add(new RecipeMenuItem("1", "Cardápio 1", "1", "Terça-feira"));
-        //mRecipeMenuList.add(new RecipeMenuItem("1", "Cardápio 2", "1", "Terça-feira"));
-        //initiateAdapter();
     }
 
     public void initiateAdapter()
@@ -140,46 +138,44 @@ public class RecipeMenusActivity extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-        /*mAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
+        mAdapter.setOnItemClickListener(new RecipeMenuAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Intent intent = new Intent(mContext, DetailsActivity.class);
+
+                Intent intent = new Intent(mContext, RecipeMenuDetailsActivity.class);
                 RecipeMenuItem clickedItem = mRecipeMenuList.get(position);
 
-                APIrequests apiRequests = new APIrequests();
-                apiRequests.getMethod(mContext, Constants.GET_RECIPE_BY_ID+"/"+clickedItem.getId(), "recipes", new APIrequests.VolleyGETResponseListener() {
-                    @Override
-                    public void onError(String message)  {
-
-                    }
-
-                    @Override
-                    public void onResponse(JSONArray jsonArray) throws JSONException {
-                        JSONObject recipeJson = jsonArray.getJSONObject(0);
-
-                        String title = recipeJson.getString("title");
-                        String ingredients = recipeJson.getString("ingredients");
-                        String category = recipeJson.getString("category");
-                        String instructions = recipeJson.getString("instructions");
-                        String tags = recipeJson.getString("tags");
-                        String likes = recipeJson.getString("likes");
-                        String image = recipeJson.getString("image");
-
-                        //Bitmap imageBitmap = ImageHandler.convert(image);
-
-                        intent.putExtra(Constants.EXTRA_TITLE, title);
-                        intent.putExtra(Constants.EXTRA_INGREDIENTS, ingredients);
-                        intent.putExtra(Constants.EXTRA_CATEGORY, category);
-                        intent.putExtra(Constants.EXTRA_INSTRUCTIONS, instructions);
-                        intent.putExtra(Constants.EXTRA_TAGS, tags);
-                        intent.putExtra(Constants.EXTRA_LIKES, likes);
-                        intent.putExtra(Constants.EXTRA_IMAGE, image);
-
-                        startActivity(intent);
-                    }
-                });
+                intent.putExtra("idRecipeMenu", clickedItem.getId());
+                intent.putExtra("recipeMenuName", clickedItem.getName());
+                startActivity(intent);
+                finish();
             }
-        });*/
+
+            @Override
+            public void onRemoveClick(int position) {
+                removeItem(position);
+            }
+        });
+    }
+
+    public void removeItem(int position)
+    {
+        RecipeMenuItem removedItem = mRecipeMenuList.get(position);
+        mRecipeMenuList.remove(position);
+        mAdapter.notifyItemRemoved(position);
+
+        APIrequests apiRequests = new APIrequests();
+        apiRequests.getMethod(mContext, Constants.GET_REMOVE_RECIPE_MENU+"/"+removedItem.getId(), "recipeMenu", new APIrequests.VolleyGETResponseListener() {
+            @Override
+            public void onError(String message)  {
+                Toast.makeText(mContext, "Hum, algo deu errado", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(JSONArray jsonArray) throws JSONException {
+                Toast.makeText(mContext, "Cardápio removido com sucesso", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void addNewRecipeMenu(String recipeMenuName)
@@ -203,10 +199,10 @@ public class RecipeMenusActivity extends AppCompatActivity {
             public void onResponse(String message) {
                 Toast.makeText(mContext, message,Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(mContext, RecipeMenuDetailsActivity.class);
-                intent.putExtra("RecipeMenuName", recipeMenuName);
-                startActivity(intent);
-                finish();
+                //Intent intent = new Intent(mContext, RecipeMenuDetailsActivity.class);
+                //intent.putExtra("RecipeMenuName", recipeMenuName);
+                //startActivity(intent);
+                //finish();
             }
         });
     }

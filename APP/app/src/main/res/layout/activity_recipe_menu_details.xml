@@ -182,14 +182,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/darkBlue"
-            android:background="@drawable/ic_circle">
+            android:onClick="onClickBreakfast">
 
             <ImageView
+                android:id="@+id/circleBreakFast"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/ic_circle"/>
 
             <ImageView
+                android:id="@+id/imgBreakfast"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_breakfast"
@@ -197,18 +199,21 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardLunch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/darkBlue"
             android:layout_marginLeft="12dp"
-            android:background="@drawable/ic_circle">
+            android:onClick="onClickLunch">
 
             <ImageView
+                android:id="@+id/circleLunch"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/ic_circle"/>
 
             <ImageView
+                android:id="@+id/imgLunch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_lunch"
@@ -220,14 +225,16 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/darkBlue"
             android:layout_marginLeft="12dp"
-            android:background="@drawable/ic_circle">
+            android:onClick="onClickDinner">
 
             <ImageView
+                android:id="@+id/circleDinner"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/ic_circle"/>
 
             <ImageView
+                android:id="@+id/imgDinner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_dinner"
