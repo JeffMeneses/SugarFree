@@ -11,6 +11,7 @@
         android:id="@+id/toolbar"/>
 
     <TextView
+        android:id="@+id/txtRecipeMenuTip"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:text="@string/recipeMenuDesc"
@@ -24,7 +25,8 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="190dp"
+        android:layout_below="@+id/txtRecipeMenuTip"
+        android:layout_marginTop="10dp"
         android:scrollbars="vertical"
         android:paddingBottom="60dp"
         android:clipToPadding="false"/>

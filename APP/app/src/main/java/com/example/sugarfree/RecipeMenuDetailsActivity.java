@@ -11,13 +11,16 @@ import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
+import com.example.sugarfree.utils.ImageHandler;
 import com.example.sugarfree.utils.MealAdapter;
 import com.example.sugarfree.utils.MealItem;
 import com.example.sugarfree.utils.RecipeMenuAdapter;
@@ -40,7 +43,9 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
     private TextView mTitle;
     private ImageView mReturnArrow, mCircleBreakfast, mImgBreakfast, mCircleLunch, mImgLunch, mCircleDinner, mImgDinner;
 
-    String mRecipeMenuName, mIdRecipeMenu, selectedCategory;
+    private CheckBox mBtnDom, mBtnSeg, mBtnTer, mBtnQua, mBtnQui, mBtnSex, mBtnSab;
+
+    String mRecipeMenuName, mIdRecipeMenu, selectedCategory, mWeekDays;
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -55,6 +60,7 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
         mReturnArrow = findViewById(R.id.imgToolbarArrow);
         mRecipeMenuName = getIntent().getStringExtra("recipeMenuName");
         mIdRecipeMenu = getIntent().getStringExtra("idRecipeMenu");
+        mWeekDays = getIntent().getStringExtra("weekDays");
         updateToolbar();
 
         mCircleBreakfast = findViewById(R.id.circleBreakFast);
@@ -64,8 +70,73 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
         mImgLunch = findViewById(R.id.imgLunch);
         mImgDinner = findViewById(R.id.imgDinner);
 
+        mBtnDom = findViewById(R.id.btnDom);
+        mBtnSeg = findViewById(R.id.btnSeg);
+        mBtnTer = findViewById(R.id.btnTer);
+        mBtnQua = findViewById(R.id.btnQua);
+        mBtnQui = findViewById(R.id.btnQui);
+        mBtnSex = findViewById(R.id.btnSex);
+        mBtnSab = findViewById(R.id.btnSab);
+        updateCheckboxes();
+
         buildRecyclerView();
         initiateRecyclerView();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        APIrequests apiRequests = new APIrequests();
+        String weekDaysValue = getWeekDays();
+
+        String weekDays = "{"+
+                "\"idRecipeMenu\":" + "\"" + mIdRecipeMenu + "\","+
+                "\"weekDays\":" + "\"" + weekDaysValue + "\""+
+                "}";
+
+        apiRequests.postMethod(mContext, weekDays, Constants.POST_UPDATE_WEEK_DAYS, new APIrequests.VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                //Toast.makeText(mContext, message,Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(String message) {
+                //Toast.makeText(mContext, message,Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void updateCheckboxes()
+    {
+        if(mWeekDays.contains("Dom")) mBtnDom.setChecked(true);
+        if(mWeekDays.contains("Seg")) mBtnSeg.setChecked(true);
+        if(mWeekDays.contains("Ter")) mBtnTer.setChecked(true);
+        if(mWeekDays.contains("Qua")) mBtnQua.setChecked(true);
+        if(mWeekDays.contains("Qui")) mBtnQui.setChecked(true);
+        if(mWeekDays.contains("Sex")) mBtnSex.setChecked(true);
+        if(mWeekDays.contains("Sab")) mBtnSab.setChecked(true);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public String getWeekDays()
+    {
+        ArrayList<String> weekDays = new ArrayList<String>();
+
+        if(mBtnDom.isChecked()) weekDays.add("Dom");
+        if(mBtnSeg.isChecked()) weekDays.add("Seg");
+        if(mBtnTer.isChecked()) weekDays.add("Ter");
+        if(mBtnQua.isChecked()) weekDays.add("Qua");
+        if(mBtnQui.isChecked()) weekDays.add("Qui");
+        if(mBtnSex.isChecked()) weekDays.add("Sex");
+        if(mBtnSab.isChecked()) weekDays.add("Sab");
+
+        String result = TextUtils.join(", ", weekDays);
+        if(result.isEmpty()) result = mWeekDays;
+
+        return result;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
@@ -210,10 +281,9 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
     {
         if(mMealList.size() < 3) {
             Intent intent = new Intent(mContext, AddMealActivity.class);
-            //intent.putExtra("idRecipeMenu", mIdRecipeMenu);
-            //intent.putExtra("category", mCategory);
+            intent.putExtra("idRecipeMenu", mIdRecipeMenu);
+            intent.putExtra("category", selectedCategory);
             startActivity(intent);
-            finish();
         }
         else
             Toast.makeText(mContext, "Ops, você chegou ao limite de refeições para essa categoria", Toast.LENGTH_LONG).show();

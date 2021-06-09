@@ -86,3 +86,19 @@ def removeMeal(idRecipeMenu, idMeal, category):
         return jsonify({"success": "Refeição removida com sucesso.", "statusCode": 200}), 200
 
     return jsonify({"error": "A remoção de refeição falhou.", "statusCode": 400}), 400
+
+@app.route('/updateWeekDays', methods=['POST'])
+def updateWeekDays():
+
+    RecipeMenuUpdate = db.recipeMenus.update_one(
+    {"idRecipeMenu": request.json.get('idRecipeMenu')}, 
+    {
+        "$set": {
+            "weekDays": request.json.get('weekDays'),
+        }
+    })
+
+    if RecipeMenuUpdate.modified_count:
+        return jsonify({"success": "Cardápio atualizada com sucesso.", "statusCode": 200}), 200
+
+    return jsonify({"error": "A atualização do cardápio falhou.", "statusCode": 400}), 400

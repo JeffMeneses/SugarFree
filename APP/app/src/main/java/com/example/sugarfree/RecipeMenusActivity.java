@@ -140,6 +140,7 @@ public class RecipeMenusActivity extends AppCompatActivity {
 
                 intent.putExtra("idRecipeMenu", clickedItem.getId());
                 intent.putExtra("recipeMenuName", clickedItem.getName());
+                intent.putExtra("weekDays", clickedItem.getWeekDays());
                 startActivity(intent);
                 finish();
             }
