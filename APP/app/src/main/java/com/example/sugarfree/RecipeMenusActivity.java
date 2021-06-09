@@ -2,16 +2,13 @@ package com.example.sugarfree;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -21,10 +18,6 @@ import android.widget.Toast;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
-import com.example.sugarfree.utils.FoodItem;
-import com.example.sugarfree.utils.ImageHandler;
-import com.example.sugarfree.utils.RecipeAdapter;
-import com.example.sugarfree.utils.RecipeItem;
 import com.example.sugarfree.utils.RecipeMenuAdapter;
 import com.example.sugarfree.utils.RecipeMenuItem;
 

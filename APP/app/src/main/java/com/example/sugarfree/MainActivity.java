@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 startActivity(new Intent(mContext, MainActivity.class));
                 break;
             case R.id.nav_refeicoes:
-                startActivity(new Intent(mContext, FoodMenuActivity.class));
+                startActivity(new Intent(mContext, RecipeMenusActivity.class));
                 break;
             case R.id.nav_logoff:
                 Toast.makeText(mContext, "Sessão encerrada", Toast.LENGTH_LONG).show();
