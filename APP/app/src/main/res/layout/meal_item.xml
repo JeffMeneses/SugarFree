@@ -6,6 +6,7 @@
     app:cardBackgroundColor="@color/white"
     android:layout_gravity="center_horizontal"
     app:cardElevation="3dp"
+    app:cardCornerRadius="5dp"
     app:cardUseCompatPadding="true">
 
     <RelativeLayout

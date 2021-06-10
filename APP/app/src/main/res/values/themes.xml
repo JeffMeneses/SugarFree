@@ -2,15 +2,15 @@
     <!-- Base application theme. -->
     <style name="Theme.SugarFree" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/darkBlue</item>
-        <item name="colorPrimaryVariant">@color/lightBlue</item>
-        <item name="colorOnPrimary">@color/lightYellow</item>
+        <item name="colorPrimary">@color/lightPink</item>
+        <item name="colorPrimaryVariant">@color/darkBlue</item>
+        <item name="colorOnPrimary">@color/lightBlue</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/lightPink</item>
         <item name="colorSecondaryVariant">@color/lightPurple</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorSecondaryVariant</item>
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
 </resources>
