@@ -55,3 +55,11 @@ def recipesCategory(category):
 def recipeId(id):
     recipes_list  = list(db.recipes.find({"_id": id}))
     return json.dumps(recipes_list, default=json_util.default)
+
+@app.route('/recipeTitle/<string:title>', methods=['GET'])
+def recipeTitle(title):
+    recipes_list  = list(db.recipes.find({"title": title}))
+
+    if recipes_list:
+        return json.dumps(recipes_list, default=json_util.default)
+    return jsonify({"error": "Ops, essa receita não está disponpivel no app", "statusCode": 400}), 400 

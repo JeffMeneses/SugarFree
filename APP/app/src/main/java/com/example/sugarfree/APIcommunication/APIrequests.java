@@ -111,7 +111,7 @@ public class APIrequests {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                volleyGETResponseListener.onError("Ops, essa receita não está disponpivel no app");
             }
         });
 

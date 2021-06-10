@@ -23,6 +23,7 @@ import com.example.sugarfree.utils.Constants;
 import com.example.sugarfree.utils.ImageHandler;
 import com.example.sugarfree.utils.MealAdapter;
 import com.example.sugarfree.utils.MealItem;
+import com.example.sugarfree.utils.RecipeItem;
 import com.example.sugarfree.utils.RecipeMenuAdapter;
 import com.example.sugarfree.utils.RecipeMenuItem;
 
@@ -239,12 +240,52 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
                 //TODO pesquisar receita
-                Toast.makeText(mContext, "Pesquisando receita", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(mContext, "Pesquisando receita", Toast.LENGTH_SHORT).show();
+                MealItem clickedItem = mMealList.get(position);
+                searchRecipe(clickedItem);
             }
 
             @Override
             public void onRemoveClick(int position) {
                 removeItem(position);
+            }
+        });
+    }
+
+    public void searchRecipe(MealItem clickedItem)
+    {
+        Intent intent = new Intent(mContext, DetailsActivity.class);
+
+        APIrequests apiRequests = new APIrequests();
+        apiRequests.getMethod(mContext, Constants.GET_RECIPE_BY_TITLE+"/"+clickedItem.getName(), "recipe", new APIrequests.VolleyGETResponseListener() {
+            @Override
+            public void onError(String message)  {
+                Toast.makeText(mContext, "Ops, essa receita não está disponpivel no app", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(JSONArray jsonArray) throws JSONException {
+                JSONObject recipeJson = jsonArray.getJSONObject(0);
+
+                String title = recipeJson.getString("title");
+                String ingredients = recipeJson.getString("ingredients");
+                String category = recipeJson.getString("category");
+                String instructions = recipeJson.getString("instructions");
+                String tags = recipeJson.getString("tags");
+                String likes = recipeJson.getString("likes");
+                String image = recipeJson.getString("image");
+
+                //Bitmap imageBitmap = ImageHandler.convert(image);
+
+                intent.putExtra(Constants.EXTRA_TITLE, title);
+                intent.putExtra(Constants.EXTRA_INGREDIENTS, ingredients);
+                intent.putExtra(Constants.EXTRA_CATEGORY, category);
+                intent.putExtra(Constants.EXTRA_INSTRUCTIONS, instructions);
+                intent.putExtra(Constants.EXTRA_TAGS, tags);
+                intent.putExtra(Constants.EXTRA_LIKES, likes);
+                intent.putExtra(Constants.EXTRA_IMAGE, image);
+
+                startActivity(intent);
             }
         });
     }

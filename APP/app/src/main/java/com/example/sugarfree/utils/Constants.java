@@ -28,6 +28,7 @@ public class Constants {
     public static final String GET_REMOVE_RECIPE_MENU = "http://192.168.1.148:5000/removeRecipeMenu";
     public static final String GET_REMOVE_MEAL = "http://192.168.1.148:5000/removeMeal";
     public static final String POST_UPDATE_WEEK_DAYS = "http://192.168.1.148:5000/updateWeekDays";
+    public static final String GET_RECIPE_BY_TITLE = "http://192.168.1.148:5000/recipeTitle";
 
     // EXTRA INPUTS
     public static final String EXTRA_TITLE = "title";
