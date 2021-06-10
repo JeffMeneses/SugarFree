@@ -59,9 +59,7 @@ def mealCategory(idRecipeMenu, category):
 def removeRecipeMenu(idRecipeMenu):
     recipeMenuUpdate = db.recipeMenus.delete_one(
         {"idRecipeMenu": idRecipeMenu})
-
-    print(recipeMenuUpdate.deleted_count)
-
+        
     if recipeMenuUpdate.deleted_count:
         return jsonify({"success": "Refeição removida com sucesso.", "statusCode": 200}), 200
 

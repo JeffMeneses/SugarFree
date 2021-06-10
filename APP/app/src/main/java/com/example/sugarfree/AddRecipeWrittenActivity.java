@@ -96,6 +96,10 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
         String category = mCategory;
         String tags = mTags.getText().toString();
 
+        ingredients = ingredients.replaceAll("\n", "\\\\n");
+        instructions = instructions.replaceAll("\n", "\\\\n");
+        tags = tags.replaceAll("\n", "\\\\n");
+
         mPicture.setDrawingCacheEnabled(true);
         String image = ImageHandler.convert(mPicture.getDrawingCache());
         image = image.replaceAll("\n", "");

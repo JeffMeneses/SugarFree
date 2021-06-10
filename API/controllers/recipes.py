@@ -41,6 +41,8 @@ def recipes():
             "likes": 0
         }
 
+        print("Ingredientes: "+request.json.get('ingredients'))
+
         if db.recipes.insert_one(recipe):
             return jsonify({"success": "Receita inserida com sucesso.", "statusCode": 200}), 200
 

@@ -124,6 +124,35 @@ public class RecipeMenusActivity extends AppCompatActivity {
         });
     }
 
+    public void updateRecipeMenuList()
+    {
+        mRecipeMenuList.clear();
+        APIrequests apiRequests = new APIrequests();
+        apiRequests.getMethod(mContext, Constants.GET_RECIPE_MENU_BY_ID+"/"+1, "recipeMenu", new APIrequests.VolleyGETResponseListener() {
+            @Override
+            public void onError(String message)  {
+
+            }
+
+            @Override
+            public void onResponse(JSONArray jsonArray) throws JSONException {
+                for (int i = 0; i < jsonArray.length(); i++)
+                {
+                    JSONObject recipeMenu = jsonArray.getJSONObject(i);
+
+                    String id = recipeMenu.getString("idRecipeMenu");
+                    String name = recipeMenu.getString("name");
+                    String idUser = recipeMenu.getString("idUser");
+                    String weekDays = recipeMenu.getString("weekDays");
+
+                    mRecipeMenuList.add(new RecipeMenuItem(id, name, idUser, weekDays));
+                }
+                //mAdapter.notifyItemInserted(mRecipeMenuList.size()-1);
+                mAdapter.notifyDataSetChanged();
+            }
+        });
+    }
+
     public void initiateAdapter()
     {
         mAdapter = new RecipeMenuAdapter(mRecipeMenuList);
@@ -142,7 +171,6 @@ public class RecipeMenusActivity extends AppCompatActivity {
                 intent.putExtra("recipeMenuName", clickedItem.getName());
                 intent.putExtra("weekDays", clickedItem.getWeekDays());
                 startActivity(intent);
-                finish();
             }
 
             @Override
@@ -162,7 +190,7 @@ public class RecipeMenusActivity extends AppCompatActivity {
         apiRequests.getMethod(mContext, Constants.GET_REMOVE_RECIPE_MENU+"/"+removedItem.getId(), "recipeMenu", new APIrequests.VolleyGETResponseListener() {
             @Override
             public void onError(String message)  {
-                Toast.makeText(mContext, "Hum, algo deu errado", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "A remoção de refeição falhou", Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -193,10 +221,7 @@ public class RecipeMenusActivity extends AppCompatActivity {
             public void onResponse(String message) {
                 Toast.makeText(mContext, message,Toast.LENGTH_SHORT).show();
 
-                //Intent intent = new Intent(mContext, RecipeMenuDetailsActivity.class);
-                //intent.putExtra("RecipeMenuName", recipeMenuName);
-                //startActivity(intent);
-                //finish();
+                updateRecipeMenuList();
             }
         });
     }
