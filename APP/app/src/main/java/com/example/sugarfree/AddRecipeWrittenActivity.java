@@ -21,6 +21,7 @@ import com.example.sugarfree.utils.ImageHandler;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class AddRecipeWrittenActivity extends AppCompatActivity {
     private Context mContext;
@@ -95,10 +96,17 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
         String instructions = mInstructions.getText().toString();
         String category = mCategory;
         String tags = mTags.getText().toString();
+        tags.replaceAll(" ", "     ");
+        tags.replaceAll(", ", "    ");
+        tags.replaceAll(",", "     ");
+        //ArrayList<String> tags = new ArrayList<>();
+        //tags.add("tag 1");
+        //tags.add("tag 2");
+        //tags.add("tag 3");
 
         ingredients = ingredients.replaceAll("\n", "\\\\n");
         instructions = instructions.replaceAll("\n", "\\\\n");
-        tags = tags.replaceAll("\n", "\\\\n");
+        //tags = tags.replaceAll("\n", "\\\\n");
 
         mPicture.setDrawingCacheEnabled(true);
         String image = ImageHandler.convert(mPicture.getDrawingCache());

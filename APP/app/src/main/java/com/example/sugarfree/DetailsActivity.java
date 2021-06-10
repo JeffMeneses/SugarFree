@@ -79,4 +79,13 @@ public class DetailsActivity extends AppCompatActivity {
         shareIntent.putExtra(Intent.EXTRA_TEXT, getRecipeText());
         startActivity(Intent.createChooser(shareIntent, "Selecione um aplicativo"));
     }
+
+    public String convertTags(String tags)
+    {
+        tags = tags.replaceAll("\\[", "");
+        tags = tags.replaceAll("\\]", "");
+        tags = tags.replaceAll(",", "    ");
+
+        return tags;
+    }
 }
