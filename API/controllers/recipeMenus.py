@@ -60,10 +60,12 @@ def removeRecipeMenu(idRecipeMenu):
     recipeMenuUpdate = db.recipeMenus.delete_one(
         {"idRecipeMenu": idRecipeMenu})
         
-    if recipeMenuUpdate.deleted_count:
-        return jsonify({"success": "Refeição removida com sucesso.", "statusCode": 200}), 200
+    print(recipeMenuUpdate.deleted_count)
 
-    return jsonify({"error": "A remoção de refeição falhou.", "statusCode": 400}), 400
+    if recipeMenuUpdate.deleted_count:
+        return jsonify({"success": "Cardápio removido com sucesso.", "statusCode": 200}), 200
+
+    return jsonify({"error": "A remoção de cardápio falhou.", "statusCode": 400}), 400
 
 @app.route('/removeMeal/<string:idRecipeMenu>/<string:idMeal>/<string:category>', methods=['GET'])
 def removeMeal(idRecipeMenu, idMeal, category):

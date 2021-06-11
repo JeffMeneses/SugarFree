@@ -214,6 +214,12 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        updateMeals();
+    }
+
     public void buildRecyclerView() {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -226,7 +232,6 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
         selectedCategory = "breakfast";
         mImgBreakfast.setBackgroundTintList(ContextCompat.getColorStateList(this,R.color.white));
         mCircleBreakfast.setBackgroundTintList(ContextCompat.getColorStateList(this,R.color.yellow));
-        updateMeals();
     }
 
     public void initiateAdapter()
@@ -260,7 +265,7 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
         apiRequests.getMethod(mContext, Constants.GET_RECIPE_BY_TITLE+"/"+clickedItem.getName(), "recipe", new APIrequests.VolleyGETResponseListener() {
             @Override
             public void onError(String message)  {
-                Toast.makeText(mContext, "Ops, essa receita não está disponpivel no app", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Ops, receita indisponpivel no app", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -300,7 +305,8 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
         apiRequests.getMethod(mContext, Constants.GET_REMOVE_MEAL+"/"+mIdRecipeMenu+"/"+removedItem.getId()+"/"+selectedCategory, "recipeMenu", new APIrequests.VolleyGETResponseListener() {
             @Override
             public void onError(String message)  {
-                Toast.makeText(mContext, "Hum, algo deu errado", Toast.LENGTH_LONG).show();
+                //Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Refeição removida com sucesso", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -327,6 +333,6 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else
-            Toast.makeText(mContext, "Ops, você chegou ao limite de refeições para essa categoria", Toast.LENGTH_LONG).show();
+            Toast.makeText(mContext, "Ops, você chegou ao limite de refeições para essa categoria", Toast.LENGTH_SHORT).show();
     }
 }

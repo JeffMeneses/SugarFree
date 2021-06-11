@@ -62,11 +62,11 @@ public class DetailsActivity extends AppCompatActivity {
 
     public String getRecipeText()
     {
-        String recipeText = "TÍTULO: "+mTxtTitleDetails.getText().toString()+"\n"+
-                "_____________________________________\n" +
-                "INGREDIENTES: "+mTxtIngredients.getText().toString()+"\n" +
-                "_____________________________________\n" +
-                "INSTRUÇÕES: "+mTxtInstructions.getText().toString();
+        String recipeText = mTxtTitleDetails.getText().toString()+"\n"+
+                "___________________________________\n\n" +
+                mTxtIngredients.getText().toString()+"\n" +
+                "___________________________________\n\n" +
+                mTxtInstructions.getText().toString();
 
         return recipeText;
     }

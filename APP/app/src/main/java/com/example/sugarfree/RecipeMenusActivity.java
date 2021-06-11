@@ -50,7 +50,13 @@ public class RecipeMenusActivity extends AppCompatActivity {
         updateToolbar();
 
         buildRecyclerView();
-        initiateRecyclerView();
+        //initiateRecyclerView();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        updateRecipeMenuList();
     }
 
     public void onClickAddRecipeMenu(View v)
@@ -148,7 +154,8 @@ public class RecipeMenusActivity extends AppCompatActivity {
                     mRecipeMenuList.add(new RecipeMenuItem(id, name, idUser, weekDays));
                 }
                 //mAdapter.notifyItemInserted(mRecipeMenuList.size()-1);
-                mAdapter.notifyDataSetChanged();
+                //mAdapter.notifyDataSetChanged();
+                initiateAdapter();
             }
         });
     }
@@ -190,7 +197,7 @@ public class RecipeMenusActivity extends AppCompatActivity {
         apiRequests.getMethod(mContext, Constants.GET_REMOVE_RECIPE_MENU+"/"+removedItem.getId(), "recipeMenu", new APIrequests.VolleyGETResponseListener() {
             @Override
             public void onError(String message)  {
-                Toast.makeText(mContext, "A remoção de refeição falhou", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "Cardápio removido com sucesso", Toast.LENGTH_SHORT).show();
             }
 
             @Override
