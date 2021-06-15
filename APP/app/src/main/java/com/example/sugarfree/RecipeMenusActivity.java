@@ -252,29 +252,43 @@ public class RecipeMenusActivity extends AppCompatActivity {
                     JSONArray lunch = item.getJSONArray("lunch");
                     JSONArray dinner = item.getJSONArray("dinner");
 
-                    for (int j = 0; j < breakfast.length(); j++)
+                    if(breakfast.length() > 0)
                     {
-                        JSONObject breakfastItem = breakfast.getJSONObject(j);
-                        mRecipeMenuText = mRecipeMenuText + breakfastItem.getString("mealName")+"\n"+
-                                breakfastItem.getString("type")+"\n";
+                        mRecipeMenuText = mRecipeMenuText  + "[Café da Manhã]\n\n";
+                        for (int j = 0; j < breakfast.length(); j++)
+                        {
+                            JSONObject breakfastItem = breakfast.getJSONObject(j);
+                            mRecipeMenuText = mRecipeMenuText +
+                                    breakfastItem.getString("type")+" -> "+
+                                    breakfastItem.getString("mealName")+"\n";
+                        }
+                        mRecipeMenuText = mRecipeMenuText + "___________________________________\n\n";
                     }
-                    mRecipeMenuText = mRecipeMenuText + "___________________________________\n\n";
 
-                    for (int j = 0; j < lunch.length(); j++)
+                    if(lunch.length() > 0)
                     {
-                        JSONObject lunchtItem = lunch.getJSONObject(j);
-                        mRecipeMenuText = mRecipeMenuText + lunchtItem.getString("mealName")+"\n"+
-                                lunchtItem.getString("type")+"\n";
+                        mRecipeMenuText = mRecipeMenuText  + "[Almoço]\n\n";
+                        for (int j = 0; j < lunch.length(); j++)
+                        {
+                            JSONObject lunchItem = lunch.getJSONObject(j);
+                            mRecipeMenuText = mRecipeMenuText  +
+                                    lunchItem.getString("type")+" -> "+
+                                    lunchItem.getString("mealName")+"\n";
+                        }
+                        mRecipeMenuText = mRecipeMenuText + "___________________________________\n\n";
                     }
-                    mRecipeMenuText = mRecipeMenuText + "___________________________________\n\n";
 
-                    for (int j = 0; j < dinner.length(); j++)
+                    if(dinner.length() > 0)
                     {
-                        JSONObject dinnerItem = dinner.getJSONObject(j);
-                        mRecipeMenuText = mRecipeMenuText + dinnerItem.getString("mealName")+"\n"+
-                                dinnerItem.getString("type")+"\n";
+                        mRecipeMenuText = mRecipeMenuText  + "[Jantar]\n\n";
+                        for (int j = 0; j < dinner.length(); j++)
+                        {
+                            JSONObject dinnerItem = dinner.getJSONObject(j);
+                            mRecipeMenuText = mRecipeMenuText +
+                                    dinnerItem.getString("type")+" -> "+
+                                    dinnerItem.getString("mealName")+"\n";
+                        }
                     }
-                    mRecipeMenuText = mRecipeMenuText + "___________________________________\n\n";
                 }
                 shareItem();
             }
