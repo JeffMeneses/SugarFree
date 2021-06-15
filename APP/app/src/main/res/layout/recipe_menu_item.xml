@@ -25,6 +25,15 @@
             android:textColor="@color/darkGray"/>
 
         <ImageView
+            android:id="@+id/imgShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imgRemove"
+            android:layout_marginRight="40dp"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_share" />
+
+        <ImageView
             android:id="@+id/imgRemove"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

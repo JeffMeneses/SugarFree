@@ -67,6 +67,13 @@ def removeRecipeMenu(idRecipeMenu):
 
     return jsonify({"error": "A remoção de cardápio falhou.", "statusCode": 400}), 400
 
+@app.route('/shareRecipeMenu/<string:idRecipeMenu>', methods=['GET'])
+def shareRecipeMenu(idRecipeMenu):
+    meals_list  = list(db.recipeMenus.find({"idRecipeMenu": idRecipeMenu}))
+    recipeMenuItem = json.loads(json.dumps(meals_list, default=json_util.default))
+
+    return jsonify(recipeMenuItem)
+
 @app.route('/removeMeal/<string:idRecipeMenu>/<string:idMeal>/<string:category>', methods=['GET'])
 def removeMeal(idRecipeMenu, idMeal, category):
     recipeMenuUpdate = db.recipeMenus.update_one(

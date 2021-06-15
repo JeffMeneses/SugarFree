@@ -20,6 +20,7 @@ public class RecipeMenuAdapter extends RecyclerView.Adapter<RecipeMenuAdapter.Re
     {
         void onItemClick(int position);
         void onRemoveClick(int position);
+        void onShareClick(int position);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener)
@@ -31,6 +32,7 @@ public class RecipeMenuAdapter extends RecyclerView.Adapter<RecipeMenuAdapter.Re
         public TextView mTextView1;
         public TextView mTextView2;
         public ImageView mImgRemove;
+        public ImageView mImgShare;
 
         public RecipeMenuViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
@@ -38,6 +40,7 @@ public class RecipeMenuAdapter extends RecyclerView.Adapter<RecipeMenuAdapter.Re
             mTextView1 = itemView.findViewById(R.id.txtRecipeMenuName);
             mTextView2 = itemView.findViewById(R.id.txtWeekDays);
             mImgRemove = itemView.findViewById(R.id.imgRemove);
+            mImgShare = itemView.findViewById(R.id.imgShare);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -60,6 +63,19 @@ public class RecipeMenuAdapter extends RecyclerView.Adapter<RecipeMenuAdapter.Re
                         if(position != RecyclerView.NO_POSITION)
                         {
                             listener.onRemoveClick(position);
+                        }
+                    }
+                }
+            });
+
+            mImgShare.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(listener != null) {
+                        int position = getAdapterPosition();
+                        if(position != RecyclerView.NO_POSITION)
+                        {
+                            listener.onShareClick(position);
                         }
                     }
                 }

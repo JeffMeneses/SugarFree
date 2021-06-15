@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +19,8 @@ import android.widget.Toast;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
+import com.example.sugarfree.utils.ImageHandler;
+import com.example.sugarfree.utils.RecipeItem;
 import com.example.sugarfree.utils.RecipeMenuAdapter;
 import com.example.sugarfree.utils.RecipeMenuItem;
 
@@ -37,6 +40,8 @@ public class RecipeMenusActivity extends AppCompatActivity {
 
     private TextView mTitle;
     private ImageView mReturnArrow;
+
+    private  String mRecipeMenuText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +111,7 @@ public class RecipeMenusActivity extends AppCompatActivity {
     public void initiateRecyclerView()
     {
         APIrequests apiRequests = new APIrequests();
-        apiRequests.getMethod(mContext, Constants.GET_RECIPE_MENU_BY_ID+"/"+1, "recipeMenu", new APIrequests.VolleyGETResponseListener() {
+        apiRequests.getMethod(mContext, Constants.GET_ALL_RECIPE_MENU_BY_ID+"/"+1, "recipeMenu", new APIrequests.VolleyGETResponseListener() {
             @Override
             public void onError(String message)  {
 
@@ -134,7 +139,7 @@ public class RecipeMenusActivity extends AppCompatActivity {
     {
         mRecipeMenuList.clear();
         APIrequests apiRequests = new APIrequests();
-        apiRequests.getMethod(mContext, Constants.GET_RECIPE_MENU_BY_ID+"/"+1, "recipeMenu", new APIrequests.VolleyGETResponseListener() {
+        apiRequests.getMethod(mContext, Constants.GET_ALL_RECIPE_MENU_BY_ID+"/"+1, "recipeMenu", new APIrequests.VolleyGETResponseListener() {
             @Override
             public void onError(String message)  {
 
@@ -184,6 +189,11 @@ public class RecipeMenusActivity extends AppCompatActivity {
             public void onRemoveClick(int position) {
                 removeItem(position);
             }
+
+            @Override
+            public void onShareClick(int position) {
+                getRecipeMenuText(position);
+            }
         });
     }
 
@@ -203,6 +213,70 @@ public class RecipeMenusActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONArray jsonArray) throws JSONException {
                 Toast.makeText(mContext, "Cardápio removido com sucesso", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void shareItem()
+    {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, mRecipeMenuText);
+        startActivity(Intent.createChooser(shareIntent, "Selecione um aplicativo"));
+    }
+
+    public void getRecipeMenuText(int position)
+    {
+        mRecipeMenuText = "";
+        RecipeMenuItem sharedItem = mRecipeMenuList.get(position);
+
+        APIrequests apiRequests = new APIrequests();
+        apiRequests.getMethod(mContext, Constants.GET_RECIPE_MENU_BY_ID+"/"+sharedItem.getId(), "recipeMenu", new APIrequests.VolleyGETResponseListener() {
+            @Override
+            public void onError(String message)  {
+
+            }
+
+            @Override
+            public void onResponse(JSONArray jsonArray) throws JSONException {
+                for (int i = 0; i < jsonArray.length(); i++)
+                {
+                    JSONObject item = jsonArray.getJSONObject(i);
+
+                    String name = item.getString("name");
+                    mRecipeMenuText = name+"\n"+
+                            "___________________________________\n\n";
+
+
+                    JSONArray breakfast = item.getJSONArray("breakfast");
+                    JSONArray lunch = item.getJSONArray("lunch");
+                    JSONArray dinner = item.getJSONArray("dinner");
+
+                    for (int j = 0; j < breakfast.length(); j++)
+                    {
+                        JSONObject breakfastItem = breakfast.getJSONObject(j);
+                        mRecipeMenuText = mRecipeMenuText + breakfastItem.getString("mealName")+"\n"+
+                                breakfastItem.getString("type")+"\n";
+                    }
+                    mRecipeMenuText = mRecipeMenuText + "___________________________________\n\n";
+
+                    for (int j = 0; j < lunch.length(); j++)
+                    {
+                        JSONObject lunchtItem = lunch.getJSONObject(j);
+                        mRecipeMenuText = mRecipeMenuText + lunchtItem.getString("mealName")+"\n"+
+                                lunchtItem.getString("type")+"\n";
+                    }
+                    mRecipeMenuText = mRecipeMenuText + "___________________________________\n\n";
+
+                    for (int j = 0; j < dinner.length(); j++)
+                    {
+                        JSONObject dinnerItem = dinner.getJSONObject(j);
+                        mRecipeMenuText = mRecipeMenuText + dinnerItem.getString("mealName")+"\n"+
+                                dinnerItem.getString("type")+"\n";
+                    }
+                    mRecipeMenuText = mRecipeMenuText + "___________________________________\n\n";
+                }
+                shareItem();
             }
         });
     }
