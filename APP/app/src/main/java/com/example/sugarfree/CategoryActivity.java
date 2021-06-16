@@ -188,7 +188,10 @@ public class CategoryActivity extends AppCompatActivity {
 
     public void updateToolbar()
     {
-        mTitle.setText(mCategoryName);
+        if(mQuery.isEmpty() && !mCategoryName.isEmpty())
+            mTitle.setText(mCategoryName);
+        else
+            mTitle.setText("Busca: "+mQuery);
 
         mReturnArrow.setVisibility(View.VISIBLE);
         mTitle.setVisibility(View.VISIBLE);

@@ -259,7 +259,7 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
 
     public void searchRecipe(MealItem clickedItem)
     {
-        Intent intent = new Intent(mContext, DetailsActivity.class);
+        /*Intent intent = new Intent(mContext, DetailsActivity.class);
 
         APIrequests apiRequests = new APIrequests();
         apiRequests.getMethod(mContext, Constants.GET_RECIPE_BY_TITLE+"/"+clickedItem.getName(), "recipe", new APIrequests.VolleyGETResponseListener() {
@@ -292,7 +292,11 @@ public class RecipeMenuDetailsActivity extends AppCompatActivity {
 
                 startActivity(intent);
             }
-        });
+        });*/
+
+        Intent intent = new Intent(mContext, CategoryActivity.class);
+        intent.putExtra("query", clickedItem.getName());
+        startActivity(intent);
     }
 
     public void removeItem(int position)
