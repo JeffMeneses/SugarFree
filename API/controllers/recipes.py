@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 from app import app, db
+from pymongo import TEXT
 import json
 from bson import json_util
 import uuid
@@ -59,6 +60,16 @@ def recipeId(id):
 @app.route('/recipeTitle/<string:title>', methods=['GET'])
 def recipeTitle(title):
     recipes_list  = list(db.recipes.find({"title": title}))
+
+    if recipes_list:
+        return json.dumps(recipes_list, default=json_util.default)
+    return jsonify({"error": "Ops, essa receita não está disponpivel no app", "statusCode": 400}), 400
+
+@app.route('/partialRecipeTitle/<string:title>', methods=['GET'])
+def partialRecipeTitle(title):
+
+    db.recipes.create_index([("$**", TEXT)])
+    recipes_list  = list(db.recipes.find({"$text":{"$search":"\""+title+"\""}}))
 
     if recipes_list:
         return json.dumps(recipes_list, default=json_util.default)

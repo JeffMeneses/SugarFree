@@ -38,6 +38,8 @@ public class CategoryActivity extends AppCompatActivity {
     private TextView mTitle;
     private ImageView mReturnArrow;
 
+    private String mQuery = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,36 +69,72 @@ public class CategoryActivity extends AppCompatActivity {
             mCategoryName = getIntent().getStringExtra("categoryName");
             mCategoryName = mCategoryName.replaceAll("\n", "");
         }
+        if(getIntent().hasExtra("query"))
+        {
+            mQuery = getIntent().getStringExtra("query");
+        }
     }
 
     public void initiateRecyclerView()
     {
         APIrequests apiRequests = new APIrequests();
-        apiRequests.getMethod(mContext, Constants.GET_RECIPES_CATEGORY+"/"+mCategoryName, "recipes", new APIrequests.VolleyGETResponseListener() {
-            @Override
-            public void onError(String message)  {
 
-            }
+        if(mQuery.isEmpty() && !mCategoryName.isEmpty())
+        {
+            apiRequests.getMethod(mContext, Constants.GET_RECIPES_CATEGORY+"/"+mCategoryName, "recipes", new APIrequests.VolleyGETResponseListener() {
+                @Override
+                public void onError(String message)  {
 
-            @Override
-            public void onResponse(JSONArray jsonArray) throws JSONException {
-                for (int i = 0; i < jsonArray.length(); i++)
-                {
-                    JSONObject name = jsonArray.getJSONObject(i);
-
-                    String id = name.getString("_id");
-                    String title = name.getString("title");
-                    String likes = name.getString("likes");
-                    String image = name.getString("image");
-
-                    Bitmap imageBitmap = ImageHandler.convert(image);
-
-                    //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
-                    mRecipeList.add(new RecipeItem(id, imageBitmap, title, likes));
                 }
-                initiateAdapter();
-            }
-        });
+
+                @Override
+                public void onResponse(JSONArray jsonArray) throws JSONException {
+                    for (int i = 0; i < jsonArray.length(); i++)
+                    {
+                        JSONObject name = jsonArray.getJSONObject(i);
+
+                        String id = name.getString("_id");
+                        String title = name.getString("title");
+                        String likes = name.getString("likes");
+                        String image = name.getString("image");
+
+                        Bitmap imageBitmap = ImageHandler.convert(image);
+
+                        //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
+                        mRecipeList.add(new RecipeItem(id, imageBitmap, title, likes));
+                    }
+                    initiateAdapter();
+                }
+            });
+        }
+        else
+        {
+            apiRequests.getMethod(mContext, Constants.GET_SEARCH_RECIPE_BY_PARTIAL_TITLE+"/"+mQuery, "partialSearch", new APIrequests.VolleyGETResponseListener() {
+                @Override
+                public void onError(String message)  {
+
+                }
+
+                @Override
+                public void onResponse(JSONArray jsonArray) throws JSONException {
+                    for (int i = 0; i < jsonArray.length(); i++)
+                    {
+                        JSONObject name = jsonArray.getJSONObject(i);
+
+                        String id = name.getString("_id");
+                        String title = name.getString("title");
+                        String likes = name.getString("likes");
+                        String image = name.getString("image");
+
+                        Bitmap imageBitmap = ImageHandler.convert(image);
+
+                        //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
+                        mRecipeList.add(new RecipeItem(id, imageBitmap, title, likes));
+                    }
+                    initiateAdapter();
+                }
+            });
+        }
     }
 
     public void initiateAdapter()
