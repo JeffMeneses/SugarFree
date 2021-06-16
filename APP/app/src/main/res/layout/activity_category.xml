@@ -18,6 +18,29 @@
         android:layout_marginTop="55dp"
         android:scrollbars="vertical" />
 
+    <TextView
+        android:id="@+id/txtNoResults"
+        android:layout_width="190dp"
+        android:layout_height="wrap_content"
+        android:text="Hum, parece que não encontramos nada para essa busca."
+        android:fontFamily="@font/cloud"
+        android:textColor="@color/lightBlue"
+        android:textAlignment="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center_horizontal"
+        android:visibility="gone"/>
+
+    <ImageView
+        android:id="@+id/imgNoResults"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txtNoResults"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="-120dp"
+        app:srcCompat="@drawable/ic_crying_face"
+        android:visibility="gone"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

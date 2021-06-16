@@ -38,6 +38,9 @@ public class CategoryActivity extends AppCompatActivity {
     private TextView mTitle;
     private ImageView mReturnArrow;
 
+    private TextView mTxtNoResults;
+    private ImageView mImgNoResults;
+
     private String mQuery = "";
 
     @Override
@@ -50,6 +53,9 @@ public class CategoryActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.txtToolbarTitle);
         mReturnArrow = findViewById(R.id.imgToolbarArrow);
         updateToolbar();
+
+        mTxtNoResults = findViewById(R.id.txtNoResults);
+        mImgNoResults = findViewById(R.id.imgNoResults);
 
         //TODO: método GET para pegar receitas
         buildRecyclerView();
@@ -112,7 +118,11 @@ public class CategoryActivity extends AppCompatActivity {
             apiRequests.getMethod(mContext, Constants.GET_SEARCH_RECIPE_BY_PARTIAL_TITLE+"/"+mQuery, "partialSearch", new APIrequests.VolleyGETResponseListener() {
                 @Override
                 public void onError(String message)  {
-
+                    if(mRecipeList.size() == 0)
+                    {
+                        mTxtNoResults.setVisibility(View.VISIBLE);
+                        mImgNoResults.setVisibility(View.VISIBLE);
+                    }
                 }
 
                 @Override
