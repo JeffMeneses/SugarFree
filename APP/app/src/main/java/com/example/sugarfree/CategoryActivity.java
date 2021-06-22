@@ -38,6 +38,11 @@ public class CategoryActivity extends AppCompatActivity {
     private TextView mTitle;
     private ImageView mReturnArrow;
 
+    private TextView mTxtNoResults;
+    private ImageView mImgNoResults;
+
+    private String mQuery = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,9 @@ public class CategoryActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.txtToolbarTitle);
         mReturnArrow = findViewById(R.id.imgToolbarArrow);
         updateToolbar();
+
+        mTxtNoResults = findViewById(R.id.txtNoResults);
+        mImgNoResults = findViewById(R.id.imgNoResults);
 
         //TODO: método GET para pegar receitas
         buildRecyclerView();
@@ -65,37 +73,78 @@ public class CategoryActivity extends AppCompatActivity {
         if(getIntent().hasExtra("categoryName"))
         {
             mCategoryName = getIntent().getStringExtra("categoryName");
+            mCategoryName = mCategoryName.replaceAll("\n", "");
+        }
+        if(getIntent().hasExtra("query"))
+        {
+            mQuery = getIntent().getStringExtra("query");
         }
     }
 
     public void initiateRecyclerView()
     {
         APIrequests apiRequests = new APIrequests();
-        apiRequests.getMethod(mContext, Constants.GET_RECIPES_CATEGORY+"/"+mCategoryName, "recipes", new APIrequests.VolleyGETResponseListener() {
-            @Override
-            public void onError(String message)  {
 
-            }
+        if(mQuery.isEmpty() && !mCategoryName.isEmpty())
+        {
+            apiRequests.getMethod(mContext, Constants.GET_RECIPES_CATEGORY+"/"+mCategoryName, "recipes", new APIrequests.VolleyGETResponseListener() {
+                @Override
+                public void onError(String message)  {
 
-            @Override
-            public void onResponse(JSONArray jsonArray) throws JSONException {
-                for (int i = 0; i < jsonArray.length(); i++)
-                {
-                    JSONObject name = jsonArray.getJSONObject(i);
-
-                    String id = name.getString("_id");
-                    String title = name.getString("title");
-                    String likes = name.getString("likes");
-                    String image = name.getString("image");
-
-                    Bitmap imageBitmap = ImageHandler.convert(image);
-
-                    //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
-                    mRecipeList.add(new RecipeItem(id, imageBitmap, title, likes));
                 }
-                initiateAdapter();
-            }
-        });
+
+                @Override
+                public void onResponse(JSONArray jsonArray) throws JSONException {
+                    for (int i = 0; i < jsonArray.length(); i++)
+                    {
+                        JSONObject name = jsonArray.getJSONObject(i);
+
+                        String id = name.getString("_id");
+                        String title = name.getString("title");
+                        String likes = name.getString("likes");
+                        String image = name.getString("image");
+
+                        Bitmap imageBitmap = ImageHandler.convert(image);
+
+                        //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
+                        mRecipeList.add(new RecipeItem(id, imageBitmap, title, likes));
+                    }
+                    initiateAdapter();
+                }
+            });
+        }
+        else
+        {
+            apiRequests.getMethod(mContext, Constants.GET_SEARCH_RECIPE_BY_PARTIAL_TITLE+"/"+mQuery, "partialSearch", new APIrequests.VolleyGETResponseListener() {
+                @Override
+                public void onError(String message)  {
+                    if(mRecipeList.size() == 0)
+                    {
+                        mTxtNoResults.setVisibility(View.VISIBLE);
+                        mImgNoResults.setVisibility(View.VISIBLE);
+                    }
+                }
+
+                @Override
+                public void onResponse(JSONArray jsonArray) throws JSONException {
+                    for (int i = 0; i < jsonArray.length(); i++)
+                    {
+                        JSONObject name = jsonArray.getJSONObject(i);
+
+                        String id = name.getString("_id");
+                        String title = name.getString("title");
+                        String likes = name.getString("likes");
+                        String image = name.getString("image");
+
+                        Bitmap imageBitmap = ImageHandler.convert(image);
+
+                        //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
+                        mRecipeList.add(new RecipeItem(id, imageBitmap, title, likes));
+                    }
+                    initiateAdapter();
+                }
+            });
+        }
     }
 
     public void initiateAdapter()
@@ -149,9 +198,20 @@ public class CategoryActivity extends AppCompatActivity {
 
     public void updateToolbar()
     {
-        mTitle.setText(mCategoryName);
+        if(mQuery.isEmpty() && !mCategoryName.isEmpty())
+            mTitle.setText(mCategoryName);
+        else
+            mTitle.setText("Busca: "+mQuery);
 
         mReturnArrow.setVisibility(View.VISIBLE);
         mTitle.setVisibility(View.VISIBLE);
+    }
+
+    public void onClickAddRecipe(View v)
+    {
+        Intent intent = new Intent(mContext, AddRecipeWrittenActivity.class);
+        intent.putExtra("category", mCategoryName);
+        startActivity(intent);
+        finish();
     }
 }

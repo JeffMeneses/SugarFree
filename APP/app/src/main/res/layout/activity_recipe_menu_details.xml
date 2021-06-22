@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/darkBlue"
+    tools:context=".RecipeMenuDetailsActivity">
+
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:layout_marginTop="100dp"
+        android:layout_centerHorizontal="true">
+
+        <CheckBox
+            android:id="@+id/btnDom"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/bg_week_day"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="D"
+            android:textSize="16sp"
+            android:fontFamily="@font/cloud_bold"
+            android:textColor="@color/txt_week_day"/>
+
+        <CheckBox
+            android:id="@+id/btnSeg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_week_day"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="S"
+            android:textSize="16sp"
+            android:fontFamily="@font/cloud_bold"
+            android:textColor="@color/txt_week_day"/>
+
+        <CheckBox
+            android:id="@+id/btnTer"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_week_day"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="T"
+            android:textSize="16sp"
+            android:fontFamily="@font/cloud_bold"
+            android:textColor="@color/txt_week_day"/>
+
+        <CheckBox
+            android:id="@+id/btnQua"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_week_day"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="Q"
+            android:textSize="16sp"
+            android:fontFamily="@font/cloud_bold"
+            android:textColor="@color/txt_week_day"/>
+
+        <CheckBox
+            android:id="@+id/btnQui"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_week_day"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="Q"
+            android:textSize="16sp"
+            android:fontFamily="@font/cloud_bold"
+            android:textColor="@color/txt_week_day"/>
+
+        <CheckBox
+            android:id="@+id/btnSex"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_week_day"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="S"
+            android:textSize="16sp"
+            android:fontFamily="@font/cloud_bold"
+            android:textColor="@color/txt_week_day"/>
+
+        <CheckBox
+            android:id="@+id/btnSab"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/bg_week_day"
+            android:button="@null"
+            android:checked="false"
+            android:gravity="center"
+            android:text="S"
+            android:textSize="16sp"
+            android:fontFamily="@font/cloud_bold"
+            android:textColor="@color/txt_week_day"/>
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearIcons"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="160dp"
+        android:layout_centerHorizontal="true">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkBlue"
+            android:onClick="onClickBreakfast">
+
+            <ImageView
+                android:id="@+id/circleBreakFast"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_circle"/>
+
+            <ImageView
+                android:id="@+id/imgBreakfast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_breakfast"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardLunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkBlue"
+            android:layout_marginLeft="12dp"
+            android:onClick="onClickLunch">
+
+            <ImageView
+                android:id="@+id/circleLunch"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_circle"/>
+
+            <ImageView
+                android:id="@+id/imgLunch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_lunch"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/darkBlue"
+            android:layout_marginLeft="12dp"
+            android:onClick="onClickDinner">
+
+            <ImageView
+                android:id="@+id/circleDinner"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:background="@drawable/ic_circle"/>
+
+            <ImageView
+                android:id="@+id/imgDinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_dinner"
+                android:layout_gravity="center"/>
+        </androidx.cardview.widget.CardView>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearIcons"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Café da\n Manhã"
+            android:layout_marginLeft="55dp"
+            android:fontFamily="@font/cloud"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Almoço"
+            android:layout_marginLeft="30dp"
+            android:fontFamily="@font/cloud"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jantar"
+            android:layout_marginLeft="35dp"
+            android:fontFamily="@font/cloud"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txtMealTitle"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cloud"
+        android:textSize="16dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/lightBlue"
+        android:text="Refeições"
+        android:layout_marginTop="270dp"/>
+
+    <TextView
+        android:id="@+id/txtMealTip"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/cloud"
+        android:textSize="12dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/lightBlue"
+        android:text="@string/recipeMenuAddTip"
+        android:layout_below="@+id/txtMealTitle"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/txtMealTip"
+        android:scrollbars="vertical"
+        android:paddingBottom="60dp"
+        android:clipToPadding="false"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_add_food_item"
+        android:onClick="onClickAddMeal"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="20dp"/>
+
+</RelativeLayout>

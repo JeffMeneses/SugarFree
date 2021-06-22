@@ -156,7 +156,7 @@ def food():
     return jsonify({"error": "A inserção de alimento falhou.", "statusCode": 400}), 400
 
 @app.route('/mealCategory/<int:idUser>/<string:category>', methods=['GET'])
-def mealCategory(idUser, category):
+def mealCategoryy(idUser, category):
     meals_list  = list(db.meals.find({"idUser": idUser}))
     categoryResponse = json.loads(json.dumps(meals_list, default=json_util.default))
 

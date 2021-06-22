@@ -19,8 +19,10 @@
     <color name="darkGrayFont">#252525</color>
     <color name="lightGrayFont">#ABABAB</color>
 
-    <color name="green">#71BF73</color>
-    <color name="orange">#FF8D69</color>
-    <color name="blue">#6574C5</color>
+    <color name="blue">#4DABF5</color>
+    <color name="yellow">#FFAD33</color>
+    <color name="red">#E26A61</color>
+
+    <color name="blueTest">#00A0E0</color>
 
 </resources>

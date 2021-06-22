@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="300dp"
+    android:layout_height="110dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardBackgroundColor="@color/white"
     android:layout_gravity="center_horizontal"
-    app:cardCornerRadius="3dp"
     app:cardElevation="3dp"
     app:cardUseCompatPadding="true">
 
@@ -16,13 +15,23 @@
         android:padding="16dp">
 
         <TextView
-            android:id="@+id/txtFoodName"
+            android:id="@+id/txtRecipeMenuName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:text="Banana"
+            android:text="Mome do Cardápio"
+            android:fontFamily="@font/cloud_bold"
             android:textSize="16sp"
             android:textColor="@color/darkGray"/>
+
+        <ImageView
+            android:id="@+id/imgShare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/imgRemove"
+            android:layout_marginRight="40dp"
+            android:layout_centerVertical="true"
+            app:srcCompat="@drawable/ic_share" />
 
         <ImageView
             android:id="@+id/imgRemove"
@@ -38,19 +47,10 @@
             android:layout_marginTop="20dp"
             android:layout_marginLeft="20dp">
             <TextView
-                android:id="@+id/txtQuantity"
+                android:id="@+id/txtWeekDays"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100"
-                android:textSize="12sp"
-                android:textColor="@color/lightGrayFont"/>
-
-            <TextView
-                android:id="@+id/txtUnit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:text="gramas"
+                android:text="Segunda-feira"
                 android:textSize="12sp"
                 android:textColor="@color/lightGrayFont"/>
         </LinearLayout>

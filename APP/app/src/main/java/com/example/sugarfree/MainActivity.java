@@ -3,6 +3,7 @@ package com.example.sugarfree;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -68,7 +69,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
+        MenuItem menuItem = menu.findItem(R.id.search);
+        androidx.appcompat.widget.SearchView searchView = (androidx.appcompat.widget.SearchView) menuItem.getActionView();
+        searchView.setQueryHint("Buscar receita");
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchRecipe(query);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
         return true;
+    }
+
+    public void searchRecipe(String query)
+    {
+        Intent intent = new Intent(mContext, CategoryActivity.class);
+        intent.putExtra("query", query);
+        startActivity(intent);
     }
 
     public void onClickBreakfast(View v)
@@ -103,31 +128,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId())
-        {
+        switch (item.getItemId()) {
             case R.id.nav_home:
                 startActivity(new Intent(mContext, MainActivity.class));
                 break;
             case R.id.nav_refeicoes:
-                startActivity(new Intent(mContext, FoodMenuActivity.class));
+                startActivity(new Intent(mContext, RecipeMenusActivity.class));
                 break;
             case R.id.nav_logoff:
                 Toast.makeText(mContext, "Sessão encerrada", Toast.LENGTH_LONG).show();
                 break;
-            case R.id.nav_addRecipeWritten:
-                startActivity(new Intent(mContext, AddRecipeWrittenActivity.class));
-                break;
-            case R.id.nav_addRecipeScreenshot:
-                Toast.makeText(mContext, "Não disponível", Toast.LENGTH_LONG).show();
-                break;
         }
-
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
     public void onClickRecipeMenu(View v)
     {
-        startActivity(new Intent(mContext, FoodMenuActivity.class));
+        startActivity(new Intent(mContext, RecipeMenusActivity.class));
     }
 }

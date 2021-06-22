@@ -73,7 +73,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         holder.mImageView.setImageBitmap(currentItem.getImageResource());
         holder.mTextView1.setText(title);
-        holder.mTextView2.setText("Likes: "+likes);
+        holder.mTextView2.setText("Curtidas: "+likes);
     }
 
     @Override
