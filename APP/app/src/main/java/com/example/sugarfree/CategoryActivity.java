@@ -159,39 +159,9 @@ public class CategoryActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 Intent intent = new Intent(mContext, DetailsActivity.class);
                 RecipeItem clickedItem = mRecipeList.get(position);
-
-                APIrequests apiRequests = new APIrequests();
-                apiRequests.getMethod(mContext, Constants.GET_RECIPE_BY_ID+"/"+clickedItem.getId(), "recipes", new APIrequests.VolleyGETResponseListener() {
-                    @Override
-                    public void onError(String message)  {
-
-                    }
-
-                    @Override
-                    public void onResponse(JSONArray jsonArray) throws JSONException {
-                        JSONObject recipeJson = jsonArray.getJSONObject(0);
-
-                        String title = recipeJson.getString("title");
-                        String ingredients = recipeJson.getString("ingredients");
-                        String category = recipeJson.getString("category");
-                        String instructions = recipeJson.getString("instructions");
-                        String tags = recipeJson.getString("tags");
-                        String likes = recipeJson.getString("likes");
-                        String image = recipeJson.getString("image");
-
-                        //Bitmap imageBitmap = ImageHandler.convert(image);
-
-                        intent.putExtra(Constants.EXTRA_TITLE, title);
-                        intent.putExtra(Constants.EXTRA_INGREDIENTS, ingredients);
-                        intent.putExtra(Constants.EXTRA_CATEGORY, category);
-                        intent.putExtra(Constants.EXTRA_INSTRUCTIONS, instructions);
-                        intent.putExtra(Constants.EXTRA_TAGS, tags);
-                        intent.putExtra(Constants.EXTRA_LIKES, likes);
-                        intent.putExtra(Constants.EXTRA_IMAGE, image);
-
-                        startActivity(intent);
-                    }
-                });
+                
+                intent.putExtra("recipeID", clickedItem.getId());
+                startActivity(intent);
             }
         });
     }
