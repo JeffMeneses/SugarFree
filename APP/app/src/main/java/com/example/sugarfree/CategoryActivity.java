@@ -159,7 +159,7 @@ public class CategoryActivity extends AppCompatActivity {
             public void onItemClick(int position) {
                 Intent intent = new Intent(mContext, DetailsActivity.class);
                 RecipeItem clickedItem = mRecipeList.get(position);
-                
+
                 intent.putExtra("recipeID", clickedItem.getId());
                 startActivity(intent);
             }

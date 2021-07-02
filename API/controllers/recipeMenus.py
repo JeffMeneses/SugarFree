@@ -9,7 +9,7 @@ def recipeMenu():
     if request.method == 'POST':
         recipeMenu = {
         "idRecipeMenu": uuid.uuid4().hex,
-        "idUser": int(request.json.get('idUser')),
+        "idUser": request.json.get('idUser'),
         "name": request.json.get('name'),
         "weekDays": "",
         "breakfast": [],
@@ -22,7 +22,7 @@ def recipeMenu():
 
         return jsonify({"error": "A inserção de cardápio falhou.", "statusCode": 400}), 400
 
-@app.route('/recipeMenu/<int:idUser>', methods=['GET'])
+@app.route('/recipeMenu/<string:idUser>', methods=['GET'])
 def recipeMenuByIdUser(idUser):
     recipeMenu_list  = list(db.recipeMenus.find({"idUser": idUser}))
     return json.dumps(recipeMenu_list, default=json_util.default)

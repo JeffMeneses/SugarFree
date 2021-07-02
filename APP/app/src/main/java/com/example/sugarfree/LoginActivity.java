@@ -12,6 +12,8 @@ import android.widget.Toast;
 import com.example.sugarfree.utils.Constants;
 import com.example.sugarfree.APIcommunication.APIrequests;
 
+import static com.example.sugarfree.utils.CurrentUser.setCurrentUser;
+
 public class LoginActivity extends AppCompatActivity {
     private Context mContext;
 
@@ -49,7 +51,8 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(String message) {
-                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+                setCurrentUser(message);
+                Toast.makeText(mContext, "Login concluído com sucesso.",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(mContext, MainActivity.class));
             }
         });

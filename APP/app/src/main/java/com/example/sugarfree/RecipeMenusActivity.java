@@ -30,6 +30,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.example.sugarfree.utils.CurrentUser.getCurrentUser;
+
 public class RecipeMenusActivity extends AppCompatActivity {
     private Context mContext;
 
@@ -111,7 +113,7 @@ public class RecipeMenusActivity extends AppCompatActivity {
     public void initiateRecyclerView()
     {
         APIrequests apiRequests = new APIrequests();
-        apiRequests.getMethod(mContext, Constants.GET_ALL_RECIPE_MENU_BY_ID+"/"+1, "recipeMenu", new APIrequests.VolleyGETResponseListener() {
+        apiRequests.getMethod(mContext, Constants.GET_ALL_RECIPE_MENU_BY_ID+"/"+getCurrentUser(), "recipeMenu", new APIrequests.VolleyGETResponseListener() {
             @Override
             public void onError(String message)  {
 
@@ -139,7 +141,7 @@ public class RecipeMenusActivity extends AppCompatActivity {
     {
         mRecipeMenuList.clear();
         APIrequests apiRequests = new APIrequests();
-        apiRequests.getMethod(mContext, Constants.GET_ALL_RECIPE_MENU_BY_ID+"/"+1, "recipeMenu", new APIrequests.VolleyGETResponseListener() {
+        apiRequests.getMethod(mContext, Constants.GET_ALL_RECIPE_MENU_BY_ID+"/"+getCurrentUser(), "recipeMenu", new APIrequests.VolleyGETResponseListener() {
             @Override
             public void onError(String message)  {
 
@@ -302,7 +304,7 @@ public class RecipeMenusActivity extends AppCompatActivity {
         //String idUser = mFoodName.getText().toString();
 
         String recipeMenu = "{"+
-                "\"idUser\":" + "\"" + 1 + "\","+
+                "\"idUser\":" + "\"" + getCurrentUser() + "\","+
                 "\"name\":" + "\"" + recipeMenuName + "\""+
                 "}";
 
