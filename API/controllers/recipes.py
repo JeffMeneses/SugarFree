@@ -11,6 +11,23 @@ recipes_db = [
     {"id": 1, "title": "Macarrão", "intructions": "Um texto passo a passo da receita"}
 ]
 
+invalidIngredients = ["açúcar", "arroz branco", "farinha de trigo"]
+
+def checkIngredients(ingredients):
+    ok = True
+
+    for item in invalidIngredients:
+        if item in ingredients:
+            ok = False
+            break
+
+    if ok == True:
+        print("receita inserida")
+        return 200
+
+    print("ingrediente indevido encontrado")
+    return 400
+
 @app.route('/recipes', methods=['GET', 'POST'])
 def recipes():
     if request.method == 'GET':      
@@ -41,6 +58,9 @@ def recipes():
             "image": request.json.get('image'),
             "likes": 0
         }
+
+        if checkIngredients(recipe["ingredients"]) == 400:
+            return jsonify({"error": "Hum, ingrediente indevido encontrado.", "statusCode": 400}), 400
 
         if db.recipes.insert_one(recipe):
             return jsonify({"success": "Receita inserida com sucesso.", "statusCode": 200}), 200
