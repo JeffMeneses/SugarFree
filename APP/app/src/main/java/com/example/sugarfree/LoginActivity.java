@@ -12,6 +12,9 @@ import android.widget.Toast;
 import com.example.sugarfree.utils.Constants;
 import com.example.sugarfree.APIcommunication.APIrequests;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import static com.example.sugarfree.utils.CurrentUser.setCurrentUser;
 
 public class LoginActivity extends AppCompatActivity {
@@ -50,8 +53,8 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(String message) {
-                setCurrentUser(message);
+            public void onResponse(JSONObject jsonObject) throws JSONException {
+                setCurrentUser(jsonObject.getString("success"));
                 Toast.makeText(mContext, "Login concluído com sucesso.",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(mContext, MainActivity.class));
             }

@@ -1,3 +1,4 @@
+from user.models import User
 from controllers.recipes import recipesIdList
 from flask import Flask, jsonify, request
 import json
@@ -56,6 +57,7 @@ def recommendation():
 
     if request.method == 'POST':
         userLikedRecipes = request.json.get('userLikedRecipes')
+        print("userLikedRecipes: ",userLikedRecipes)
 
     similar_recipes = pd.DataFrame()
     for recipe in userLikedRecipes:
@@ -69,5 +71,4 @@ def recommendation():
     result = recipes_df['_id'].iloc[recipe_indices]
     
     resultRecipes = recipesIdList(result.values.tolist())
-
     return jsonify({"success": "Recomendação gerada com sucesso.", "statusCode": 200, "result": json.loads(resultRecipes)}), 200

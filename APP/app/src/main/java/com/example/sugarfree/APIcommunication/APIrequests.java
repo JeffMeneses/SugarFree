@@ -9,7 +9,6 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -25,7 +24,7 @@ public class APIrequests {
     public interface VolleyResponseListener {
         void onError(String message);
 
-        void onResponse(String message);
+        void onResponse(JSONObject jsonObject) throws JSONException;
     }
 
     public interface VolleyGETResponseListener {
@@ -45,7 +44,7 @@ public class APIrequests {
             public void onResponse(String response) {
                 try {
                     JSONObject objres=new JSONObject(response);
-                    volleyResponseListener.onResponse(objres.getString("success"));
+                    volleyResponseListener.onResponse(objres);
 
                 } catch (JSONException e) {
                     volleyResponseListener.onError("Server Error");

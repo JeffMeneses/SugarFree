@@ -18,10 +18,12 @@ import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
 import com.example.sugarfree.utils.ImageHandler;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 public class AddRecipeWrittenActivity extends AppCompatActivity {
     private Context mContext;
@@ -128,14 +130,15 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(String message) {
-                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+            public void onResponse(JSONObject jsonObject) throws JSONException {
+                Toast.makeText(mContext, jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, CategoryActivity.class);
                 intent.putExtra("categoryName", mCategory);
                 startActivity(intent);
                 finish();
             }
+
         });
     }
 

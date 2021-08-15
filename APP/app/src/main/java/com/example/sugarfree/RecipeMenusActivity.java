@@ -315,8 +315,8 @@ public class RecipeMenusActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(String message) {
-                Toast.makeText(mContext, message,Toast.LENGTH_SHORT).show();
+            public void onResponse(JSONObject jsonObject) throws JSONException {
+                Toast.makeText(mContext, jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
 
                 updateRecipeMenuList();
             }

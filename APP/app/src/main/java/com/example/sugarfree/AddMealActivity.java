@@ -3,11 +3,9 @@ package com.example.sugarfree;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -15,6 +13,9 @@ import android.widget.Toast;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static com.example.sugarfree.utils.CurrentUser.getCurrentUser;
 
@@ -80,8 +81,8 @@ public class AddMealActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onResponse(String message) {
-                Toast.makeText(mContext, message,Toast.LENGTH_SHORT).show();
+            public void onResponse(JSONObject jsonObject) throws JSONException {
+                Toast.makeText(mContext, jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
 
                 //Intent intent = new Intent(mContext, RecipeMenuDetailsActivity.class);
                 //intent.putExtra("RecipeMenuName", recipeMenuName);
