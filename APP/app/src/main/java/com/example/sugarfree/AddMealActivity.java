@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
 
+import static com.example.sugarfree.utils.CurrentUser.getCurrentUser;
+
 public class AddMealActivity extends AppCompatActivity {
     private Context mContext;
 
@@ -65,7 +67,7 @@ public class AddMealActivity extends AppCompatActivity {
 
         String meal = "{"+
                 "\"idRecipeMenu\":" + "\"" + mIdRecipeMenu + "\","+
-                "\"idUser\":" + "\"" + 1 + "\","+
+                "\"idUser\":" + "\"" + getCurrentUser() + "\","+
                 "\"category\":" + "\"" + mCategory + "\","+
                 "\"mealName\":" + "\"" + mealName + "\","+
                 "\"type\":" + "\"" + type + "\""+

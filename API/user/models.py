@@ -41,6 +41,6 @@ class User:
 
         if user and user['password']==request.json['password']:
             self.startSession(user)
-            return jsonify({"success": "Login concluído com sucesso."}), 200
+            return jsonify({"success": user['_id']}), 200
 
         return jsonify({"error": "Credenciais de login inválidas."}), 401
