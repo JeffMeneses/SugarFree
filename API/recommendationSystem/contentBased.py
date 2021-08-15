@@ -1,4 +1,6 @@
+from controllers.recipes import recipesIdList
 from flask import Flask, jsonify, request
+import json
 import pandas as pd
 from pandas import DataFrame
 from app import app, db
@@ -49,9 +51,6 @@ def get_similar_recipes(title, sig=sig):
     # Top 10 most similar recipes
     return sig_scores
 
-#user = [("Omelete de forno"),("Risoto do mar")]
-#user = [("a561f2f9891a426f978f543bd0c57d3f"),("200d1e46f24c48d89769089e3152e6b1")]
-
 @app.route('/recommendation', methods=['POST'])
 def recommendation():
 
@@ -68,4 +67,7 @@ def recommendation():
 
     recipe_indices = similar_recipes.index
     result = recipes_df['_id'].iloc[recipe_indices]
-    return jsonify({"success": "Recomendação gerada com sucesso.", "statusCode": 200, "result": result.to_dict()}), 200
+    
+    resultRecipes = recipesIdList(result.values.tolist())
+
+    return jsonify({"success": "Recomendação gerada com sucesso.", "statusCode": 200, "result": json.loads(resultRecipes)}), 200

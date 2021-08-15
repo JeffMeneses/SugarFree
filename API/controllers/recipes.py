@@ -94,3 +94,7 @@ def partialRecipeTitle(title):
     if recipes_list:
         return json.dumps(recipes_list, default=json_util.default)
     return jsonify({"error": "Ops, essa receita não está disponpivel no app", "statusCode": 400}), 400 
+
+def recipesIdList(idList):
+    recipes_list  = list(db.recipes.find({"_id":{"$in": idList}}))
+    return json.dumps(recipes_list, default=json_util.default)
