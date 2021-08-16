@@ -250,45 +250,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardCardapio" />
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card4"
-                android:layout_width="300dp"
-                android:layout_height="115dp"
-                android:layout_marginTop="10dp"
-                app:cardBackgroundColor="@color/lightPurple"
-                android:elevation="3dp"
-                app:cardCornerRadius="5dp"
-                android:onClick="onClickRecommended"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:scrollbars="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtRecommended">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:paddingBottom="20dp">
-
-                    <TextView
-                        android:id="@+id/txtCard4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:fontFamily="@font/cloud"
-                        android:text="Recomendados"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="16dp"
-                        android:background="@drawable/ic_maincard4" />
-                </RelativeLayout>
-
-            </androidx.cardview.widget.CardView>
+                app:layout_constraintTop_toBottomOf="@+id/txtRecommended" />/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

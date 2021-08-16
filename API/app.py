@@ -11,6 +11,7 @@ db = client.user_login_system
 # Routes
 from user import routes
 from controllers import recipes, meals, recipeMenus
+from recommendationSystem import contentBased
 
 @app.route('/')
 def home():
