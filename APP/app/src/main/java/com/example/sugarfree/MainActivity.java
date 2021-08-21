@@ -88,13 +88,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         APIrequests apiRequests = new APIrequests();
 
         //TODO: get user liked recipes from server
-        //HOLDER
-        String email = "[\"a561f2f9891a426f978f543bd0c57d3f\",\"200d1e46f24c48d89769089e3152e6b1\"]";
+        //PLACE HOLDER
+        String email = "[\"b6862aa10780406ba08f70668a42317f\",\"daf409f95b414a5090f63374057cb63a\"]";
 
         String userLikedRecipes = "{"+
                 "\"userLikedRecipes\":" + email +
                 "}";
-        //end of HOLDER
 
         apiRequests.postMethod(mContext, userLikedRecipes, Constants.POST_RECOMMENDATION, new APIrequests.VolleyResponseListener() {
             @Override

@@ -11,7 +11,8 @@ recipes_db = [
     {"id": 1, "title": "Macarrão", "intructions": "Um texto passo a passo da receita"}
 ]
 
-invalidIngredients = ["açúcar", "arroz branco", "farinha de trigo"]
+invalidIngredients = ["açúcar", "arroz branco", "farinha de trigo", "refrigerante",
+                     "leite integral", "iogurte integral", "enlatado", "chocolate", "doce de leite"]
 
 def checkIngredients(ingredients):
     ok = True
