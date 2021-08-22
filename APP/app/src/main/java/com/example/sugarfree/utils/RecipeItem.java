@@ -8,12 +8,22 @@ public class RecipeItem {
     private String mTitle;
     private String mLikes;
 
+    private boolean isChecked = false;
+
     public RecipeItem(String id, Bitmap imageResource, String title, String likes)
     {
         mId = id;
         mImageResource = imageResource;
         mTitle = title;
         mLikes = likes;
+    }
+
+    public boolean isChecked(){
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked){
+        isChecked = checked;
     }
 
     public String getId()
