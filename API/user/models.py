@@ -17,7 +17,8 @@ class User:
             "_id": uuid.uuid4().hex,
             "name": request.json.get('name'),
             "email": request.json.get('email'),
-            "password": request.json.get('password')
+            "password": request.json.get('password'),
+            "selectedRecipes": request.json.get('selectedRecipes')
         }
 
         if db.users.find_one({"email": user['email']}):
@@ -41,6 +42,6 @@ class User:
 
         if user and user['password']==request.json['password']:
             self.startSession(user)
-            return jsonify({"success": user['_id']}), 200
+            return jsonify({"userID": user['_id'], "selectedRecipes": user['selectedRecipes']}), 200
 
         return jsonify({"error": "Credenciais de login inválidas."}), 401

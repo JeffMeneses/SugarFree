@@ -34,6 +34,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.example.sugarfree.utils.CurrentUser.getCurrentUserSelectedRecipes;
 import static com.example.sugarfree.utils.CurrentUser.setCurrentUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -87,12 +88,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         APIrequests apiRequests = new APIrequests();
 
-        //TODO: get user liked recipes from server
-        //PLACE HOLDER
-        String email = "[\"b6862aa10780406ba08f70668a42317f\",\"daf409f95b414a5090f63374057cb63a\"]";
-
         String userLikedRecipes = "{"+
-                "\"userLikedRecipes\":" + email +
+                "\"userLikedRecipes\":" + getCurrentUserSelectedRecipes() +
                 "}";
 
         apiRequests.postMethod(mContext, userLikedRecipes, Constants.POST_RECOMMENDATION, new APIrequests.VolleyResponseListener() {

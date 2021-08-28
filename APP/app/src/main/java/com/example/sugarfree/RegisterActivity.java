@@ -30,6 +30,8 @@ import java.io.InputStream;
 public class RegisterActivity extends AppCompatActivity {
     private Context mContext;
 
+    private static final int SELECTED_RECIPES_ACTIVITY = 001;
+    private String mSelectedRecipes;
     private TextView mEmail, mName, mPassword, mConfirmPassword;
     private  ImageView mPicture;
 
@@ -52,8 +54,6 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void onClickConfirm(View v)
     {
-        APIrequests apiRequests = new APIrequests();
-
         String email = mEmail.getText().toString();
         String name = mName.getText().toString();
         String password = mPassword.getText().toString();
@@ -62,27 +62,9 @@ public class RegisterActivity extends AppCompatActivity {
         if(!checkInputs(email, name, password, confirmPassword)) {
             return;
         }
-
-        //TODO: criar classe parseJson
-        String user = "{"+
-                "\"name\":" + "\"" + name + "\","+
-                "\"email\":" + "\"" + email + "\","+
-                "\"password\":" + "\"" + password + "\""+
-                "}";
-
-        /*apiRequests.postMethod(mContext, user, Constants.POST_REGISTER, new APIrequests.VolleyResponseListener() {
-            @Override
-            public void onError(String message) {
-                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
-            }
-
-            @Override
-            public void onResponse(JSONObject jsonObject) throws JSONException {
-                Toast.makeText(mContext, jsonObject.getString("success"),Toast.LENGTH_LONG).show();
-                startActivity(new Intent(mContext, LoginActivity.class));
-            }
-        });*/
-        //startActivity(new Intent(mContext, SelectRecipesActivity.class));
+        Intent intent = new Intent(mContext, SelectRecipesActivity.class);
+        intent.putExtra("name", name);
+        startActivityForResult(intent, SELECTED_RECIPES_ACTIVITY);
     }
 
     public boolean checkInputs(String email, String name, String password, String confirmPassword)
@@ -132,19 +114,29 @@ public class RegisterActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            if (requestCode == Constants.IMAGE_GALLERY_REQUEST) {
-                Uri imageUri = data.getData();
-                InputStream inputStream;
-                try {
-                    inputStream = getContentResolver().openInputStream(imageUri);
-                    Bitmap image = BitmapFactory.decodeStream(inputStream);
-                    mPicture.setImageBitmap(image);
+        if (requestCode == SELECTED_RECIPES_ACTIVITY)
+        {
+            if (resultCode ==  RESULT_OK)
+            {
+                mSelectedRecipes = data.getStringExtra("selectedRecipes");
+                registerNewUser();
+            }
+        }
+        else{
+            if (resultCode == RESULT_OK) {
+                if (requestCode == Constants.IMAGE_GALLERY_REQUEST) {
+                    Uri imageUri = data.getData();
+                    InputStream inputStream;
+                    try {
+                        inputStream = getContentResolver().openInputStream(imageUri);
+                        Bitmap image = BitmapFactory.decodeStream(inputStream);
+                        mPicture.setImageBitmap(image);
 
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+
                 }
-
             }
         }
     }
@@ -152,4 +144,35 @@ public class RegisterActivity extends AppCompatActivity {
     public void onClickReturn(View v){
         finish();
     }
+
+    public void registerNewUser()
+    {
+        APIrequests apiRequests = new APIrequests();
+
+        String email = mEmail.getText().toString();
+        String name = mName.getText().toString();
+        String password = mPassword.getText().toString();
+        String confirmPassword = mConfirmPassword.getText().toString();
+
+        String user = "{"+
+                "\"name\":" + "\"" + name + "\","+
+                "\"email\":" + "\"" + email + "\","+
+                "\"password\":" + "\"" + password + "\","+
+                "\"selectedRecipes\":" + mSelectedRecipes +
+                "}";
+
+        apiRequests.postMethod(mContext, user, Constants.POST_REGISTER, new APIrequests.VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(JSONObject jsonObject) throws JSONException {
+                Toast.makeText(mContext, jsonObject.getString("success"),Toast.LENGTH_LONG).show();
+                startActivity(new Intent(mContext, LoginActivity.class));
+            }
+        });
+    }
+
 }

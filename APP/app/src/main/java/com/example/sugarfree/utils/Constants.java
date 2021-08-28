@@ -32,6 +32,7 @@ public class Constants {
     public static final String GET_RECIPE_MENU_BY_ID = "http://192.168.1.148:5000/shareRecipeMenu";
     public static final String GET_SEARCH_RECIPE_BY_PARTIAL_TITLE = "http://192.168.1.148:5000/partialRecipeTitle";
     public static final String POST_RECOMMENDATION = "http://192.168.1.148:5000/recommendation";
+    public static final String GET_N_RANDOM_RECIPES = "http://192.168.1.148:5000/randomNRecipes";
 
     // EXTRA INPUTS
     public static final String EXTRA_TITLE = "title";

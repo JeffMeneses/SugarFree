@@ -99,3 +99,11 @@ def partialRecipeTitle(title):
 def recipesIdList(idList):
     recipes_list  = list(db.recipes.find({"_id":{"$in": idList}}))
     return json.dumps(recipes_list, default=json_util.default)
+
+@app.route('/randomNRecipes', methods=['GET'])
+def randomNRecipes():
+    recipes_list  = list(db.recipes.aggregate([{"$sample": {"size": 10}}]))
+
+    if recipes_list:
+        return json.dumps(recipes_list, default=json_util.default)
+    return jsonify({"error": "Ops, ocorreu um problema", "statusCode": 400}), 400 

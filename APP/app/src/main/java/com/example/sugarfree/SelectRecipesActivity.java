@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
@@ -24,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class SelectRecipesActivity extends AppCompatActivity {
@@ -33,6 +35,8 @@ public class SelectRecipesActivity extends AppCompatActivity {
     Button btn;
     private Context mContext;
 
+    private TextView mTxtName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +45,8 @@ public class SelectRecipesActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         btn = findViewById(R.id.btn_multi_selection);
+        mTxtName = findViewById(R.id.txtTitle);
+        mTxtName.setText(getIntent().getStringExtra("name")+", escolha 3 favoritas.");
 
         initiateRecyclerView();
 
@@ -49,12 +55,21 @@ public class SelectRecipesActivity extends AppCompatActivity {
             public void onClick(View v) {
                 StringBuilder stringBuilder = new StringBuilder();
                 if(mAdapter.getSelected().size() > 0){
+                    stringBuilder.append("[");
                     for(int i=0; i < mAdapter.getSelected().size(); i++){
-                        stringBuilder.append(mAdapter.getSelected().get(i).getTitle());
-                        stringBuilder.append("\n");
+                        stringBuilder.append("\"");
+                        stringBuilder.append(mAdapter.getSelected().get(i).getId());
+                        if((mAdapter.getSelected().size() - i) > 1)
+                            stringBuilder.append("\",");
+                        else
+                            stringBuilder.append("\"");
                     }
+                    stringBuilder.append("]");
                 }
-                Toast.makeText(mContext, stringBuilder.toString().trim(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.putExtra("selectedRecipes", (Serializable) stringBuilder);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
@@ -63,7 +78,7 @@ public class SelectRecipesActivity extends AppCompatActivity {
     {
         APIrequests apiRequests = new APIrequests();
 
-        apiRequests.getMethod(mContext, Constants.GET_RECIPES_CATEGORY+"/"+"Café da Manhã", "recipes", new APIrequests.VolleyGETResponseListener() {
+        apiRequests.getMethod(mContext, Constants.GET_N_RANDOM_RECIPES, "recipes", new APIrequests.VolleyGETResponseListener() {
             @Override
             public void onError(String message)  {
 
