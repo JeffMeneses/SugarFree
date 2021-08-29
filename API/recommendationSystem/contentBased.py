@@ -12,7 +12,7 @@ from sklearn.metrics.pairwise import sigmoid_kernel
 
 # Crating dataFrame
 recipes_df = DataFrame(list(db.recipes.find({})))
-recipes_df = recipes_df.drop(columns=['category', 'tags', 'image', 'likes'])
+recipes_df = recipes_df.drop(columns=['category', 'tags', 'image', 'avgRating', 'ratings'])
 recipes_df = recipes_df.replace(r'\n', ' ', regex=True)
 
 # Content Based Recommendation System

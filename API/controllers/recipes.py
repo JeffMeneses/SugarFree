@@ -41,7 +41,7 @@ def recipes():
                 'title': item['title'],
                 'instructions': item['instructions'],
                 'image': item['image'],
-                'likes': item['likes'],
+                'avgRating': item['avgRating'],
                 'category': item['category'],
                 'tags': item['tags']
             })
@@ -57,7 +57,8 @@ def recipes():
             "category": request.json.get('category'),
             "tags": request.json.get('tags'),
             "image": request.json.get('image'),
-            "likes": 0
+            "avgRating": 0,
+            "ratings": []
         }
 
         if checkIngredients(recipe["ingredients"]) == 400:
