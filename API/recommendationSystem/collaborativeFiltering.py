@@ -22,7 +22,9 @@ ratings = ratings.fillna(0)
 
 # Standardizing rating values
 def standardize(row):
+    print(row)
     new_row = (row - row.mean())/(row.max() - row.min()+ 10**-100)
+    print(new_row)
     return new_row
 
 ratings_std = ratings.apply(standardize)
@@ -40,13 +42,20 @@ def cfRecommendation():
 
     if request.method == 'POST':
         userRatingRecipes = request.json.get('userRatingRecipes')
+        print("userRatingRecipes: ",userRatingRecipes)
 
     similar_recipes = pd.DataFrame()
     for recipe in userRatingRecipes:
         similar_recipes = similar_recipes.append(get_similar_recipes(recipe['_id'], recipe['rating']))
 
     similar_recipes = similar_recipes.sum().sort_values(ascending=False)
+
+    for recipe in userRatingRecipes:
+        similar_recipes = similar_recipes.drop(recipe['_id'], errors='ignore')
+
+    #print(similar_recipes)
     similar_recipes = similar_recipes[similar_recipes > 0]
+    print(similar_recipes)
     similar_recipes = similar_recipes[:5]
 
     recipe_indices = similar_recipes.index

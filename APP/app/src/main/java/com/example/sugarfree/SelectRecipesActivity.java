@@ -92,13 +92,13 @@ public class SelectRecipesActivity extends AppCompatActivity {
 
                     String id = name.getString("_id");
                     String title = name.getString("title");
-                    String likes = name.getString("likes");
+                    String avgRating = name.getString("avgRating");
                     String image = name.getString("image");
 
                     Bitmap imageBitmap = ImageHandler.convert(image);
 
                     //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
-                    selectedRecipes.add(new RecipeItem(id, imageBitmap, title, likes));
+                    selectedRecipes.add(new RecipeItem(id, imageBitmap, title, avgRating));
                 }
                 initiateAdapter();
             }

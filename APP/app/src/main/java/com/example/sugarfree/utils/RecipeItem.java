@@ -6,16 +6,16 @@ public class RecipeItem {
     private String mId;
     private Bitmap mImageResource;
     private String mTitle;
-    private String mLikes;
+    private String mAvgRating;
 
     private boolean isChecked = false;
 
-    public RecipeItem(String id, Bitmap imageResource, String title, String likes)
+    public RecipeItem(String id, Bitmap imageResource, String title, String avgRating)
     {
         mId = id;
         mImageResource = imageResource;
         mTitle = title;
-        mLikes = likes;
+        mAvgRating = avgRating;
     }
 
     public boolean isChecked(){
@@ -41,8 +41,8 @@ public class RecipeItem {
         return mTitle;
     }
 
-    public String getLikes()
+    public String getAvgRating()
     {
-        return mLikes;
+        return mAvgRating;
     }
 }
