@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onResponse(JSONObject jsonObject) throws JSONException {
-                setCurrentUser(jsonObject.getString("success"));
+                setCurrentUser(jsonObject.getString("userID"), jsonObject.getString("selectedRecipes"));
                 Toast.makeText(mContext, "Login concluído com sucesso.",Toast.LENGTH_LONG).show();
                 startActivity(new Intent(mContext, MainActivity.class));
             }

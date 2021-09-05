@@ -7,7 +7,6 @@ import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,13 +33,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import static com.example.sugarfree.utils.CurrentUser.setCurrentUser;
+import static com.example.sugarfree.utils.CurrentUser.getCurrentUserSelectedRecipes;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    private ArrayList<RecipeItem> mRecipeList = new ArrayList<>();
-    private RecyclerView mRecyclerView;
-    private RecipeAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<RecipeItem> mRecipeListCB = new ArrayList<>();
+    private ArrayList<RecipeItem> mRecipeListCF = new ArrayList<>();
+    private RecyclerView mRecyclerViewCB, mRecyclerViewCF;
+    private RecipeAdapter mAdapterCB, mAdapterCF;
+    private RecyclerView.LayoutManager mLayoutManagerCB, mLayoutManagerCF;
 
     private Context mContext;
     private DrawerLayout drawer;
@@ -77,26 +77,30 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void buildRecyclerView() {
-        mRecyclerView = findViewById(R.id.recyclerView);
-        mRecyclerView.setHasFixedSize(true);
+        mRecyclerViewCB = findViewById(R.id.recyclerViewCB);
+        mRecyclerViewCB.setHasFixedSize(true);
         //mLayoutManager = new GridLayoutManager(this, 2);
-        mLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mLayoutManagerCB = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+        mRecyclerViewCF = findViewById(R.id.recyclerViewCF);
+        mRecyclerViewCF.setHasFixedSize(true);
+        //mLayoutManager = new GridLayoutManager(this, 2);
+        mLayoutManagerCF = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
     }
 
     public void initiateRecyclerView()
     {
         APIrequests apiRequests = new APIrequests();
 
-        //TODO: get user liked recipes from server
-        //HOLDER
-        String email = "[\"a561f2f9891a426f978f543bd0c57d3f\",\"200d1e46f24c48d89769089e3152e6b1\"]";
-
         String userLikedRecipes = "{"+
-                "\"userLikedRecipes\":" + email +
+                "\"userLikedRecipes\":" + getCurrentUserSelectedRecipes() +
                 "}";
-        //end of HOLDER
 
-        apiRequests.postMethod(mContext, userLikedRecipes, Constants.POST_RECOMMENDATION, new APIrequests.VolleyResponseListener() {
+        String userRatingRecipes = "{"+
+                "\"userRatingRecipes\":" + "[{\"_id\":\"47e2b73cfd224c5fa80cfd2743302b1b\", \"rating\":4},{\"_id\":\"a561f2f9891a426f978f543bd0c57d3f\", \"rating\":4}]" +
+                "}";
+
+        apiRequests.postMethod(mContext, userLikedRecipes, Constants.POST_CB_RECOMMENDATION, new APIrequests.VolleyResponseListener() {
             @Override
             public void onError(String message) {
                 Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
@@ -112,31 +116,78 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     String id = name.getString("_id");
                     String title = name.getString("title");
-                    String likes = name.getString("likes");
+                    String avgRating = name.getString("avgRating");
                     String image = name.getString("image");
 
                     Bitmap imageBitmap = ImageHandler.convert(image);
 
                     //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
-                    mRecipeList.add(new RecipeItem(id, imageBitmap, title, likes));
+                    mRecipeListCB.add(new RecipeItem(id, imageBitmap, title, avgRating));
                 }
-                initiateAdapter();
+                initiateAdapterCB();
+            }
+        });
+
+        apiRequests.postMethod(mContext, userRatingRecipes, Constants.POST_CF_RECOMMENDATION, new APIrequests.VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(JSONObject jsonObject) throws JSONException {
+                JSONArray jsonArray = jsonObject.getJSONArray("result");
+
+                for (int i = 0; i < jsonArray.length(); i++)
+                {
+                    JSONObject name = jsonArray.getJSONObject(i);
+
+                    String id = name.getString("_id");
+                    String title = name.getString("title");
+                    String avgRating = name.getString("avgRating");
+                    String image = name.getString("image");
+
+                    Bitmap imageBitmap = ImageHandler.convert(image);
+
+                    //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
+                    mRecipeListCF.add(new RecipeItem(id, imageBitmap, title, avgRating));
+                }
+                initiateAdapterCF();
             }
         });
     }
 
-    public void initiateAdapter()
+    public void initiateAdapterCB()
     {
-        mAdapter = new RecipeAdapter(mRecipeList);
+        mAdapterCB = new RecipeAdapter(mRecipeListCB);
 
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerViewCB.setLayoutManager(mLayoutManagerCB);
+        mRecyclerViewCB.setAdapter(mAdapterCB);
 
-        mAdapter.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
+        mAdapterCB.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
                 Intent intent = new Intent(mContext, DetailsActivity.class);
-                RecipeItem clickedItem = mRecipeList.get(position);
+                RecipeItem clickedItem = mRecipeListCB.get(position);
+
+                intent.putExtra("recipeID", clickedItem.getId());
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void initiateAdapterCF()
+    {
+        mAdapterCF = new RecipeAdapter(mRecipeListCF);
+
+        mRecyclerViewCF.setLayoutManager(mLayoutManagerCF);
+        mRecyclerViewCF.setAdapter(mAdapterCF);
+
+        mAdapterCF.setOnItemClickListener(new RecipeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(mContext, DetailsActivity.class);
+                RecipeItem clickedItem = mRecipeListCF.get(position);
 
                 intent.putExtra("recipeID", clickedItem.getId());
                 startActivity(intent);

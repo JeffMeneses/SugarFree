@@ -27,7 +27,7 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView mTitle;
     private ImageView mReturnArrow;
 
-    private String title, ingredients, instructions, tags, category, likes;
+    private String title, ingredients, instructions, tags, category, avgRating;
     private Bitmap image;
 
 
@@ -77,7 +77,7 @@ public class DetailsActivity extends AppCompatActivity {
                 category = recipeJson.getString("category");
                 instructions = recipeJson.getString("instructions");
                 tags = recipeJson.getString("tags");
-                likes = recipeJson.getString("likes");
+                avgRating = recipeJson.getString("avgRating");
                 image = ImageHandler.convert(recipeJson.getString("image"));
 
                 assignContent();

@@ -69,11 +69,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
         RecipeItem currentItem = mRecipeList.get(position);
 
         String title = currentItem.getTitle();
-        String likes = currentItem.getLikes();
+        String avgRating = currentItem.getAvgRating();
 
         holder.mImageView.setImageBitmap(currentItem.getImageResource());
         holder.mTextView1.setText(title);
-        holder.mTextView2.setText("Curtidas: "+likes);
+        holder.mTextView2.setText("Curtidas: "+avgRating);
     }
 
     @Override

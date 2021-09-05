@@ -12,7 +12,7 @@ from sklearn.metrics.pairwise import sigmoid_kernel
 
 # Crating dataFrame
 recipes_df = DataFrame(list(db.recipes.find({})))
-recipes_df = recipes_df.drop(columns=['category', 'tags', 'image', 'likes'])
+recipes_df = recipes_df.drop(columns=['category', 'tags', 'image', 'avgRating', 'ratings'])
 recipes_df = recipes_df.replace(r'\n', ' ', regex=True)
 
 # Content Based Recommendation System
@@ -24,7 +24,7 @@ tfv = TfidfVectorizer(min_df=3,  max_features=None,
 # Filling NaNs with empty string
 recipes_df['ingredients'] = recipes_df['ingredients'].fillna('')
 
-# Fitting the TF-IDF on the 'overview' text
+# Fitting the TF-IDF on the 'ingredients' text
 tfv_matrix = tfv.fit_transform(recipes_df['ingredients'])
 
 # Compute the sigmoid kernel
@@ -37,7 +37,7 @@ def get_similar_recipes(title, sig=sig):
     # Get the index corresponding to title
     idx = indices[title]
 
-    # Get the pairwsie similarity scores 
+    # Get the pairwise similarity scores 
     sig_scores = list(enumerate(sig[idx]))
 
     # Sort the recipes 

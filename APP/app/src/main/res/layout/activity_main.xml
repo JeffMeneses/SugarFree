@@ -238,7 +238,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/txtRecommended"
+                android:id="@+id/txtRecommendedCB"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -251,7 +251,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/cardCardapio" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
+                android:id="@+id/recyclerViewCB"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerHorizontal="true"
@@ -259,7 +259,31 @@
                 android:scrollbars="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtRecommended" />/>
+                app:layout_constraintTop_toBottomOf="@+id/txtRecommendedCB" />
+
+            <TextView
+                android:id="@+id/txtRecommendedCF"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:fontFamily="@font/cloud"
+                android:text="Receitas que outras pessoas gostaram"
+                android:textColor="@color/lightBlue"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewCB" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerViewCF"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:scrollbars="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtRecommendedCF" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

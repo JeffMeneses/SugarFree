@@ -5,18 +5,18 @@ import android.graphics.Bitmap;
 public class Recipe {
     private Bitmap mImageResource;
     private String mTitle;
-    private String mLikes;
+    private String mAvgRating;
     private String mCategory;
     private String mTags;
     private String mInstructions;
     private String mIngredients;
 
 
-    public Recipe(Bitmap imageResource, String title, String likes, String category, String tags, String instructions, String ingredients)
+    public Recipe(Bitmap imageResource, String title, String avgRating, String category, String tags, String instructions, String ingredients)
     {
         mImageResource = imageResource;
         mTitle = title;
-        mLikes = likes;
+        mAvgRating = avgRating;
         mCategory = category;
         mTags = tags;
         mInstructions = instructions;
@@ -33,9 +33,9 @@ public class Recipe {
         return mTitle;
     }
 
-    public String getLikes()
+    public String getAvgRating()
     {
-        return mLikes;
+        return mAvgRating;
     }
 
     public String getCategory()

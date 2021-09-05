@@ -11,7 +11,8 @@ recipes_db = [
     {"id": 1, "title": "Macarrão", "intructions": "Um texto passo a passo da receita"}
 ]
 
-invalidIngredients = ["açúcar", "arroz branco", "farinha de trigo"]
+invalidIngredients = ["açúcar", "arroz branco", "farinha de trigo", "refrigerante",
+                     "leite integral", "iogurte integral", "enlatado", "chocolate", "doce de leite"]
 
 def checkIngredients(ingredients):
     ok = True
@@ -40,7 +41,7 @@ def recipes():
                 'title': item['title'],
                 'instructions': item['instructions'],
                 'image': item['image'],
-                'likes': item['likes'],
+                'avgRating': item['avgRating'],
                 'category': item['category'],
                 'tags': item['tags']
             })
@@ -56,7 +57,8 @@ def recipes():
             "category": request.json.get('category'),
             "tags": request.json.get('tags'),
             "image": request.json.get('image'),
-            "likes": 0
+            "avgRating": 0,
+            "ratings": []
         }
 
         if checkIngredients(recipe["ingredients"]) == 400:
@@ -98,3 +100,11 @@ def partialRecipeTitle(title):
 def recipesIdList(idList):
     recipes_list  = list(db.recipes.find({"_id":{"$in": idList}}))
     return json.dumps(recipes_list, default=json_util.default)
+
+@app.route('/randomNRecipes', methods=['GET'])
+def randomNRecipes():
+    recipes_list  = list(db.recipes.aggregate([{"$sample": {"size": 10}}]))
+
+    if recipes_list:
+        return json.dumps(recipes_list, default=json_util.default)
+    return jsonify({"error": "Ops, ocorreu um problema", "statusCode": 400}), 400 
