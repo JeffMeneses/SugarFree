@@ -267,7 +267,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:fontFamily="@font/cloud"
-                android:text="Receitas que talvez você goste"
+                android:text="Receitas que outras pessoas gostaram"
                 android:textColor="@color/lightBlue"
                 android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"

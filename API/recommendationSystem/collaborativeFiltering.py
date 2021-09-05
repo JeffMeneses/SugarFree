@@ -22,15 +22,15 @@ ratings = ratings.fillna(0)
 
 # Standardizing rating values
 def standardize(row):
-    print(row)
     new_row = (row - row.mean())/(row.max() - row.min()+ 10**-100)
-    print(new_row)
     return new_row
 
 ratings_std = ratings.apply(standardize)
 
+# Creating similarity DataFrame
 item_similarity = cosine_similarity(ratings_std.T)
 item_similarity_df = pd.DataFrame(item_similarity,index=ratings.columns,columns=ratings.columns)
+print(item_similarity_df)
 
 def get_similar_recipes(recipe_name, user_rating):
     similar_score = item_similarity_df[recipe_name]*(user_rating-2.5)
@@ -53,9 +53,8 @@ def cfRecommendation():
     for recipe in userRatingRecipes:
         similar_recipes = similar_recipes.drop(recipe['_id'], errors='ignore')
 
-    #print(similar_recipes)
-    similar_recipes = similar_recipes[similar_recipes > 0]
     print(similar_recipes)
+    similar_recipes = similar_recipes[similar_recipes > 0]
     similar_recipes = similar_recipes[:5]
 
     recipe_indices = similar_recipes.index
