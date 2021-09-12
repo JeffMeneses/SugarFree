@@ -26,7 +26,6 @@
             android:layout_marginTop="5dp"
             android:layout_below="@id/imgRecipe"
             android:text="Sopa de Cenoura"
-            android:layout_centerHorizontal="true"
             android:textSize="16sp"
             android:fontFamily="@font/cloud"
             android:textColor="@color/white"/>
@@ -35,6 +34,7 @@
             android:id="@+id/txtLike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginTop="5dp"
             android:layout_below="@id/txtTitle"
             android:layout_alignParentRight="true"
@@ -42,6 +42,40 @@
             android:textSize="16sp"
             android:fontFamily="@font/cloud"
             android:textColor="@color/lightPink"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_below="@id/txtTitle">
+            <TextView
+                android:id="@+id/txtRatingValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4,0"
+                android:textSize="16sp"
+                android:fontFamily="@font/cloud"
+                android:textColor="@color/lightPink"/>
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:rating="4"/>
+
+            <TextView
+                android:id="@+id/txtRatingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="(50)"
+                android:textSize="16sp"
+                android:fontFamily="@font/cloud"
+                android:textColor="@color/lightPink"/>
+
+        </LinearLayout>
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

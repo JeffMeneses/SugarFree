@@ -44,32 +44,98 @@
             app:layout_constraintTop_toBottomOf="@+id/imgRecipeDetails" />
 
         <LinearLayout
+            android:id="@+id/ratingInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitleDetails">
+
+            <TextView
+                android:id="@+id/txtRatingValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/cloud"
+                android:text="4,0"
+                android:textColor="@color/lightPink"
+                android:textSize="16sp" />
+
+            <RatingBar
+                android:id="@+id/ratingBarInfo"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:rating="4" />
+
+            <TextView
+                android:id="@+id/txtRatingCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:fontFamily="@font/cloud"
+                android:text="(50)"
+                android:textColor="@color/lightPink"
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/iconLayout"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:gravity="center_horizontal"
-            app:layout_constraintTop_toBottomOf="@+id/txtTitleDetails">
+            android:layout_marginLeft="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ratingInfo">
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="35dp"
                 android:background="@drawable/ic_like_icon"
-                android:visibility="invisible"/>
+                android:visibility="gone" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="35dp"
-                android:onClick="onClickShare"
-                android:background="@drawable/ic_share_icon" />
+                android:background="@drawable/ic_share_icon"
+                android:onClick="onClickShare" />
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_favorite_icon"
-                android:visibility="invisible"/>
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/reviewRecipe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgRecipeDetails">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/lightBlue"
+                android:textSize="12sp"
+                android:fontFamily="@font/cloud"
+                android:layout_marginLeft="30dp"
+                android:text="Avalie essa receita"/>
+
+            <RatingBar
+                android:id="@+id/listitemrating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX=".8"
+                android:scaleY=".8"
+                android:isIndicator="true"
+                android:max="5"/>
+
         </LinearLayout>
 
         <TextView
