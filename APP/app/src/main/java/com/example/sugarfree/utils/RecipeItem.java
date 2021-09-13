@@ -7,15 +7,17 @@ public class RecipeItem {
     private Bitmap mImageResource;
     private String mTitle;
     private String mAvgRating;
+    private String mCountRating;
 
     private boolean isChecked = false;
 
-    public RecipeItem(String id, Bitmap imageResource, String title, String avgRating)
+    public RecipeItem(String id, Bitmap imageResource, String title, String avgRating, String countRating)
     {
         mId = id;
         mImageResource = imageResource;
         mTitle = title;
         mAvgRating = avgRating;
+        mCountRating = countRating;
     }
 
     public boolean isChecked(){
@@ -45,4 +47,6 @@ public class RecipeItem {
     {
         return mAvgRating;
     }
+
+    public String getCountRating() { return mCountRating;}
 }

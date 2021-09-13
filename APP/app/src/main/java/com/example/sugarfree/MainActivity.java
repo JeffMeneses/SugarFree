@@ -117,12 +117,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     String id = name.getString("_id");
                     String title = name.getString("title");
                     String avgRating = name.getString("avgRating");
+                    String countRating = name.getString("countRating");
                     String image = name.getString("image");
 
                     Bitmap imageBitmap = ImageHandler.convert(image);
 
                     //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
-                    mRecipeListCB.add(new RecipeItem(id, imageBitmap, title, avgRating));
+                    mRecipeListCB.add(new RecipeItem(id, imageBitmap, title, avgRating, countRating));
                 }
                 initiateAdapterCB();
             }
@@ -145,12 +146,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     String id = name.getString("_id");
                     String title = name.getString("title");
                     String avgRating = name.getString("avgRating");
+                    String countRating = name.getString("countRating");
                     String image = name.getString("image");
 
                     Bitmap imageBitmap = ImageHandler.convert(image);
 
                     //mRecipeList.add(new RecipeItem(R.drawable.ic_default_image, title, likes));
-                    mRecipeListCF.add(new RecipeItem(id, imageBitmap, title, avgRating));
+                    mRecipeListCF.add(new RecipeItem(id, imageBitmap, title, avgRating, countRating));
                 }
                 initiateAdapterCF();
             }

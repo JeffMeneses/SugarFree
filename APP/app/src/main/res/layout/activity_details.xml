@@ -61,7 +61,7 @@
                 android:textSize="16sp" />
 
             <RatingBar
-                android:id="@+id/ratingBarInfo"
+                android:id="@+id/rbInfo"
                 style="?android:attr/ratingBarStyleSmall"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -128,13 +128,13 @@
                 android:text="Avalie essa receita"/>
 
             <RatingBar
-                android:id="@+id/listitemrating"
+                android:id="@+id/rbReview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:scaleX=".8"
                 android:scaleY=".8"
-                android:isIndicator="true"
-                android:max="5"/>
+                android:max="5"
+                android:stepSize="1"/>
 
         </LinearLayout>
 

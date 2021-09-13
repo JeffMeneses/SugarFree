@@ -8,7 +8,9 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
@@ -29,7 +31,7 @@ public class DetailsActivity extends AppCompatActivity {
 
     private String title, ingredients, instructions, tags, category, avgRating;
     private Bitmap image;
-
+    private RatingBar mRbReview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,15 @@ public class DetailsActivity extends AppCompatActivity {
         mTitle = findViewById(R.id.txtToolbarTitle);
         mReturnArrow = findViewById(R.id.imgToolbarArrow);
         updateToolbar();
+
+        //RatingBar
+        mRbReview = findViewById(R.id.rbReview);
+        mRbReview.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                Toast.makeText(getApplicationContext(), "Your Selected Ratings  : " + String.valueOf(rating), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     public void updateToolbar()
@@ -122,4 +133,6 @@ public class DetailsActivity extends AppCompatActivity {
 
         return tags;
     }
+
+
 }

@@ -42,6 +42,7 @@ def recipes():
                 'instructions': item['instructions'],
                 'image': item['image'],
                 'avgRating': item['avgRating'],
+                'countRating': item['countRating'],
                 'category': item['category'],
                 'tags': item['tags']
             })
@@ -58,6 +59,7 @@ def recipes():
             "tags": request.json.get('tags'),
             "image": request.json.get('image'),
             "avgRating": 0,
+            "countRating": 0,
             "ratings": []
         }
 

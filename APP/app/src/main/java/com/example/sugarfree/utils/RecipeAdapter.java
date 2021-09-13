@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,14 +29,18 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
     public static class RecipeViewHolder extends RecyclerView.ViewHolder {
         public ImageView mImageView;
-        public TextView mTextView1;
-        public TextView mTextView2;
+        public TextView mTxtTitle;
+        public TextView mTxtRatingValue;
+        public RatingBar mRatingBar;
+        public TextView mRatingCount;
 
         public RecipeViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             mImageView = itemView.findViewById(R.id.imgRecipe);
-            mTextView1 = itemView.findViewById(R.id.txtTitle);
-            mTextView2 = itemView.findViewById(R.id.txtLike);
+            mTxtTitle = itemView.findViewById(R.id.txtTitle);
+            mTxtRatingValue = itemView.findViewById(R.id.txtRatingValue);
+            mRatingBar = itemView.findViewById(R.id.ratingBar);
+            mRatingCount = itemView.findViewById(R.id.txtRatingCount);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -70,10 +75,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeView
 
         String title = currentItem.getTitle();
         String avgRating = currentItem.getAvgRating();
+        String countRating = currentItem.getCountRating();
 
         holder.mImageView.setImageBitmap(currentItem.getImageResource());
-        holder.mTextView1.setText(title);
-        holder.mTextView2.setText("Curtidas: "+avgRating);
+        holder.mTxtTitle.setText(title);
+        holder.mTxtRatingValue.setText(avgRating);
+        holder.mRatingBar.setRating(Float.parseFloat(avgRating));
+        holder.mRatingCount.setText("("+countRating+")");
     }
 
     @Override
