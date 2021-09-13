@@ -30,7 +30,7 @@ ratings_std = ratings.apply(standardize)
 # Creating similarity DataFrame
 item_similarity = cosine_similarity(ratings_std.T)
 item_similarity_df = pd.DataFrame(item_similarity,index=ratings.columns,columns=ratings.columns)
-print(item_similarity_df)
+#print(item_similarity_df)
 
 def get_similar_recipes(recipe_name, user_rating):
     similar_score = item_similarity_df[recipe_name]*(user_rating-2.5)
@@ -42,7 +42,7 @@ def cfRecommendation():
 
     if request.method == 'POST':
         userRatingRecipes = request.json.get('userRatingRecipes')
-        print("userRatingRecipes: ",userRatingRecipes)
+        #print("userRatingRecipes: ",userRatingRecipes)
 
     similar_recipes = pd.DataFrame()
     for recipe in userRatingRecipes:
@@ -53,7 +53,7 @@ def cfRecommendation():
     for recipe in userRatingRecipes:
         similar_recipes = similar_recipes.drop(recipe['_id'], errors='ignore')
 
-    print(similar_recipes)
+    #print(similar_recipes)
     similar_recipes = similar_recipes[similar_recipes > 0]
     similar_recipes = similar_recipes[:5]
 

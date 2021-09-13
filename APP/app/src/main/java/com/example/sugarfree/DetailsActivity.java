@@ -14,12 +14,15 @@ import android.widget.Toast;
 
 import com.example.sugarfree.APIcommunication.APIrequests;
 import com.example.sugarfree.utils.Constants;
+import com.example.sugarfree.utils.CurrentUser;
 import com.example.sugarfree.utils.ImageHandler;
 import com.example.sugarfree.utils.Recipe;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.example.sugarfree.utils.CurrentUser.setCurrentUser;
 
 public class DetailsActivity extends AppCompatActivity {
     private ImageView mImgRecipeDetails;
@@ -29,7 +32,7 @@ public class DetailsActivity extends AppCompatActivity {
     private TextView mTitle;
     private ImageView mReturnArrow;
 
-    private String title, ingredients, instructions, tags, category, avgRating;
+    private String title, ingredients, instructions, tags, category, avgRating, recipeID;
     private Bitmap image;
     private RatingBar mRbReview;
 
@@ -55,7 +58,8 @@ public class DetailsActivity extends AppCompatActivity {
         mRbReview.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                Toast.makeText(getApplicationContext(), "Your Selected Ratings  : " + String.valueOf(rating), Toast.LENGTH_LONG).show();
+                //Toast.makeText(getApplicationContext(), "Your Selected Ratings  : " + String.valueOf(rating), Toast.LENGTH_LONG).show();
+                sendRecipeReview(rating);
             }
         });
     }
@@ -71,7 +75,7 @@ public class DetailsActivity extends AppCompatActivity {
     public void getDetails()
     {
         Intent intent = getIntent();
-        String recipeID = intent.getStringExtra("recipeID");
+        recipeID = intent.getStringExtra("recipeID");
         APIrequests apiRequests = new APIrequests();
         apiRequests.getMethod(mContext, Constants.GET_RECIPE_BY_ID+"/"+recipeID, "recipes", new APIrequests.VolleyGETResponseListener() {
             @Override
@@ -132,6 +136,30 @@ public class DetailsActivity extends AppCompatActivity {
         tags = tags.replaceAll(",", "    ");
 
         return tags;
+    }
+
+    public void sendRecipeReview(float rating)
+    {
+        APIrequests apiRequests = new APIrequests();
+
+        String recipeReview = "{"+
+                "\"recipeID\":" + "\"" + recipeID + "\","+
+                "\"userID\":" + "\"" + CurrentUser.getCurrentUser() + "\","+
+                "\"rating\":" + "\"" + rating + "\""+
+                "}";
+        //Toast.makeText(getApplicationContext(), recipeReview, Toast.LENGTH_LONG).show();
+        apiRequests.postMethod(mContext, recipeReview, Constants.POST_LOGIN, new APIrequests.VolleyResponseListener() {
+            @Override
+            public void onError(String message) {
+                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onResponse(JSONObject jsonObject) throws JSONException {
+                Toast.makeText(mContext, "Obrigado pela sua avaliação!",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
     }
 
 

@@ -110,3 +110,43 @@ def randomNRecipes():
     if recipes_list:
         return json.dumps(recipes_list, default=json_util.default)
     return jsonify({"error": "Ops, ocorreu um problema", "statusCode": 400}), 400 
+
+@app.route('/recipeReview', methods=['POST'])
+def recipeReview():
+    recipeReview = {
+        "recipeID": request.json.get('recipeID'),
+        "userID": request.json.get('userID'),
+        "rating": request.json.get('rating')
+    }
+
+    recipeReviewUpdate = db.recipes.update_one(
+        {"_id": recipeReview['recipeID']},
+        { 
+            "$pull": {
+                "ratings": 
+                {
+                    "userID": recipeReview['userID']
+                }
+            }
+        })
+    
+    print(recipeReviewUpdate.modified_count)
+
+    recipeReviewUpdate = db.recipes.update_one(
+    {"_id": recipeReview['recipeID']}, 
+    {
+        "$push": {
+            "ratings": 
+            {
+                "userID": request.json.get('userID'),
+                "rating": request.json.get('rating')
+            }
+        }
+    })
+
+    print(recipeReviewUpdate.modified_count)
+
+    if recipeReviewUpdate.modified_count:
+        return jsonify({"success": "Avaliação inserida com sucesso.", "statusCode": 200}), 200
+
+    return jsonify({"error": "A inserção de avaliação falhou.", "statusCode": 400}), 400
