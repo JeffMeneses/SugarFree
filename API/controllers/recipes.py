@@ -129,8 +129,6 @@ def recipeReview():
                 }
             }
         })
-    
-    print(recipeReviewUpdate.modified_count)
 
     recipeReviewUpdate = db.recipes.update_one(
     {"_id": recipeReview['recipeID']}, 
@@ -139,14 +137,42 @@ def recipeReview():
             "ratings": 
             {
                 "userID": request.json.get('userID'),
-                "rating": request.json.get('rating')
+                "rating": int(float(request.json.get('rating')))
             }
         }
     })
 
-    print(recipeReviewUpdate.modified_count)
-
     if recipeReviewUpdate.modified_count:
-        return jsonify({"success": "Avaliação inserida com sucesso.", "statusCode": 200}), 200
+        return updateAvgRating(recipeReview)
 
+    return jsonify({"error": "A inserção de avaliação falhou.", "statusCode": 400}), 400
+
+def updateAvgRating(recipeReview):
+
+    ratings = (list(db.recipes.find({"_id": recipeReview['recipeID']}, {"_id":0, "ratings":1})))
+    ratingAcum = 0
+    ratingCount = 0
+
+    for item in ratings:
+        ratingCount = len(item['ratings'])
+        for ratings in item['ratings']:
+            ratingAcum += int(ratings['rating'])
+
+    #print('Count= '+str(ratingCount))
+    #print('Acum= '+str(ratingAcum))
+    #print('Avg= '+str(ratingAcum/ratingCount))
+    avgRating = round((ratingAcum/ratingCount), 1)
+
+    ratingAvgUpdate = db.recipes.update_one(
+    {"_id": recipeReview['recipeID']}, 
+    {
+        "$set":
+        {
+            "countRating": ratingCount,
+            "avgRating": avgRating
+        }
+    })
+
+    if ratingAvgUpdate.modified_count:
+        return jsonify({"success": "Avaliação inserida com sucesso.", "statusCode": 200}), 200
     return jsonify({"error": "A inserção de avaliação falhou.", "statusCode": 400}), 400

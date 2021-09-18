@@ -26,13 +26,14 @@ import static com.example.sugarfree.utils.CurrentUser.setCurrentUser;
 
 public class DetailsActivity extends AppCompatActivity {
     private ImageView mImgRecipeDetails;
-    private TextView mTxtTitleDetails, mTxtIngredients, mTxtInstructions, mTxtTags;
+    private TextView mTxtTitleDetails, mTxtIngredients, mTxtInstructions, mTxtTags, mTxtRatingValue, mTxtRatingCount;
+    private RatingBar mRbInfo;
 
     private Context mContext;
     private TextView mTitle;
     private ImageView mReturnArrow;
 
-    private String title, ingredients, instructions, tags, category, avgRating, recipeID;
+    private String title, ingredients, instructions, tags, category, avgRating, recipeID, countRating;
     private Bitmap image;
     private RatingBar mRbReview;
 
@@ -48,6 +49,9 @@ public class DetailsActivity extends AppCompatActivity {
         mTxtIngredients = findViewById(R.id.txtIngredients);
         mTxtInstructions = findViewById(R.id.txtInstructions);
         mTxtTags = findViewById(R.id.txtTags);
+        mTxtRatingValue = findViewById(R.id.txtRatingValue);
+        mTxtRatingCount = findViewById(R.id.txtRatingCount);
+        mRbInfo = findViewById(R.id.rbInfo);
 
         mTitle = findViewById(R.id.txtToolbarTitle);
         mReturnArrow = findViewById(R.id.imgToolbarArrow);
@@ -93,6 +97,7 @@ public class DetailsActivity extends AppCompatActivity {
                 instructions = recipeJson.getString("instructions");
                 tags = recipeJson.getString("tags");
                 avgRating = recipeJson.getString("avgRating");
+                countRating = recipeJson.getString("countRating");
                 image = ImageHandler.convert(recipeJson.getString("image"));
 
                 assignContent();
@@ -107,6 +112,9 @@ public class DetailsActivity extends AppCompatActivity {
         mTxtIngredients.setText(ingredients);
         mTxtInstructions.setText(instructions);
         mTxtTags.setText(tags);
+        mTxtRatingValue.setText(avgRating);
+        mTxtRatingCount.setText("("+countRating+")");
+        mRbInfo.setRating(Float.parseFloat(avgRating));
     }
 
     public String getRecipeText()
@@ -148,7 +156,7 @@ public class DetailsActivity extends AppCompatActivity {
                 "\"rating\":" + "\"" + rating + "\""+
                 "}";
         //Toast.makeText(getApplicationContext(), recipeReview, Toast.LENGTH_LONG).show();
-        apiRequests.postMethod(mContext, recipeReview, Constants.POST_LOGIN, new APIrequests.VolleyResponseListener() {
+        apiRequests.postMethod(mContext, recipeReview, Constants.POST_RECIPE_REVIEW, new APIrequests.VolleyResponseListener() {
             @Override
             public void onError(String message) {
                 Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
@@ -160,7 +168,4 @@ public class DetailsActivity extends AppCompatActivity {
             }
         });
     }
-    }
-
-
 }
