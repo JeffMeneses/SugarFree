@@ -12,6 +12,7 @@ db = client.user_login_system
 from user import routes
 from controllers import recipes, meals, recipeMenus
 from recommendationSystem import contentBased, collaborativeFiltering
+from extractTextFromImage import OCR
 
 @app.route('/')
 def home():
