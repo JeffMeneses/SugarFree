@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.SugarFree">
-        <activity android:name=".SelectRecipesActivity"></activity>
+        <activity android:name=".SendScreenshotActivity"></activity>
+        <activity android:name=".SelectRecipesActivity" />
         <activity android:name=".AddMealActivity" />
         <activity android:name=".RecipeMenuDetailsActivity" />
         <activity android:name=".RecipeMenusActivity" />

@@ -152,6 +152,7 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
 
     public void onClickSendScreenshot (View v)
     {
-        Toast.makeText(mContext, "Essa função ainda não é suportada.", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(mContext, "Essa função ainda não é suportada.", Toast.LENGTH_SHORT).show();
+        
     }
 }
