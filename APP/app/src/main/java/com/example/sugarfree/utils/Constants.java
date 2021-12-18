@@ -35,6 +35,7 @@ public class Constants {
     public static final String POST_CF_RECOMMENDATION = "http://192.168.1.148:5000/cfRecommendation";
     public static final String GET_N_RANDOM_RECIPES = "http://192.168.1.148:5000/randomNRecipes";
     public static final String POST_RECIPE_REVIEW = "http://192.168.1.148:5000/recipeReview";
+    public static final String POST_EXTRACT_TEXT_FROM_IMG = "http://192.168.1.148:5000/extractTextFromImage";
 
     // EXTRA INPUTS
     public static final String EXTRA_TITLE = "title";

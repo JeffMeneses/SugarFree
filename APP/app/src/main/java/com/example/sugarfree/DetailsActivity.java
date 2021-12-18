@@ -165,6 +165,10 @@ public class DetailsActivity extends AppCompatActivity {
             @Override
             public void onResponse(JSONObject jsonObject) throws JSONException {
                 Toast.makeText(mContext, "Obrigado pela sua avaliação!",Toast.LENGTH_LONG).show();
+                finish();
+                overridePendingTransition(0, 0);
+                startActivity(getIntent());
+                overridePendingTransition(0, 0);
             }
         });
     }

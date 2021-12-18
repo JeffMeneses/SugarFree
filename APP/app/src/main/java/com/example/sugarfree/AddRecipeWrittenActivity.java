@@ -28,6 +28,7 @@ import java.io.InputStream;
 public class AddRecipeWrittenActivity extends AppCompatActivity {
     private Context mContext;
 
+    private static final int SEND_SCREENSHOT_ACTIVITY = 002;
     private TextView mTitle, mIngredients, mInstructions, mTags, mTitleToolBar;
     private ImageView mPicture, mReturnArrow;
     private String mCategory;
@@ -50,17 +51,16 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
         mReturnArrow = findViewById(R.id.imgToolbarArrow);
         updateToolbar();
 
-        mPicture = (ImageView)findViewById(R.id.imgRecipe);
+        mPicture = (ImageView) findViewById(R.id.imgRecipe);
         //Bitmap image = BitmapFactory.decodeResource(getResources(), R.drawable.ic_profile_picture);
         //mPicture.setImageBitmap(image);
     }
 
-    public void onClickReturn(View v){
+    public void onClickReturn(View v) {
         finish();
     }
 
-    public void onClickAddPicture(View v)
-    {
+    public void onClickAddPicture(View v) {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         File pictureDirectory = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
         String pictureDirectoryPath = pictureDirectory.getPath();
@@ -72,7 +72,17 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
+        if (requestCode == SEND_SCREENSHOT_ACTIVITY) {
+            if (resultCode == RESULT_OK) {
+                String title = data.getStringExtra("title");
+                String ingredients = data.getStringExtra("ingredients");
+                String instructions = data.getStringExtra("instructions");
+
+                mTitle.setText(title);
+                mIngredients.setText(ingredients);
+                mInstructions.setText(instructions);
+            }
+        } else if (resultCode == RESULT_OK) {
             if (requestCode == Constants.IMAGE_GALLERY_REQUEST) {
                 Uri imageUri = data.getData();
                 InputStream inputStream;
@@ -89,8 +99,7 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickConfirm(View v)
-    {
+    public void onClickConfirm(View v) {
         APIrequests apiRequests = new APIrequests();
 
         String title = mTitle.getText().toString();
@@ -114,24 +123,24 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
         String image = ImageHandler.convert(mPicture.getDrawingCache());
         image = image.replaceAll("\n", "");
 
-        String recipe = "{"+
-                "\"title\":" + "\"" + title + "\","+
-                "\"ingredients\":" + "\"" + ingredients + "\","+
-                "\"instructions\":" + "\"" + instructions + "\","+
-                "\"category\":" + "\"" + category + "\","+
-                "\"tags\":" + "\"" + tags + "\","+
-                "\"image\":" + "\"" + image + "\""+
+        String recipe = "{" +
+                "\"title\":" + "\"" + title + "\"," +
+                "\"ingredients\":" + "\"" + ingredients + "\"," +
+                "\"instructions\":" + "\"" + instructions + "\"," +
+                "\"category\":" + "\"" + category + "\"," +
+                "\"tags\":" + "\"" + tags + "\"," +
+                "\"image\":" + "\"" + image + "\"" +
                 "}";
 
         apiRequests.postMethod(mContext, recipe, Constants.POST_RECIPES, new APIrequests.VolleyResponseListener() {
             @Override
             public void onError(String message) {
-                Toast.makeText(mContext, message,Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, message, Toast.LENGTH_LONG).show();
             }
 
             @Override
             public void onResponse(JSONObject jsonObject) throws JSONException {
-                Toast.makeText(mContext, jsonObject.getString("success"),Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, jsonObject.getString("success"), Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(mContext, CategoryActivity.class);
                 intent.putExtra("categoryName", mCategory);
@@ -142,17 +151,16 @@ public class AddRecipeWrittenActivity extends AppCompatActivity {
         });
     }
 
-    public void updateToolbar()
-    {
+    public void updateToolbar() {
         mTitleToolBar.setText("Adicionar");
 
         mReturnArrow.setVisibility(View.VISIBLE);
         mTitleToolBar.setVisibility(View.VISIBLE);
     }
 
-    public void onClickSendScreenshot (View v)
-    {
+    public void onClickSendScreenshot(View v) {
         //Toast.makeText(mContext, "Essa função ainda não é suportada.", Toast.LENGTH_SHORT).show();
-        
+        Intent intent = new Intent(mContext, SendScreenshotActivity.class);
+        startActivityForResult(intent, SEND_SCREENSHOT_ACTIVITY);
     }
 }
